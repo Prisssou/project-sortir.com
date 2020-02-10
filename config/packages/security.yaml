@@ -36,6 +36,7 @@ security:
             algorithm: argon2i # méthode de chiffrement du mdp / autre : bcrypt
 
 
+
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
 

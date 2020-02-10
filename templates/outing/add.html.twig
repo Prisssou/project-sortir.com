@@ -1,0 +1,39 @@
+{% extends 'layout.html.twig' %}
+
+{%  block title %} Ajout d'une sortie {%  endblock %}
+
+{%  block body %}
+
+    <h2> Créer une sortie </h2>
+
+    {{ form_label(outingFormView.name) }}
+    {{ form_widget(outingFormView.name) }}
+    {{ form_errors(outingFormView.name) }} <br>
+
+    {{ form_label(outingFormView.startDate) }}
+    {{ form_widget(outingFormView.startDate) }}
+    {{ form_errors(outingFormView.startDate) }} <br>
+
+    {{ form_label(outingFormView.limitDateSub) }}
+    {{ form_widget(outingFormView.limitDateSub) }}
+    {{ form_errors(outingFormView.limitDateSub) }} <br>
+
+    {{ form_label(outingFormView.numberMaxSub) }}
+    {{ form_widget(outingFormView.numberMaxSub) }}
+    {{ form_errors(outingFormView.numberMaxSub) }} <br>
+
+    {{ form_label(outingFormView.duration) }}
+    {{ form_widget(outingFormView.duration) }}
+    {{ form_errors(outingFormView.duration) }} <br>
+
+    {{ form_label(outingFormView.description) }}
+    {{ form_widget(outingFormView.description) }}
+    {{ form_errors(outingFormView.description) }} <br>
+
+    <input class="btn btn-primary" type="submit" value="Enregistrer">
+    <input class="btn btn-primary" type="submit" value="Publier la sortie">
+    <input class="btn btn-primary" type="submit" value="Annuler">
+
+    {{ form_end(outingFormView) }}
+
+{%  endblock %}
