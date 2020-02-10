@@ -57,7 +57,7 @@ class Member
     private $active;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Image", mappedBy="member", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Image", inversedBy="member", cascade={"persist", "remove"})
      */
     private $image;
 

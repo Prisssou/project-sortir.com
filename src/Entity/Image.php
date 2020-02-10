@@ -22,7 +22,7 @@ class Image
     private $url;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Member", inversedBy="image", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Member", mappedBy="image", cascade={"persist", "remove"})
      */
     private $member;
 
