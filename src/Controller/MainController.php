@@ -12,6 +12,6 @@ class MainController extends Controller
      */
     public function home()
     {
-        return $this->render('main/index.html.twig');
+        return $this->render('main/home.html.twig');
     }
 }

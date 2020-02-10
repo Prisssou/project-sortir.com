@@ -1,0 +1,130 @@
+h1 {
+    color: #209387;
+    text-align: center;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+h2, h3 {
+    color: darkslategrey;
+    text-align: center;
+    padding-bottom: 1em;
+}
+
+/* Middle Out */
+.navbar-brand {
+    display: inline-block;
+    position: relative;
+
+}
+
+.navbar-brand:after {
+    content: '';
+    display: block;
+    margin: auto;
+    height: 4px;
+    width: 0px;
+    background: transparent;
+    transition: width .5s ease, background-color .5s ease;
+}
+
+.navbar-brand:hover:after {
+    width: 100%;
+    background: #209387;
+}
+
+.btn-primary {
+    background-color: #209387 !important;
+}
+
+.btn {
+    margin-right: 100px;
+
+}
+
+
+.col-lg-3 {
+    margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+
+.nav {
+    align-items: center;
+}
+
+
+.vignette {
+    margin: 20px;
+}
+
+.validationDetail {
+    display: block;
+    margin: auto;
+}
+
+#article-image {
+    width: 100px;
+    height: 100px;
+    margin-left: 30px;
+    margin-bottom: 20px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 1px 1px rgba(199, 188, 188, 0.1);
+}
+
+#avatar {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 1px 1px rgba(199, 188, 188, 0.1);
+}
+
+#image-create {
+    width: 200px;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 1px 1px rgba(199, 188, 188, 0.1);
+}
+
+#login-button {
+    margin-top: 20px;
+}
+
+.typing {
+    color: #FFA57A;
+}
+
+#alert {
+    text-align: center;
+}
+
+#box-shadow {
+    padding-top: 20px;
+    margin: 40px;
+    border-radius: 20px;
+    background-color: #fff;
+    -moz-box-shadow: 5px 5px 15px 2px #cfcfcf;
+    -webkit-box-shadow: 5px 5px 15px 2px #cfcfcf;
+    -o-box-shadow: 5px 5px 15px 2px #cfcfcf;
+    box-shadow: 5px 5px 15px 2px #cfcfcf;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
+}
+
+@media (min-width: 768px) {
+    .login-form {
+        margin-right: 18em;
+        margin-left: 18em;
+    }
+}
+
+
+
+
+
+
+
+
+

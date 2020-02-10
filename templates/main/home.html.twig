@@ -1,0 +1,43 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %}Sortir.com{% endblock %}
+
+{% block body %}
+    <h1>Bienvenue sur Sortir.com !</h1>
+    <h2 class="d-none d-md-block"> Envie <span class="typing"></span></h2>
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    <script src="js/typed.min.js"></script>
+    <script src="js/animation.js"></script>
+
+    <h2> Rejoignez le réseau de l'ENI !</h2>
+
+    <h3> Qu'avez-vous manqué aujourd'hui ? </h3><br>
+    <div class="container">
+
+        <div class="row">
+{#
+
+            {% for article in articles %}
+                <div class="col-lg-3" id="box-shadow">
+                    <ul style="list-style-image: url({{ asset('img/hang.png') }})">
+                        {% if app.user %}
+                        <a href="{{ path('detail', {'id':article.id}) }}">
+                            {% endif %}
+                            <img id="article-image" src="{{ asset('uploads/images') }}/{{ article.image }}  "
+                                 alt="article"></a>
+                        <li> Nom : {{ article.nom }}</li>
+                        <li> Description : {{ article.description }}</li>
+                        <li> Echangé par : {{ article.user.getUsername() }}</li>
+                    </ul>
+                </div>
+            {% else %}
+                Il n'y a pas d'articles à échanger.
+            {% endfor %}#}
+
+
+        </div>
+    </div>
+{% endblock %}

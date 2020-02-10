@@ -1,0 +1,24 @@
+<nav class="navbar navbar-expand-lg navbar-light justify-content-between d-flex align-items-center"
+     style="background-color: #CFC8C6;">
+    <div class="nav">
+        <a class="navbar-brand" href="{{ path('home') }}"> <img src="{{ asset('img/favicon/point_of_interest.png') }}"></a>
+        {#        {% if app.user %}
+                <a class="navbar-brand" href="{{ path('profil') }}"> Mon profil</a>
+                <a class="navbar-brand" href="{{ path('create') }}"> Echange </a>
+                <a class="navbar-brand" href=" {{ path('logout') }}"> Déconnexion</a>
+            </div>
+            <div class="avatar d-none d-md-block">
+                <a href="{{ path('profil') }}"><img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="avatar"></a>
+                <p>Hello {{ app.user.username }} !</p>
+            </div>
+            #}{#<a href="{{ path('profil') }}"><img src="{{ asset(app.user.image) }}" alt="avatar" height="150" width="150"></a>#}{#
+
+
+
+            {% else %}
+                <a class="navbar-brand" href=" {{ path('login') }}"> Connexion</a>
+                <a class="navbar-brand" href=" {{ path('app_register') }}"> S'enregistrer</a>
+            {% endif %}#}
+    </div>
+</nav>
+
