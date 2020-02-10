@@ -27,11 +27,21 @@ class UserController extends Controller
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('account/login.html.twig', [
+        return $this->render('user/login.html.twig', [
             'last_username' => $lastUsername,
             'error'         => $error,
         ]);
 
+    }
+
+    /**
+     * @Route("/main", name="main")
+     */
+    public function index()
+    {
+        return $this->render('user/hometest.html.twig', [
+            'controller_name' => 'MainController',
+        ]);
     }
 
 }
