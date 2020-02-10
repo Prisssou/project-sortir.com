@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>{% block title %}Sortir.com{% endblock %}</title>
+
+
+    {#    JQuery#}
+    <script
+            src="https://code.jquery.com/jquery-3.4.1.min.js"
+            integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+            crossorigin="anonymous"></script>
+    {#    Bootstrap#}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+            integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+            crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+            integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+            crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+            integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+            crossorigin="anonymous"></script>
+
+    {#    FONTS#}
+
+
+    {#    STYLESHEETS#}
+
+
+    {#    fontawsome link#}
+
+
+{#    <link rel="icon" href="{{ asset('img/opitmized/logolibellulefinal.png') }}"/>#}
+</head>
+
+
+<body>
+
+
+
+{% block body %}
+    <div id="spacing-div"></div>
+    <h1 class="lobster-align">Viens donc te connecter ici!👇</h1>
+    <div id="spacing-div"></div>
+    <div id="spacing-div"></div>
+    <div class="d-flex justify-content-center mb-3">
+
+        <div class="container">
+            <div class="d-flex justify-content-center mb-3">
+
+
+                <form action="{{ path('user_login') }}" method="post">
+                    <div class="row">
+                        <div class="col">
+                            <label for="username">Identifiant:</label>
+                            <div class="col no-padding">
+                                <input class="input-form" type="text" id="username" name="_username" value="{{ last_username }}"/>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row">
+                        <div class="col">
+                            <label for="password">Mot de passe:</label>
+                            <div class="col no-padding">
+                                <input class="input-form" type="password" id="password" name="_password"/>
+                            </div>
+                        </div>
+                    </div>
+
+                    {#
+                        If you want to control the URL the user
+                        is redirected to on success (more details below)
+                        <input type="hidden" name="_target_path" value="/account"/>
+                    #}
+
+
+                    <div id="spacing-div"></div>
+
+                    <div class="row">
+                        <div class="col">
+                            <input type="hidden" name="_target_path" value="{{ url('user_main') }}"/>
+                            <button type="submit" class="btn btn-primary">Se connecter</button>
+                        </div>
+                    </div>
+
+
+                    {% if error %}
+                        <div class="row">
+                            <div class="col">
+                                <div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}<a id="egg" href="{{ path('egg') }}">🥚</a></div>
+                            </div>
+                        </div>
+                        <div id="spacing-div"></div>
+                    {% endif %}
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+
+{% block javascripts %}{% endblock %}
+
+{#<script src="{{ asset('js/index.js') }}"></script>#}
+</body>
+</html>
