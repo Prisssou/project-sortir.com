@@ -217,6 +217,9 @@
             "./.env"
         ]
     },
+    "symfony/form": {
+        "version": "v3.4.37"
+    },
     "symfony/framework-bundle": {
         "version": "3.3",
         "recipe": {
@@ -245,6 +248,9 @@
     "symfony/inflector": {
         "version": "v3.4.37"
     },
+    "symfony/intl": {
+        "version": "v3.4.37"
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {
@@ -271,10 +277,16 @@
             "./config/packages/test/monolog.yaml"
         ]
     },
+    "symfony/options-resolver": {
+        "version": "v3.4.37"
+    },
     "symfony/orm-pack": {
         "version": "v1.0.7"
     },
     "symfony/polyfill-apcu": {
+        "version": "v1.13.1"
+    },
+    "symfony/polyfill-intl-icu": {
         "version": "v1.13.1"
     },
     "symfony/polyfill-mbstring": {
