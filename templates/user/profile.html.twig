@@ -1,0 +1,64 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1> Mon profil </h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <img id="image-create" src="{{ asset('img/articleimage.png') }}" alt="">
+                {# Image + Upload #}
+                {{ form_start(memberFormView) }}
+                {{ form_label(memberFormView.image) }}
+                {{ form_widget(memberFormView.image) }}
+                {{ form_errors(memberFormView.image) }} <br>
+            </div>
+
+            <div class="col-lg-8">
+
+
+                {{ form_label(memberFormView.username) }}
+                {{ form_widget(memberFormView.username) }}
+                {{ form_errors(memberFormView.username) }} <br>
+
+                {{ form_label(memberFormView.firstname) }}
+                {{ form_widget(memberFormView.firstname) }}
+                {{ form_errors(memberFormView.firstname) }} <br>
+
+                {{ form_label(memberFormView.name) }}
+                {{ form_widget(memberFormView.name) }}
+                {{ form_errors(memberFormView.name) }} <br>
+
+                {{ form_label(memberFormView.phone) }}
+                {{ form_widget(memberFormView.phone) }}
+                {{ form_errors(memberFormView.phone) }} <br>
+
+                {{ form_label(memberFormView.email) }}
+                {{ form_widget(memberFormView.email) }}
+                {{ form_errors(memberFormView.email) }} <br>
+
+                {{ form_label(memberFormView.plainPassword) }}
+                {{ form_widget(memberFormView.plainPassword) }}
+                {{ form_errors(memberFormView.plainPassword) }} <br>
+
+                {{ form_label(memberFormView.site) }}
+                {{ form_widget(memberFormView.site) }}
+                {{ form_errors(memberFormView.site) }} <br>
+
+
+
+            </div>
+
+        </div>
+        <div class="col-sm-12 text-center">
+            <input class="btn btn-primary" type="submit" value="Enregistrer">
+            <a href="{{ path('home') }}"><input class="btn btn-primary" type="button" value="Annuler"></a>
+        </div>
+
+
+        {{ form_end(memberFormView) }}
+
+    </div>
+{% endblock %}
+
+

@@ -5,15 +5,15 @@ namespace App\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Routing\Annotation\Route;
 
-class UserController extends Controller
+class CityController extends Controller
 {
     /**
-     * @Route("/user", name="user")
+     * @Route("/city", name="city")
      */
     public function index()
     {
-        return $this->render('user/index.html.twig', [
-            'controller_name' => 'UserController',
+        return $this->render('outing/cities.html.twig', [
+            'controller_name' => 'CityController',
         ]);
     }
 }

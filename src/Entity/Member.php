@@ -3,11 +3,13 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MemberRepository")
  */
-class Member
+class Member implements UserInterface
 {
     /**
      * @ORM\Id()
@@ -47,9 +49,9 @@ class Member
     private $password;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(type="array")
      */
-    private $admin;
+    private $roles = ['ROLE_USER'];
 
     /**
      * @ORM\Column(type="boolean")
@@ -144,17 +146,6 @@ class Member
         return $this;
     }
 
-    public function getAdmin(): ?bool
-    {
-        return $this->admin;
-    }
-
-    public function setAdmin(bool $admin): self
-    {
-        $this->admin = $admin;
-
-        return $this;
-    }
 
     public function getActive(): ?bool
     {
@@ -186,6 +177,7 @@ class Member
         return $this;
     }
 
+
     public function getSite(): ?Site
     {
         return $this->site;
@@ -196,5 +188,33 @@ class Member
         $this->site = $site;
 
         return $this;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        if(empty($this->roles)){
+            $this->roles = ['ROLE_USER'];
+        }
+
+        return $this->roles;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        // TODO: Implement getSalt() method.
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+        // TODO: Implement eraseCredentials() method.
     }
 }
