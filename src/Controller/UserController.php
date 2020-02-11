@@ -35,6 +35,7 @@ class UserController extends Controller
             $member->setPassword($passwordEncoder->encodePassword(
                 $member,
                 $memberForm->get('plainPassword')->getData()));
+            $member->setActive(1);
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($member);
@@ -47,7 +48,7 @@ class UserController extends Controller
 
 
         return $this->render('user/register.html.twig', [
-            'accountFormView' => $memberForm->createView()
+            'MemberFormView' => $memberForm->createView()
         ]);
     }
 

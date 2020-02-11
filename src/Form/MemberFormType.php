@@ -3,6 +3,8 @@
 namespace App\Form;
 
 use App\Entity\Member;
+use App\Entity\Site;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -41,6 +43,28 @@ class MemberFormType extends AbstractType
                     ]),
                 ],
             ])
+            ->add(
+                'site',
+                EntityType::class,
+                [
+                    'class' => Site::class,
+                    'label' => 'Ville organisatrice',
+                    'choice_label' => function ($site) {
+                        return $site->getName();
+                    },
+                ]
+            )
+            ->add(
+                'site',
+                EntityType::class,
+                [
+                    'class' => Site::class,
+                    'label' => 'Site de rattachement',
+                    'choice_label' => function ($site) {
+                        return $site->getName();
+                    },
+                ]
+            )
 //            ->add('roles')
 //            ->add('active')
 //            ->add('image')

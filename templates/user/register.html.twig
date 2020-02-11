@@ -1,10 +1,73 @@
-{% extends 'base.html.twig' %}
+{% extends 'layout.html.twig' %}
+
+{% block title %} Création d'un compte {% endblock %}
 
 {% block body %}
 
-{% endblock %}
+    <h2> Créer un compte </h2>
 
-{% block title %}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
 
-{% endblock %}
+                {# Todo : ajouter upload image #}
+
+            </div>
+
+            <div class="col-lg-4">
+                {{ form_start(MemberFormView) }}
+
+                {{ form_label(MemberFormView.username) }}
+                {{ form_widget(MemberFormView.username) }}
+                {{ form_errors(MemberFormView.username) }} <br>
+
+                {{ form_label(MemberFormView.name) }}
+                {{ form_widget(MemberFormView.name) }}
+                {{ form_errors(MemberFormView.name) }} <br>
+
+                {{ form_label(MemberFormView.firstname) }}
+                {{ form_widget(MemberFormView.firstname) }}
+                {{ form_errors(MemberFormView.firstname) }} <br>
+
+                {{ form_label(MemberFormView.phone) }}
+                {{ form_widget(MemberFormView.phone) }}
+                {{ form_errors(MemberFormView.phone) }} <br>
+
+                {{ form_label(MemberFormView.email) }}
+                {{ form_widget(MemberFormView.email) }}
+                {{ form_errors(MemberFormView.email) }} <br>
+
+                {{ form_label(MemberFormView.plainPassword) }}
+                {{ form_widget(MemberFormView.plainPassword) }}
+                {{ form_errors(MemberFormView.plainPassword) }} <br>
+
+            </div>
+
+            <div class="col-lg-4">
+
+                {{ form_label(MemberFormView.site) }}
+                {{ form_widget(MemberFormView.site) }}
+                {{ form_errors(MemberFormView.site) }} <br> <br>
+
+                <br>
+
+            </div>
+
+            <div class="col-sm-12 text-center">
+
+                <input class="btn btn-primary" type="submit" name="submitAction" value="Enregistrer">
+                <input class="btn btn-primary" type="submit" value="Annuler">
+
+                {{ form_end(MemberFormView) }}
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+{%  endblock %}
+
 

@@ -20,7 +20,7 @@ security:
             logout_on_user_change: true
             logout:
                 path: logout
-                target: login
+                target: user_login
             # https://symfony.com/doc/current/security/impersonating_user.html
 #            switch_user: true
 
@@ -52,3 +52,4 @@ security:
         - { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY} # Pour accéder à série, il faut le ROLE_USER -> cf getRoles de User.php
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/signup, roles: ROLE_ADMIN }
