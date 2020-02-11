@@ -35,12 +35,22 @@ class UserController extends Controller
     }
 
     /**
+     * @Route("/home", name="home")
+     */
+    public function home()
+    {
+        return $this->render('user/hometest2.html.twig', [
+            'controller_name' => 'UserController',
+        ]);
+    }
+
+    /**
      * @Route("/main", name="main")
      */
-    public function index()
+    public function main()
     {
         return $this->render('user/hometest.html.twig', [
-            'controller_name' => 'MainController',
+            'controller_name' => 'UserController',
         ]);
     }
 
