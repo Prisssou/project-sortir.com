@@ -1,0 +1,65 @@
+{% extends 'layout.html.twig' %}
+
+{% block body %}
+    <h1> Mon profil </h1>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <img id="image-create" src="{{ asset('img/articleimage.png') }}" alt="">
+                {# Image + Upload #}
+                {{ form_start(articleFormView) }}
+                {{ form_label(articleFormView.image) }}
+                {{ form_widget(articleFormView.image) }}
+                {{ form_errors(articleFormView.image) }} <br>
+            </div>
+
+            <div class="col-lg-4">
+
+
+                {{ form_label(articleFormView.nom) }}
+                {{ form_widget(articleFormView.nom) }}
+                {{ form_errors(articleFormView.nom) }} <br>
+
+                {{ form_label(articleFormView.description) }}
+                {{ form_widget(articleFormView.description) }}
+                {{ form_errors(articleFormView.description) }} <br>
+
+                {{ form_label(articleFormView.categorie) }}
+                {{ form_widget(articleFormView.categorie) }}
+                {{ form_errors(articleFormView.categorie) }} <br>
+
+                {{ form_label(articleFormView.dateDebut) }}
+                {{ form_widget(articleFormView.dateDebut) }}
+                {{ form_errors(articleFormView.dateDebut) }} <br>
+
+                {{ form_label(articleFormView.dateFin) }}
+                {{ form_widget(articleFormView.dateFin) }}
+                {{ form_errors(articleFormView.dateFin) }} <br>
+
+                {{ form_label(articleFormView.etat) }}
+                {{ form_widget(articleFormView.etat) }}
+                {{ form_errors(articleFormView.etat) }} <br>
+
+
+            </div>
+
+            <div class="col-lg-4">
+                <h4> Adresse de retrait </h4>
+                Rue : {{ app.user.getAddress() }} <br>
+                Code Postal : {{ app.user.getZipcode() }} <br>
+                Ville : {{ app.user.getCity() }} <br>
+            </div>
+        </div>
+        <div class="col-sm-12 text-center">
+            <input class="btn btn-primary" type="submit" value="Enregistrer">
+            <a href="{{ path('home') }}"><input class="btn btn-primary" type="button" value="Annuler"></a>
+        </div>
+
+
+        {{ form_end(articleFormView) }}
+
+    </div>
+{% endblock %}
+
+
