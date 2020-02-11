@@ -27,13 +27,15 @@ class MemberFormType extends AbstractType
             ->add('phone',TelType::class,['label' => 'Numéro de téléphone :'])
             ->add('email', EmailType::class, ['label' => 'Email :'])
             ->add('plainPassword', RepeatedType::class, [
+                'label' => false,
+
                 'type' => PasswordType::class,
                 'invalid_message' => 'Les mots de passe ne correspondent pas.',
                 'options' => ['attr' => ['class' => 'password-field']],
                 'required' => true,
                 'first_options'  => ['label' => 'Mot de passe :'],
                 'second_options' => ['label' => 'Confirmation du mot de passe :'],
-                'label' => ' ',
+
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
