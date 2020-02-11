@@ -27,9 +27,13 @@ class MemberFormType extends AbstractType
             ->add('phone',TelType::class,['label' => 'Numéro de téléphone :'])
             ->add('email', EmailType::class, ['label' => 'Email :'])
             ->add('plainPassword', RepeatedType::class, [
-                'label' => 'Mot de Passe :',
-                // instead of being set onto the object directly,
-                // this is read and encoded in the controller
+                'type' => PasswordType::class,
+                'invalid_message' => 'Les mots de passe ne correspondent pas.',
+                'options' => ['attr' => ['class' => 'password-field']],
+                'required' => true,
+                'first_options'  => ['label' => 'Mot de passe :'],
+                'second_options' => ['label' => 'Confirmation du mot de passe :'],
+                'label' => ' ',
                 'mapped' => false,
                 'constraints' => [
                     new NotBlank([
@@ -37,9 +41,10 @@ class MemberFormType extends AbstractType
                     ]),
                     new Length([
                         'min' => 8,
-                        'minMessage' => 'Your password should be at least {{ limit }} characters',
+                        'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} caractères!',
                         // max length allowed by Symfony for security reasons
                         'max' => 50,
+                        'maxMessage' => 'Votre mot de passe doit contenir au maximum {{ limit }} caractères!',
                     ]),
                 ],
             ])
