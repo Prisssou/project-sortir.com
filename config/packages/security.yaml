@@ -14,8 +14,8 @@ security:
             provider: user_provider
             anonymous: ~
             form_login:
-                login_path: login
-                check_path: login
+                login_path: user_login
+                check_path: user_login
                 # en méthode POST, envoi des input _username et _password à check_path qui va permettre la connexion
             logout_on_user_change: true
             logout:
