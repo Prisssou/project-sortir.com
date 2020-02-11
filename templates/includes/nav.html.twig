@@ -20,5 +20,24 @@
                 <a class="navbar-brand" href=" {{ path('app_register') }}"> S'enregistrer</a>
             {% endif %}#}
     </div>
+
+    <ul class="navbar-nav ml-auto">
+
+        {% if is_granted("ROLE_ADMIN") %}
+            <li class="nav-item"><a class="nav-link" href="{{ path('city') }}">Villes</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('site') }}">Sites</a></li>
+            <li class="nav-item"><a class="nav-link" href="{{ path('user_signup') }}">Créer un compte</a></li>
+
+        {% endif %}
+
+        {% if app.user %}
+
+            <li class="nav-item"><a class="nav-link" href="{{ path('logout') }}">Déconnexion</a></li>
+        {% else %}
+            <li class="nav-item"><a class="nav-link" href="{{ path('user_login') }}">Connexion</a></li>
+
+        {% endif %}
+
+    </ul>
 </nav>
 
