@@ -2,10 +2,15 @@
 
 namespace App\Controller;
 
-use App\Entity\Article;
-use App\Form\ArticleType;
+
+use App\Entity\Member;
+use App\Form\MemberFormType;
+use App\Form\MemberType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 
 /**
@@ -14,6 +19,44 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
 class UserController extends Controller
 {
 
+    /**
+     * @Route("/signup", name="signup")
+     * @param Request $request
+     * @param UserPasswordEncoderInterface $passwordEncoder
+     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
+     */
+    public function signinUp(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    {
+        $member = new Member();
+        $memberForm = $this->createForm(MemberFormType::class, $member);
+        $memberForm->handleRequest($request);
+
+        if ($memberForm->isSubmitted() && $memberForm->isValid()) {
+            $this->addFlash('success', 'Ce compte a bien été enregistré!');
+            $member->setPassword(
+                $passwordEncoder->encodePassword(
+                    $member,
+                    $memberForm->get('plainPassword')->getData()
+                )
+            );
+            $member->setActive(1);
+
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($member);
+            $entityManager->flush();
+
+            return $this->redirectToRoute("user_login");
+
+        }
+
+
+        return $this->render(
+            'user/register.html.twig',
+            [
+                'MemberFormView' => $memberForm->createView(),
+            ]
+        );
+    }
 
 
     /**
@@ -29,40 +72,32 @@ class UserController extends Controller
         // last username entered by the user
         $lastUsername = $authenticationUtils->getLastUsername();
 
-        return $this->render('user/login.html.twig', [
-            'last_username' => $lastUsername,
-            'error'         => $error,
-        ]);
+        return $this->render(
+            'user/login.html.twig',
+            [
+                'last_username' => $lastUsername,
+                'error' => $error,
+            ]
+        );
 
     }
 
     /**
      * Afficher la page de gestion du profil
-     * @Route("/profil", name="create")
+     * @Route("/profile", name="profile")
      */
-    public function profil(EntityManagerInterface $entityManager, Request $request)
+    public function profil(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
         $member = new Member();
-        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
-            $member = $this->getMember();
-            $member->setUser($member);
-        }
-
-        $memberForm = $this->createForm(MemberType::class, $article);
+        $memberForm = $this->createForm(MemberType::class, $member);
 
         $memberForm->handleRequest($request);
 
-        if ($memberForm->isSubmitted()) {
+        if ($memberForm->isSubmitted() && $memberForm->isValid()) {
             /**
              * @var UploadedFile $imageFile
              */
             $imageFile = $memberForm->get('image')->getData();
-
-//            $imageFile = $article->getImage();
-            /*            dump($imageFile);
-                        dump($imageFile->getPathname());
-                        die();*/
-
             $fileName = $this->generateUniqueFileName().'.'.$imageFile->guessExtension();
 //          $fileName = $this->generateUniqueFileName().'.'.$imageFile->getMimeType();
 
@@ -85,17 +120,15 @@ class UserController extends Controller
 
             $this->addFlash(
                 'success',
-                'Article ajouté avec succès'
+                'La mise à jour du profil a été faite avec succès!'
             );
 
+            $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($member);
             $entityManager->flush();
 
             return $this->redirectToRoute("home");
         }
-
-
-
 
         return $this->render(
             'user/profile.html.twig',
@@ -106,19 +139,36 @@ class UserController extends Controller
 
     }
 
+
     private function generateUniqueFileName()
     {
         return md5(uniqid());
     }
 
     /**
+     * @Route("/home", name="home")
+     */
+    public function home()
+    {
+        return $this->render(
+            'user/hometest2.html.twig',
+            [
+                'controller_name' => 'UserController',
+            ]
+        );
+    }
+
+    /**
      * @Route("/main", name="main")
      */
-    public function index()
+    public function main()
     {
-        return $this->render('user/hometest.html.twig', [
-            'controller_name' => 'MainController',
-        ]);
+        return $this->render(
+            'user/hometest.html.twig',
+            [
+                'controller_name' => 'UserController',
+            ]
+        );
     }
 
 }

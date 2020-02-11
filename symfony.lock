@@ -341,6 +341,19 @@
     "symfony/stopwatch": {
         "version": "v3.4.37"
     },
+    "symfony/translation": {
+        "version": "3.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "3.3",
+            "ref": "2ad9d2545bce8ca1a863e50e92141f0b9d87ffcd"
+        },
+        "files": [
+            "./config/packages/translation.yaml",
+            "./translations/.gitignore"
+        ]
+    },
     "symfony/twig-bridge": {
         "version": "v3.4.37"
     },
@@ -358,6 +371,9 @@
             "./config/routes/dev/twig.yaml",
             "./templates/base.html.twig"
         ]
+    },
+    "symfony/validator": {
+        "version": "v3.4.37"
     },
     "symfony/var-dumper": {
         "version": "v3.4.37"

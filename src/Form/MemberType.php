@@ -3,11 +3,17 @@
 namespace App\Form;
 
 use App\Entity\Member;
+use App\Entity\Site;
+use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
+use Symfony\Component\Validator\Constraints\Length;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 
 class MemberType extends AbstractType
@@ -33,52 +39,65 @@ class MemberType extends AbstractType
                 'firstname',
                 TextType::class,
                 [
-                    'label' => 'Nom :',
+                    'label' => 'Prénom :',
                 ]
             )
             ->add(
                 'phone',
                 TextType::class,
                 [
-                    'label' => 'Nom :',
+                    'label' => 'Téléphone :',
                 ]
             )
             ->add(
                 'email',
                 TextType::class,
                 [
-                    'label' => 'Nom :',
+                    'label' => 'Email :',
                 ]
             )
             ->add(
-                'password',
-                PasswowordType::class,
+                'plainPassword',
+                RepeatedType::class,
                 [
-                    // instead of being set onto the object directly,
-                    // this is read and encoded in the controller
-                    'label' => 'mot de passe : ',
+                    'type' => PasswordType::class,
+                    'invalid_message' => 'Les mots de passe ne correspondent pas.',
+                    'options' => ['attr' => ['class' => 'password-field']],
+                    'required' => true,
+                    'first_options' => ['label' => 'Mot de passe :'],
+                    'second_options' => ['label' => 'Confirmation du mot de passe :'],
+                    'label' => ' ',
                     'mapped' => false,
                     'constraints' => [
                         new NotBlank(
                             [
-                                'message' => 'Please enter a password',
+                                'message' => 'Merci d\'entrer un mot de passe',
                             ]
                         ),
                         new Length(
                             [
-                                'min' => 6,
-                                'minMessage' => 'Your password should be at least {{ limit }} characters',
+                                'min' => 8,
+                                'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} caractères!',
                                 // max length allowed by Symfony for security reasons
-                                'max' => 4096,
+                                'max' => 50,
+                                'maxMessage' => 'Votre mot de passe doit contenir au maximum {{ limit }} caractères!',
                             ]
                         ),
                     ],
                 ]
             )
             ->add(
-                'admin'
+                'site',
+                EntityType::class,
+                [
+                    'class' => Site::class,
+                    'label' => 'Site de rattachement',
+                    'choice_label' => function ($site) {
+                        return $site->getName();
+                    },
+                ]
             )
-            ->add('active')
+
             ->add(
                 'image',
                 FileType::class,
@@ -108,8 +127,7 @@ class MemberType extends AbstractType
 //                ),
 //            ],
                 ]
-            )
-            ->add('site');
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver)
