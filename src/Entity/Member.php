@@ -177,6 +177,7 @@ class Member implements UserInterface
         return $this;
     }
 
+
     public function getSite(): ?Site
     {
         return $this->site;

@@ -86,6 +86,7 @@ class MemberType extends AbstractType
                     ],
                 ]
             )
+
             ->add(
                 'site',
                 EntityType::class,
@@ -98,9 +99,10 @@ class MemberType extends AbstractType
                 ]
             )
 
+            // Upload de l'image
             ->add(
                 'image',
-                FileType::class,
+                ImageType::class,
                 [
                     'label' => 'Avatar :  ',
 
@@ -128,6 +130,8 @@ class MemberType extends AbstractType
 //            ],
                 ]
             );
+
+
     }
 
     public function configureOptions(OptionsResolver $resolver)
