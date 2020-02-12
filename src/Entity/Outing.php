@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -83,6 +85,16 @@ class Outing
      * @ORM\JoinColumn(nullable=false)
      */
     private $place;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Member", inversedBy="outing")
+     */
+    private $member;
+
+    public function __construct()
+    {
+        $this->member = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -241,6 +253,32 @@ class Outing
     public function setPlace(?Place $place): self
     {
         $this->place = $place;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Member[]
+     */
+    public function getMember(): Collection
+    {
+        return $this->member;
+    }
+
+    public function addMember(Member $member): self
+    {
+        if (!$this->member->contains($member)) {
+            $this->member[] = $member;
+        }
+
+        return $this;
+    }
+
+    public function removeMember(Member $member): self
+    {
+        if ($this->member->contains($member)) {
+            $this->member->removeElement($member);
+        }
 
         return $this;
     }

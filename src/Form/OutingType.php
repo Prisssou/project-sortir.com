@@ -2,8 +2,10 @@
 
 namespace App\Form;
 
+
 use App\Entity\Outing;
-use App\Entity\Site;
+use App\Entity\City;
+use App\Entity\Place;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -61,16 +63,27 @@ class OutingType extends AbstractType
                 ]
             )
             ->add(
-                'site',
+                'city',
                 EntityType::class,
                 [
-                    'class' => Site::class,
-                    'label' => 'Ville organisatrice',
-                    'choice_label' => function ($site) {
-                        return $site->getName();
+                    'class' => City::class,
+                    'choice_label' => function ($city) {
+                        return $city->getName();
+                    },
+                    'mapped' => false,
+                ]
+            )
+            ->add(
+                'place',
+                EntityType::class,
+                [
+                    'class' => Place::class,
+                    'choice_label' => function ($place) {
+                        return $place->getName();
                     },
                 ]
             )
+
             //->add('place')
         ;
     }
