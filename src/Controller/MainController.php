@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Outing;
+use App\Entity\State;
 use App\Form\FilterFormType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -18,6 +19,10 @@ class MainController extends Controller
     {
         $sortieRepository = $entityManager->getRepository(Outing::class);
         $sorties = $sortieRepository->findAll();
+
+        $sortieMemberRepository = $entityManager->getRepository(Outing::class);
+        $sortiesMember = $sortieRepository->findAll();
+
 
 
 
