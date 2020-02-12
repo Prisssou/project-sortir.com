@@ -262,4 +262,5 @@ class Member implements UserInterface
     {
         return $this->username;
     }
+
 }

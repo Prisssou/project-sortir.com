@@ -51,6 +51,7 @@
 
         formulaire de filtre à faire
 
+
     </section>
 
     <section id="section-tableau-sorties">
@@ -82,15 +83,15 @@
                 {% for sortie in sorties %}
                 <tr>
                     <td>{{ sortie.name }}</td>
-{#                    <td>{{ sortie.startDate}}</td>#}
-{#                    <td>{{ sortie.closingDate }}</td>#}
-                    <td>Date début</td>
-                    <td>Date clôture</td>
-                    <td>{{ sortie.numberSub }}/{{ sortie.numberMaxSub }}</td>
-                    <td>Etat à définir</td>
-{#                    <td>{{ sortie.state }}</td>#}
+                    <td>{{ sortie.startDate|date('d/m/Y à H:i')}}</td>
+                    <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
+                    <td><small>{{ sortie.numberSub }}</small>/{{ sortie.numberMaxSub }}</td>
+                    <td>{{ sortie.state.label }}</td>
                     <td> Oui! </td>
-                    <td> Mamie Nova</td>
+{#                    <td>{{dump(sortie.member)}}</td>#}
+                    {% for member in sortie.member %}
+                    <td> {{ member.username }}</td>
+                    {% endfor %}
                     <td><a href="#">Afficher</a></td>
                 </tr>
                 {% endfor %}
