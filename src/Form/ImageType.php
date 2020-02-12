@@ -11,15 +11,16 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class ImageType extends AbstractType
 {
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    public function buildForm(FormBuilderInterface $builder,array $options)
     {
         $builder
             ->add(
                 'url',
                 FileType::class,
-                array('data_class' => null),
+
                 [
-                    'label' => 'Avatar :  ',
+                    'data_class' => null,
+                    'label' => false,
 
                     // unmapped means that this field is not associated to any entity property
 

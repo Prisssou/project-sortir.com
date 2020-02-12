@@ -116,12 +116,9 @@ class UserController extends Controller
 
                 // Récupération de l'image
                 $image = new Image();
-                if ($memberForm['image']['url']->getData()) {
-                    $imageFile = $memberForm['image']['url']->getData();
-                    $imageFileName = $fileUploader->upload($imageFile);
-                    $image->setUrl($imageFileName);
-                }
-
+                $imageFile = $memberForm['image']['url']->getData();
+                $imageFileName = $fileUploader->upload($imageFile);
+                $image->setUrl($imageFileName);
 
                 // Hydratation de la la table Image de la BDD
                 $entityManager->persist($image);
