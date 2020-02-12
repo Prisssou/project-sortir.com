@@ -76,9 +76,15 @@ class Member implements UserInterface
      */
     private $outing;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Subscribed", mappedBy="member", orphanRemoval=true)
+     */
+    private $subscribeds;
+
     public function __construct()
     {
         $this->outing = new ArrayCollection();
+        $this->subscribeds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -261,6 +267,37 @@ class Member implements UserInterface
     public function __toString():string
     {
         return $this->username;
+    }
+
+    /**
+     * @return Collection|Subscribed[]
+     */
+    public function getSubscribeds(): Collection
+    {
+        return $this->subscribeds;
+    }
+
+    public function addSubscribed(Subscribed $subscribed): self
+    {
+        if (!$this->subscribeds->contains($subscribed)) {
+            $this->subscribeds[] = $subscribed;
+            $subscribed->setMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscribed(Subscribed $subscribed): self
+    {
+        if ($this->subscribeds->contains($subscribed)) {
+            $this->subscribeds->removeElement($subscribed);
+            // set the owning side to null (unless already changed)
+            if ($subscribed->getMember() === $this) {
+                $subscribed->setMember(null);
+            }
+        }
+
+        return $this;
     }
 
 }

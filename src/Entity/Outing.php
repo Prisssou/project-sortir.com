@@ -91,9 +91,15 @@ class Outing
      */
     private $member;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Subscribed", mappedBy="outing")
+     */
+    private $subscribeds;
+
     public function __construct()
     {
         $this->member = new ArrayCollection();
+        $this->subscribeds = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -278,6 +284,34 @@ class Outing
     {
         if ($this->member->contains($member)) {
             $this->member->removeElement($member);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subscribed[]
+     */
+    public function getSubscribeds(): Collection
+    {
+        return $this->subscribeds;
+    }
+
+    public function addSubscribed(Subscribed $subscribed): self
+    {
+        if (!$this->subscribeds->contains($subscribed)) {
+            $this->subscribeds[] = $subscribed;
+            $subscribed->addOuting($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscribed(Subscribed $subscribed): self
+    {
+        if ($this->subscribeds->contains($subscribed)) {
+            $this->subscribeds->removeElement($subscribed);
+            $subscribed->removeOuting($this);
         }
 
         return $this;
