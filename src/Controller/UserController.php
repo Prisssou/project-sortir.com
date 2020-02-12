@@ -3,15 +3,18 @@
 namespace App\Controller;
 
 
+
 use App\Entity\Member;
 use App\Form\MemberFormType;
 use App\Form\MemberType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Doctrine\ORM\EntityManagerInterface;
 
 /**
  * @Route("/",name="user_")
@@ -40,6 +43,7 @@ class UserController extends Controller
                 )
             );
             $member->setActive(1);
+
 
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($member);
@@ -84,13 +88,22 @@ class UserController extends Controller
 
     /**
      * Afficher la page de gestion du profil
-     * @Route("/profile", name="profile")
+     * @Route("/profile{id}", name="profile" )
      */
-    public function profil(Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function profil($id, EntityManagerInterface $entityManager, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
     {
-        $member = new Member();
-        $memberForm = $this->createForm(MemberType::class, $member);
+//        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {        }
 
+//        // Récupération du membre par son id
+        $memberRepository = $entityManager->getRepository(Member::class);
+        $member = $memberRepository->find($id);
+
+//        // Récupération de l'image par son id
+//        $imageRepository = $entityManager->getRepository(Image::class);
+//        $image = $imageRepository->find($id);
+
+        // Création du formulaire de mise à jour du profil
+        $memberForm = $this->createForm(MemberType::class, $member);
         $memberForm->handleRequest($request);
 
         if ($memberForm->isSubmitted() && $memberForm->isValid()) {
@@ -98,12 +111,14 @@ class UserController extends Controller
              * @var UploadedFile $imageFile
              */
             $imageFile = $memberForm->get('image')->getData();
+//            dump($imageFile);
+//            die();
             $fileName = $this->generateUniqueFileName().'.'.$imageFile->guessExtension();
 //          $fileName = $this->generateUniqueFileName().'.'.$imageFile->getMimeType();
 
 
-//            dump($fileName);
-//            die();
+            dump($fileName);
+            die();
 
             // Move the file to the directory where images are stored
 
@@ -111,7 +126,6 @@ class UserController extends Controller
                 $this->getParameter('images_directory'),
                 $fileName
             );
-
 
             // updates the 'imageFilename' property to store the Images file name
             // instead of its contents
@@ -138,6 +152,9 @@ class UserController extends Controller
         );
 
     }
+
+
+
 
 
     private function generateUniqueFileName()

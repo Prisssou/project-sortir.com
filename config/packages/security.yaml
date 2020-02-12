@@ -25,11 +25,13 @@ security:
 #            switch_user: true
 
             # Remember me
-#            remember_me:
-#                secret: '%kernel.secret%'
-#                lifetime: 172800 # 2 days in seconds
-#                path: /
-#                always_remember_me: true
+
+            remember_me:
+                secret:   '%kernel.secret%' #version 4.4 symfony
+                #secret:   '%secret%' version 3.4 symfony
+                lifetime: 172800 # 2 days in seconds
+                path:     /
+                always_remember_me: true
 
     encoders:
         App\Entity\Member:
