@@ -1,0 +1,109 @@
+{% extends 'layout.html.twig' %}
+
+{% block title %} Détails de la sortie {% endblock %}
+
+{% block body %}
+
+    <div class="container">
+        <h3>Afficher une sortie</h3>
+        <div class="row mt-3">
+            <div class="col-md-6 col-sm-12">
+                <div class="col">
+                    <label>Nom de la sortie : </label>
+                    <span>{{ outing.name }}</span>
+                </div>
+                <div class="col">
+                    <label>Date et heure : </label>
+                    <span>{{ outing.startDate|date('d-m-Y h:i', "Europe/Paris") }}</span>
+                </div>
+                <div class="col">
+                    <label>Date limite : </label>
+                    <span>{{ outing.limitDateSub|date('d-m-Y h:i', "Europe/Paris") }}</span>
+                </div>
+                <div class="col">
+                    <label>Nom de places : </label>
+                    <span>{{ outing.numberMaxSub }}</span>
+                </div>
+                <div class="col">
+                    <label>Durée :</label>
+                    <span>{{ outing.duration }} minutes</span>
+                </div>
+                <div class="col">
+                    <label>Description et infos : </label>
+                    <span>{{ outing.description }}</span>
+                </div>
+            </div>
+            <div class="col-md-6 col-sm-12">
+                <div class="col">
+                    <label>Ville organisatrice :</label>
+                    <span>{{ outing.site.name }}</span>
+                </div>
+                <div class="col">
+                    <label>Lieu : </label>
+                    <span>{{ outing.place.name }}</span>
+                </div>
+                <div class="col">
+                    <label>Rue :</label>
+                    <span>{{ outing.place.street }}</span>
+                </div>
+                <div class="col">
+                    <label>Code postal :</label>
+                    <span>{{ outing.place.city.zipCode }}</span>
+                </div>
+                <div class="col">
+                    <label>Latitude :</label>
+                    <span>{{ outing.place.latitude }}</span>
+                </div>
+                <div class="col">
+                    <label>Longitude :</label>
+                    <span>{{ outing.place.longitude }}</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="row mt-3">
+            {# Affiche la liste des participants à la sortie #}
+            <h3>Liste des participants inscrits :</h3>
+            <div class="scrollbar scrollbar-juicy-peach bordered-warning">
+                <table class="table col-md-6">
+                    <thead>
+                    <tr>
+                        <th>Pseudo</th>
+                        <th>Nom</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+
+                    {#                {% for suscribers in listSuscribers %}#}
+                    <tr>
+                        {# <td>{{ outing_member.member.username }}</td>#}
+                        {# <td>{{ outing_member.member.firstname }} {{ outing_member.site.name }}</td>#}
+                        <td>Popo</td>
+                        <td>Pauline - ENI Nantes</td>
+
+                    </tr>
+                    <tr>
+                        <td>Alanou</td>
+                        <td>Alan - ENI Nantes</td>
+                    </tr>
+                    {#                {% endfor %}#}
+
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col-md-6 text-center">
+                <input class="btn btn-primary" type="submit" name="submitAction" value="S'inscrire">
+                <input class="btn btn-primary" type="submit" value="Annuler">
+
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}
+
+
+
+
+

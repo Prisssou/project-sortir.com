@@ -92,7 +92,10 @@
                     {% for member in sortie.member %}
                     <td> {{ member.username }}</td>
                     {% endfor %}
-                    <td><a href="#">Afficher</a></td>
+                    <td>
+{#                      <a href="#">Afficher</a>#}
+                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
+                    </td>
                 </tr>
                 {% endfor %}
 
@@ -111,6 +114,9 @@
 
 
     </section>
+
+
+
 
 
 <script src="{{ asset('js/table-animation.js') }}"></script>

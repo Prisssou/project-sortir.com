@@ -6,8 +6,11 @@ namespace App\Controller;
 use App\Entity\Outing;
 use App\Entity\State;
 use App\Form\FilterFormType;
+use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class MainController extends Controller
@@ -22,12 +25,6 @@ class MainController extends Controller
 
         $sortieMemberRepository = $entityManager->getRepository(Outing::class);
         $sortiesMember = $sortieRepository->findAll();
-
-
-
-
-
-
 
 
 //        $filterForm = $this->createForm(FilterFormType::class);
@@ -51,4 +48,17 @@ class MainController extends Controller
 
         return $this->render('main/home.html.twig', compact('sorties'));
     }
+
+//    /**
+//     * @Route("/outing{id}", name="detail", methods{'GET'})
+//     */
+//    public function detail(EntityManagerInterface $entityManager, Outing $outing) : Response
+//    {
+////        $id = $outing->getId();
+////        $suscribersList = $entityManager->getRepository()->find($id);
+//
+//        return $this->render('outing/detailOuting.html.twig', compact('outing', 'suscribersList'));
+//    }
+
+
 }
