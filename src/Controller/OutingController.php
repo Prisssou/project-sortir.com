@@ -23,7 +23,6 @@ class OutingController extends Controller
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $user = $this->getUser();
             $outing->addMember($user);
-
         }
 
         $outingForm = $this->createForm(OutingType::class, $outing);

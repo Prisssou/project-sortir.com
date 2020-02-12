@@ -26,12 +26,32 @@ class City
     /**
      * @ORM\Column(type="string", length=10)
      */
-    private $zipcode;
+    private $zip;
 
     /**
      * @ORM\OneToMany(targetEntity="App\Entity\Place", mappedBy="city")
      */
     private $place;
+
+    /**
+     * @ORM\Column(type="string", length=3)
+     */
+    private $department;
+
+    /**
+     * @ORM\Column(type="string", length=5, nullable=true)
+     */
+    private $insee;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $lat;
+
+    /**
+     * @ORM\Column(type="float")
+     */
+    private $lng;
 
     public function __construct()
     {
@@ -48,21 +68,21 @@ class City
         return $this->name;
     }
 
-    public function setName(string $name): self
+    public function setName(string $name)
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getZipcode(): ?string
+    public function getZip(): ?string
     {
-        return $this->zipcode;
+        return $this->zip;
     }
 
-    public function setZipcode(string $zipcode): self
+    public function setZip(string $zip)
     {
-        $this->zipcode = $zipcode;
+        $this->zip = $zip;
 
         return $this;
     }
@@ -75,7 +95,7 @@ class City
         return $this->place;
     }
 
-    public function addPlace(Place $place): self
+    public function addPlace(Place $place)
     {
         if (!$this->place->contains($place)) {
             $this->place[] = $place;
@@ -85,7 +105,7 @@ class City
         return $this;
     }
 
-    public function removePlace(Place $place): self
+    public function removePlace(Place $place)
     {
         if ($this->place->contains($place)) {
             $this->place->removeElement($place);
@@ -96,5 +116,58 @@ class City
         }
 
         return $this;
+    }
+
+    public function getDepartment(): ?string
+    {
+        return $this->department;
+    }
+
+    public function setDepartment(string $department)
+    {
+        $this->department = $department;
+
+        return $this;
+    }
+
+    public function getInsee(): ?string
+    {
+        return $this->insee;
+    }
+
+    public function setInsee(?string $insee)
+    {
+        $this->insee = $insee;
+
+        return $this;
+    }
+
+    public function getLat(): ?float
+    {
+        return $this->lat;
+    }
+
+    public function setLat(float $lat)
+    {
+        $this->lat = $lat;
+
+        return $this;
+    }
+
+    public function getLng(): ?float
+    {
+        return $this->lng;
+    }
+
+    public function setLng(float $lng)
+    {
+        $this->lng = $lng;
+
+        return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->name;
     }
 }
