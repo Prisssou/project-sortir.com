@@ -2,14 +2,17 @@
 //Pour les villes (id 1 à 10)
 INSERT INTO `city` (`id`, `name`, `zipcode`) VALUES (NULL, 'Nantes', '44000'), (NULL, 'Rennes', '35000'), (NULL, 'Quimper', '29000'), (NULL, 'Niort', '79000'), (NULL, 'Brest', '29200'), (NULL, 'Périgueux', '24000'), (NULL, 'Bordeaux', '33300'), (NULL, 'Paris', '75000'), (NULL, 'Strasbourg', '67000'), (NULL, 'Lille', '59800');
 
-//Pour les lieux de sortie ()
+//Pour les lieux de sortie (id 1 à 7)
 INSERT INTO `place` (`id`, `city_id`, `name`, `street`, `latitude`, `longitude`) VALUES (NULL, '1', 'La Fabrique à impro', '14 rue de l\'arche sèche', '10', '10'), (NULL, '4', 'La grande rue', '1 rue principale', '10', '10'), (NULL, '10', 'Carrousel', 'place du Carrousel', '10', '10'), (NULL, '6', 'Musée d\'Art et d\'archéologie', '22 cours Tourny', '10', '10'), (NULL, '2', 'Des bars', 'rue de la soif', '10', '10'), (NULL, '8', 'Tour effeil', 'Champ de Mars, 5 Avenue Anatole France, 75007 Paris', '10', '10'), (NULL, '1', 'Muséum d\'histoire naturelle', '12 rue Voltaire', '10', '10');
 
+//Pour les sites (id 1 à 5)
+INSERT INTO `site` (`id`, `name`) VALUES (NULL, 'ENI NANTES'), (NULL, 'ENI RENNES'), (NULL, 'ENI NIORT'), (NULL, 'ENI LA ROCHE SUR YON'), (NULL, 'ENI CHARTRES DE BRETAGNE')
 
+//Pour les sorties (id 1 à 4)
+INSERT INTO `outing` (`id`, `image_id`, `site_id`, `state_id`, `place_id`, `name`, `start_date`, `duration`, `limit_date_sub`, `closing_date`, `number_max_sub`, `number_sub`, `description`, `cancel_info`) VALUES (NULL, NULL, '1', '1', '6', 'Visite Tour Effeil', '2020-02-29 00:00:00', '2880', '2020-02-20 00:00:00', '2020-02-20 00:00:00', '12', '0', 'Voyage de groupe à Paris, avec une visite de la Tour Effeil et du Louvre', NULL), (NULL, NULL, '3', '2', '5', 'Barathon', '2020-02-26 00:00:00', '180', '2020-02-20 00:00:00', '2020-02-20 00:00:00', '8', '3', 'Boire, beaucoup', NULL), (NULL, NULL, '1', '2', '1', 'Match d\'impro', '2020-03-24 00:00:00', '180', '2020-03-04 00:00:00', '2020-03-04 00:00:00', '24', '10', 'Match d\'impro entre la LNI et la Poule', NULL), (NULL, NULL, '5', '1', '7', 'Musée à Nantes', '2020-04-30 00:00:00', '90', '2020-02-28 00:00:00', '2020-02-28 00:00:00', '10', '0', 'Visite d\'un musée à Nantes', NULL);
 
-
-
-
+//Pour la table outing_member (attention a voir assez de membres!)
+INSERT INTO `outing_member` (`outing_id`, `member_id`) VALUES ('1', '5'), ('2', '3'), ('3', '1'), ('4', '1');
 
 
 
