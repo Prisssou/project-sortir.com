@@ -41,13 +41,16 @@
             {{ form_widget(outingFormView.description) }}
             {{ form_errors(outingFormView.description) }} <br>
 
-            {{ form_label(outingFormView.city) }}
+            {{ form_label(outingFormView.department) }}
+            {{ form_widget(outingFormView.department) }}
+            {{ form_errors(outingFormView.department) }} <br>
+
+
+           {{ form_label(outingFormView.city) }}
             {{ form_widget(outingFormView.city) }}
             {{ form_errors(outingFormView.city) }} <br>
 
-            {{ form_label(outingFormView.place) }}
-            {{ form_widget(outingFormView.place) }}
-            {{ form_errors(outingFormView.place) }} <br>
+
 
             <a href="{{ path('add_place') }}" class="btn btn-primary">Ajouter un lieu</a>
 

@@ -6,6 +6,7 @@ namespace App\Form;
 use App\Entity\Outing;
 use App\Entity\City;
 use App\Entity\Place;
+use App\Repository\CityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -63,29 +64,29 @@ class OutingType extends AbstractType
                 ]
             )
             ->add(
+                'department',
+                EntityType::class,
+                [
+                    'class' => City::class,
+                    'choice_label' => 'department',
+                    'mapped' => false,
+                    'query_builder' => function (CityRepository $repo) {
+                        return $repo->createQueryBuilder('a')
+                            ->groupBy('a.department')
+                            ->orderBy('a.department', 'ASC');
+                    },
+                ]
+            )
+            ->add(
                 'city',
                 EntityType::class,
                 [
                     'class' => City::class,
-                    'choice_label' => function ($city) {
-                        return $city->getName();
-                    },
+                    'choice_label' => 'name',
                     'mapped' => false,
                 ]
-            )
-            ->add(
-                'place',
-                EntityType::class,
-                [
-                    'class' => Place::class,
-                    'choice_label' => function ($place) {
-                        return $place->getName();
-                    },
-                ]
-            )
+            );
 
-            //->add('place')
-        ;
     }
 
     public function configureOptions(OptionsResolver $resolver)
