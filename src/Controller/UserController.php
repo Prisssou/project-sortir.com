@@ -4,9 +4,12 @@ namespace App\Controller;
 
 
 
+use App\Entity\Image;
 use App\Entity\Member;
 use App\Form\MemberFormType;
+use App\Form\ImageType;
 use App\Form\MemberType;
+use App\Service\FileUploader;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\Request;
@@ -88,79 +91,61 @@ class UserController extends Controller
 
     /**
      * Afficher la page de gestion du profil
-     * @Route("/profile{id}", name="profile" )
+     * @Route("/profile{id}", name="profile", requirements={"id" : "\d+"} )
      */
-    public function profil($id, EntityManagerInterface $entityManager, Request $request, UserPasswordEncoderInterface $passwordEncoder): Response
+    public function profil($id, EntityManagerInterface $entityManager, Request $request, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader): Response
     {
 //        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {        }
 
-//        // Récupération du membre par son id
-        $memberRepository = $entityManager->getRepository(Member::class);
-        $member = $memberRepository->find($id);
 
-//        // Récupération de l'image par son id
-//        $imageRepository = $entityManager->getRepository(Image::class);
-//        $image = $imageRepository->find($id);
-
-        // Création du formulaire de mise à jour du profil
-        $memberForm = $this->createForm(MemberType::class, $member);
-        $memberForm->handleRequest($request);
-
-        if ($memberForm->isSubmitted() && $memberForm->isValid()) {
-            /**
-             * @var UploadedFile $imageFile
-             */
-            $imageFile = $memberForm->get('image')->getData();
-//            dump($imageFile);
-//            die();
-            $fileName = $this->generateUniqueFileName().'.'.$imageFile->guessExtension();
-//          $fileName = $this->generateUniqueFileName().'.'.$imageFile->getMimeType();
+        // Formulaire générale de gestion de profil
+            // Récupération du membre par son id
+            $memberRepository = $entityManager->getRepository(Member::class);
+            $member = $memberRepository->find($id);
+            dump($member);
+            // Création du formulaire de mise à jour du profil
+            $memberForm = $this->createForm(MemberType::class, $member);
+            $memberForm->handleRequest($request);
 
 
-            dump($fileName);
-            die();
+            if ($memberForm->isSubmitted() && $memberForm->isValid()) {
 
-            // Move the file to the directory where images are stored
 
-            $imageFile->move(
-                $this->getParameter('images_directory'),
-                $fileName
+                $entityManager = $this->getDoctrine()->getManager();
+                $formData = $request->request->all();
+
+                // Récupération de l'image
+                $image = new Image();
+                if ($memberForm['image']['url']->getData()) {
+                    $imageFile = $memberForm['image']['url']->getData();
+                    $imageFileName = $fileUploader->upload($imageFile);
+                    $image->setUrl($imageFileName);
+                }
+
+
+                // Hydratation de la la table Image de la BDD
+                $entityManager->persist($image);
+                $entityManager->flush();
+
+                $member->setImage($image);
+                $entityManager->persist($member);
+                $entityManager->flush();
+
+                return $this->redirectToRoute("home");
+            }
+
+            return $this->render(
+                'user/profile.html.twig',
+                [
+                    'member' => $member,
+                    'memberFormView' => $memberForm->createView(),
+
+                ]
             );
 
-            // updates the 'imageFilename' property to store the Images file name
-            // instead of its contents
-            $member->setImage($fileName);
-
-
-            $this->addFlash(
-                'success',
-                'La mise à jour du profil a été faite avec succès!'
-            );
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($member);
-            $entityManager->flush();
-
-            return $this->redirectToRoute("home");
         }
 
-        return $this->render(
-            'user/profile.html.twig',
-            [
-                'memberFormView' => $memberForm->createView(),
-            ]
-        );
 
-    }
-
-
-
-
-
-    private function generateUniqueFileName()
-    {
-        return md5(uniqid());
-    }
 
     /**
      * @Route("/home", name="home")

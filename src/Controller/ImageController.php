@@ -39,15 +39,15 @@ class ImageController extends Controller
             /**
              * @var UploadedFile $imageFile
              */
-            $imageFile = $imageForm->get('image')->getData();
-//            dump($imageFile);
-//            die();
+            $imageFile = $imageForm['url']->getData();
+            dump($imageFile);
+            die();
             $fileName = $this->generateUniqueFileName().'.'.$imageFile->guessExtension();
 //          $fileName = $this->generateUniqueFileName().'.'.$imageFile->getMimeType();
 
 
-            dump($fileName);
-            die();
+//            dump($fileName);
+//            die();
 
             // Move the file to the directory where images are stored
 
@@ -58,7 +58,7 @@ class ImageController extends Controller
 
             // updates the 'imageFilename' property to store the Images file name
             // instead of its contents
-            $member->setImage($fileName);
+            $image->setUrl($fileName);
 
 
             $this->addFlash(
@@ -70,15 +70,13 @@ class ImageController extends Controller
             $entityManager->persist($image);
             $entityManager->flush();
 
-            return $this->redirectToRoute("home");
+//            return $this->redirectToRoute("home");
         }
 
-        return $this->render(
-            'user/profile.html.twig',
-            [
-                'imageFormView' => $imageForm->createView(),
-            ]
-        );
+        return $imageForm;
+
+
+
     }
     private function generateUniqueFileName()
     {
