@@ -2,8 +2,11 @@
 
 namespace App\Form;
 
+
 use App\Entity\Outing;
-use App\Entity\Site;
+use App\Entity\City;
+use App\Entity\Place;
+use App\Repository\CityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
@@ -61,18 +64,29 @@ class OutingType extends AbstractType
                 ]
             )
             ->add(
-                'site',
+                'department',
                 EntityType::class,
                 [
-                    'class' => Site::class,
-                    'label' => 'Ville organisatrice',
-                    'choice_label' => function ($site) {
-                        return $site->getName();
+                    'class' => City::class,
+                    'choice_label' => 'department',
+                    'mapped' => false,
+                    'query_builder' => function (CityRepository $repo) {
+                        return $repo->createQueryBuilder('a')
+                            ->groupBy('a.department')
+                            ->orderBy('a.department', 'ASC');
                     },
                 ]
             )
-            //->add('place')
-        ;
+            ->add(
+                'city',
+                EntityType::class,
+                [
+                    'class' => City::class,
+                    'choice_label' => 'name',
+                    'mapped' => false,
+                ]
+            );
+
     }
 
     public function configureOptions(OptionsResolver $resolver)

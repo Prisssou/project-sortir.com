@@ -20,6 +20,10 @@ class OutingController extends Controller
     {
         $outing = new Outing();
         // Todo : ajout de l'user pour chaque sortie
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $user = $this->getUser();
+            $outing->addMember($user);
+        }
 
         $outingForm = $this->createForm(OutingType::class, $outing);
         $outingForm->handleRequest($request);
@@ -32,6 +36,9 @@ class OutingController extends Controller
             $placeRepository = $entityManager->getRepository(Place::class);
             $outing->setPlace($place = $placeRepository->find('1'));
 
+            $outing->setSite($user->getSite());
+
+
             if ($request->get('submitAction') == 'Enregistrer') {
                 $outing->setState($state = $stateRepository->find('1'));
             } else {
@@ -40,10 +47,14 @@ class OutingController extends Controller
                 }
             }
 
+            dump($outing);
+            die();
+
         $this->addFlash(
             'success',
             'Sortie ajoutée avec succès'
         );
+
 
         $entityManager->persist($outing);
         $entityManager->flush();

@@ -102,8 +102,8 @@ class MemberType extends AbstractType
             // Upload de l'image
             ->add(
                 'image',
-                ImageType::class
-//                [
+                ImageType::class,
+                [
 //                    'label' => 'Avatar :  ',
 //
 //                    // unmapped means that this field is not associated to any entity property
@@ -111,7 +111,7 @@ class MemberType extends AbstractType
 //
 //                    // make it optional so you don't have to re-upload the PDF file
 //                    // everytime you edit the Product details
-//                    'required' => false,
+                    'required' => false,
 //
 //                    // unmapped fields can't define their validation using annotations
 //                    // in the associated entity, so you can use the PHP constraint classes
@@ -128,7 +128,7 @@ class MemberType extends AbstractType
 ////                    ]
 ////                ),
 ////            ],
-//                ]
+               ]
             );
 
 

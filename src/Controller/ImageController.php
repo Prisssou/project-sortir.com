@@ -17,7 +17,7 @@ class ImageController extends Controller
      */
     public function index()
     {
-        return $this->render('image/index.html.twig', [
+        return $this->render('image/addplace.html.twig', [
             'controller_name' => 'ImageController',
         ]);
     }

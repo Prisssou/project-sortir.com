@@ -84,7 +84,10 @@ class MemberFormType extends AbstractType
 //            ->add('roles')
 //            ->add('active')
 
-//            // Upload de l'image
+
+
+            // Upload de l'image
+
 //            ->add(
 //                'image',
 //                FileType::class,
