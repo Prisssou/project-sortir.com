@@ -1,7 +1,9 @@
 {% extends 'layout.html.twig' %}
 
 {% block title %}Sortir.com{% endblock %}
-
+{% block stylesheet %}
+    <link rel="stylesheet" href="{{ asset('css/style-table.css') }}">
+{% endblock %}
 {% block body %}
     <div>
         <h1>Bienvenue sur Sortir.com !</h1>
@@ -55,9 +57,61 @@
 
 
 
+        <div class="tab">
+            <button class="tablinks" onclick="openCity(event, 'London')">London</button>
+            <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
+            <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+        </div>
+
+        <!-- Tab content -->
+        <div id="London" class="tabcontent">
+            <h3>ENI Nantes</h3>
+
+            <table style="width:100%">
+                <tr>
+                    <th>Nom de la sortie</th>
+                    <th>Date de la sortie</th>
+                    <th>Clôture</th>
+                    <th>Inscrits/Places</th>
+                    <th>Etat</th>
+                    <th>Déjà inscrit?</th>
+                    <th>Organisateur</th>
+                    <th>Actions</th>
+                </tr>
+
+                {% for sortie in sorties %}
+                <tr>
+                    <td>{{ sortie.name }}</td>
+{#                    <td>{{ sortie.startDate}}</td>#}
+{#                    <td>{{ sortie.closingDate }}</td>#}
+                    <td>Date début</td>
+                    <td>Date clôture</td>
+                    <td>{{ sortie.numberSub }}/{{ sortie.numberMaxSub }}</td>
+                    <td>Etat à définir</td>
+{#                    <td>{{ sortie.state }}</td>#}
+                    <td> Oui! </td>
+                    <td> Mamie Nova</td>
+                    <td><a href="#">Afficher</a></td>
+                </tr>
+                {% endfor %}
+
+            </table>
+            <p>London is the capital city of England.</p>
+        </div>
+
+        <div id="Paris" class="tabcontent">
+            <h3>Paris</h3>
+            <p>Paris is the capital of France.</p>
+        </div>
+
+        <div id="Tokyo" class="tabcontent">
+            <h3>Tokyo</h3>
+            <p>Tokyo is the capital of Japan.</p>
+        </div>
+
 
     </section>
 
 
-
+<script src="{{ asset('js/table-animation.js') }}"></script>
 {% endblock %}

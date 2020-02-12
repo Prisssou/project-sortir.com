@@ -1,0 +1,15 @@
+
+//Pour les villes (id 1 à 10)
+INSERT INTO `city` (`id`, `name`, `zipcode`) VALUES (NULL, 'Nantes', '44000'), (NULL, 'Rennes', '35000'), (NULL, 'Quimper', '29000'), (NULL, 'Niort', '79000'), (NULL, 'Brest', '29200'), (NULL, 'Périgueux', '24000'), (NULL, 'Bordeaux', '33300'), (NULL, 'Paris', '75000'), (NULL, 'Strasbourg', '67000'), (NULL, 'Lille', '59800');
+
+//Pour les lieux de sortie ()
+INSERT INTO `place` (`id`, `city_id`, `name`, `street`, `latitude`, `longitude`) VALUES (NULL, '1', 'La Fabrique à impro', '14 rue de l\'arche sèche', '10', '10'), (NULL, '4', 'La grande rue', '1 rue principale', '10', '10'), (NULL, '10', 'Carrousel', 'place du Carrousel', '10', '10'), (NULL, '6', 'Musée d\'Art et d\'archéologie', '22 cours Tourny', '10', '10'), (NULL, '2', 'Des bars', 'rue de la soif', '10', '10'), (NULL, '8', 'Tour effeil', 'Champ de Mars, 5 Avenue Anatole France, 75007 Paris', '10', '10'), (NULL, '1', 'Muséum d\'histoire naturelle', '12 rue Voltaire', '10', '10');
+
+
+
+
+
+
+
+
+
