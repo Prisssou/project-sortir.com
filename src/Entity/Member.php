@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -68,6 +70,16 @@ class Member implements UserInterface
      * @ORM\JoinColumn(nullable=false)
      */
     private $site;
+
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Outing", mappedBy="member")
+     */
+    private $outing;
+
+    public function __construct()
+    {
+        $this->outing = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -216,5 +228,38 @@ class Member implements UserInterface
     public function eraseCredentials()
     {
         // TODO: Implement eraseCredentials() method.
+    }
+
+    /**
+     * @return Collection|Outing[]
+     */
+    public function getOuting(): Collection
+    {
+        return $this->outing;
+    }
+
+    public function addOuting(Outing $outing): self
+    {
+        if (!$this->outing->contains($outing)) {
+            $this->outing[] = $outing;
+            $outing->addMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeOuting(Outing $outing): self
+    {
+        if ($this->outing->contains($outing)) {
+            $this->outing->removeElement($outing);
+            $outing->removeMember($this);
+        }
+
+        return $this;
+    }
+
+    public function __toString():string
+    {
+        return $this->username;
     }
 }
