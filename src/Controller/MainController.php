@@ -3,10 +3,12 @@
 namespace App\Controller;
 
 
+use App\Data\SearchData;
 use App\Entity\Outing;
 use App\Entity\Site;
 use App\Entity\State;
 use App\Form\FilterFormType;
+use App\Form\SearchFormType;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -24,12 +26,17 @@ class MainController extends Controller
         $sortieRepository = $entityManager->getRepository(Outing::class);
         $sorties = $sortieRepository->findAll();
 
+
 //        $sortieMemberRepository = $entityManager->getRepository(Outing::class);
 //        $sortiesMember = $sortieRepository->findAll();
 
         $siteRepository = $entityManager->getRepository(Site::class);
         $sites = $siteRepository->findAll();
 
+
+        $data = new SearchData();
+        $form = $this->createForm(SearchFormType::class, $data);
+        $sortiesFiltered = $sortieRepository->findSearch();
 
 //        $filterForm = $this->createForm(FilterFormType::class);
 //        $filterForm->handleRequest($request);
@@ -50,7 +57,15 @@ class MainController extends Controller
 //            ]
 //        );
 
-        return $this->render('main/home.html.twig', compact('sorties', 'sites'));
+        return $this->render(
+            'main/home.html.twig',
+            [
+                'sorties' => $sorties,
+                'sites' => $sites,
+                'sortiesFiltered' => $sortiesFiltered,
+                'form' => $form->createView(),
+            ]
+        );
     }
 
 //    /**

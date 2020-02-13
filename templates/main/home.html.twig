@@ -3,6 +3,7 @@
 {% block title %}Sortir.com{% endblock %}
 {% block stylesheet %}
     <link rel="stylesheet" href="{{ asset('css/style-table.css') }}">
+
 {% endblock %}
 {% block body %}
     <div>
@@ -48,8 +49,14 @@
 
     <section id="section-filtre">
 
+        <div class="row">
+            <div class="col-md-3">
+                {% include 'includes/homeFilter.html.twig' with {form: form} only %}
 
-        formulaire de filtre à faire
+            </div>
+
+
+        </div>
 
 
     </section>
@@ -73,69 +80,70 @@
 
         {% for site in sites %}
 
-        <!-- Tab content -->
+            <!-- Tab content -->
 
-        {% if app.user.site == site.name %}
+            {% if app.user.site == site.name %}
 
-        <div id="{{ site.name }}" class="tabcontent" style="display: block">
+                <div id="{{ site.name }}" class="tabcontent" style="display: block">
             {% else %}
-            <div id="{{ site.name }}" class="tabcontent">
-                {% endif %}
-                <h3>{{ site.name }}</h3>
+                <div id="{{ site.name }}" class="tabcontent">
+            {% endif %}
+            <h3>{{ site.name }}</h3>
 
-                <table style="width:100%">
-                    <tr>
-                        <th>Nom de la sortie</th>
-                        <th>Date de la sortie</th>
-                        <th>Clôture</th>
-                        <th>Inscrits/Places</th>
-                        <th>Etat</th>
-                        <th>Déjà inscrit?</th>
-                        <th>Organisateur</th>
-                        <th>Actions</th>
-                    </tr>
+            <table style="width:100%">
+                <tr>
+                    <th>Nom de la sortie</th>
+                    <th>Date de la sortie</th>
+                    <th>Clôture</th>
+                    <th>Inscrits/Places</th>
+                    <th>Etat</th>
+                    <th>Déjà inscrit?</th>
+                    <th>Organisateur</th>
+                    <th>Actions</th>
+                </tr>
 
-                    {% for sortie in sorties %}
-                        {% if site.name == sortie.site %}
+                {% for sortie in sorties %}
+                    {% if site.name == sortie.site %}
 
-                            <tr>
-                                <td>{{ sortie.name }}</td>
-                                <td>{{ sortie.startDate|date('d/m/Y à H:i') }}</td>
-                                <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
-                                {% if sortie.numberSub == sortie.numberMaxSub %}
-                                    <td><span style="color: red; font-weight: bold">{{ sortie.numberSub }}</span>/{{ sortie.numberMaxSub }}
-                                    </td>
-                                {% else %}
-                                    <td>
-                                        <span style="color: green; font-weight: bold">{{ sortie.numberSub }}</span>/{{ sortie.numberMaxSub }}
-                                    </td>
-                                {% endif %}
-                                <td>{{ sortie.state.label }}</td>
-                                <td> Oui!</td>
-                                {#                    <td>{{dump(sortie.member)}}</td>#}
-                                {% for member in sortie.member %}
-                                    <td> {{ member.username }}</td>
-                                {% endfor %}
-                                {% if site.name == 'ENI NANTES' %}
-                                    <td>
-                                        <a href="#">Prout</a>
-                                    </td>
-                                {% else %}
-                                    <td>
-                                        <a href="#">Afficher</a>
-                                        {#                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>#}
-                                    </td>
-                                {% endif %}
-                            </tr>
-                        {% endif %}
+                        <tr>
+                            <td>{{ sortie.name }}</td>
+                            <td>{{ sortie.startDate|date('d/m/Y à H:i') }}</td>
+                            <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
+                            {% if sortie.numberSub == sortie.numberMaxSub %}
+                                <td>
+                                    <span style="color: red; font-weight: bold">{{ sortie.numberSub }}</span>/{{ sortie.numberMaxSub }}
+                                </td>
+                            {% else %}
+                                <td>
+                                    <span style="color: green; font-weight: bold">{{ sortie.numberSub }}</span>/{{ sortie.numberMaxSub }}
+                                </td>
+                            {% endif %}
+                            <td>{{ sortie.state.label }}</td>
+                            <td> Oui!</td>
+                            {#                    <td>{{dump(sortie.member)}}</td>#}
+                            {% for member in sortie.member %}
+                                <td> {{ member.username }}</td>
+                            {% endfor %}
+                            {% if site.name == 'ENI NANTES' %}
+                                <td>
+                                    <a href="#">Prout</a>
+                                </td>
+                            {% else %}
+                                <td>
+                                    <a href="#">Afficher</a>
+                                    {#                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>#}
+                                </td>
+                            {% endif %}
+                        </tr>
+                    {% endif %}
 
-                    {% endfor %}
+                {% endfor %}
 
-                </table>
+            </table>
+            </div>
             </div>
 
-
-            {% endfor %}
+        {% endfor %}
 
 
     </section>
