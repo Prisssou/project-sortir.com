@@ -30,7 +30,7 @@ class SubscribedController extends Controller
             $entityManager->persist($subscription);
             $entityManager->flush();
         }
-
+return $this->render('main/home.html.twig');
 
     }
 }
