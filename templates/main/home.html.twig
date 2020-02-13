@@ -23,24 +23,24 @@
     <div class="container">
 
         <div class="row">
-{#
+            {#
 
-            {% for article in articles %}
-                <div class="col-lg-3" id="box-shadow">
-                    <ul style="list-style-image: url({{ asset('img/hang.png') }})">
-                        {% if app.user %}
-                        <a href="{{ path('detail', {'id':article.id}) }}">
-                            {% endif %}
-                            <img id="article-image" src="{{ asset('uploads/images') }}/{{ article.image }}  "
-                                 alt="article"></a>
-                        <li> Nom : {{ article.nom }}</li>
-                        <li> Description : {{ article.description }}</li>
-                        <li> Echangé par : {{ article.user.getUsername() }}</li>
-                    </ul>
-                </div>
-            {% else %}
-                Il n'y a pas d'articles à échanger.
-            {% endfor %}#}
+                        {% for article in articles %}
+                            <div class="col-lg-3" id="box-shadow">
+                                <ul style="list-style-image: url({{ asset('img/hang.png') }})">
+                                    {% if app.user %}
+                                    <a href="{{ path('detail', {'id':article.id}) }}">
+                                        {% endif %}
+                                        <img id="article-image" src="{{ asset('uploads/images') }}/{{ article.image }}  "
+                                             alt="article"></a>
+                                    <li> Nom : {{ article.nom }}</li>
+                                    <li> Description : {{ article.description }}</li>
+                                    <li> Echangé par : {{ article.user.getUsername() }}</li>
+                                </ul>
+                            </div>
+                        {% else %}
+                            Il n'y a pas d'articles à échanger.
+                        {% endfor %}#}
 
 
         </div>
@@ -56,13 +56,14 @@
 
     <section id="section-tableau-sorties">
 
-
-
         <div class="tab">
-            <button class="tablinks" onclick="openCity(event, 'London')">London</button>
-            <button class="tablinks" onclick="openCity(event, 'Paris')">Paris</button>
-            <button class="tablinks" onclick="openCity(event, 'Tokyo')">Tokyo</button>
+            {% for site in sites %}
+
+                <button class="tablinks" onclick="openCity(event, '{{ site.name }}')">{{ site.name }}</button>
+
+            {% endfor %}
         </div>
+
 
         <!-- Tab content -->
         <div id="London" class="tabcontent">
@@ -102,22 +103,65 @@
             </table>
         </div>
 
-        <div id="Paris" class="tabcontent">
-            <h3>Paris</h3>
-            <p>Paris is the capital of France.</p>
-        </div>
 
-        <div id="Tokyo" class="tabcontent">
-            <h3>Tokyo</h3>
-            <p>Tokyo is the capital of Japan.</p>
-        </div>
+        {% for site in sites %}
+
+            <!-- Tab content -->
+            <div id="{{ site.name }}" class="tabcontent">
+                <h3>{{ site.name }}</h3>
+
+                <table style="width:100%">
+                    <tr>
+                        <th>Nom de la sortie</th>
+                        <th>Date de la sortie</th>
+                        <th>Clôture</th>
+                        <th>Inscrits/Places</th>
+                        <th>Etat</th>
+                        <th>Déjà inscrit?</th>
+                        <th>Organisateur</th>
+                        <th>Actions</th>
+                    </tr>
+
+                    {% for sortie in sorties %}
+                        {% for member in sortie.member %}
+                            {% if site.name == member.site %}
+
+                                <tr>
+                                    <td>{{ sortie.name }}</td>
+                                    <td>{{ sortie.startDate|date('d/m/Y à H:i') }}</td>
+                                    <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
+                                    <td><small>{{ sortie.numberSub }}</small>/{{ sortie.numberMaxSub }}</td>
+                                    <td>{{ sortie.state.label }}</td>
+                                    <td> Oui!</td>
+                                    {#                    <td>{{dump(sortie.member)}}</td>#}
+                                    {% for member in sortie.member %}
+                                        <td> {{ member.username }}</td>
+                                    {% endfor %}
+                                    {% if site.name == 'ENI NANTES' %}
+                                        <td>
+                                            <a href="#">Prout</a>
+                                        </td>
+                                    {% else %}
+                                        <td>
+                                            <a href="#">Afficher</a>
+                                            {#                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>#}
+                                        </td>
+                                    {% endif %}
+                                </tr>
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+
+                </table>
+            </div>
+
+
+
+        {% endfor %}
 
 
     </section>
 
 
-
-
-
-<script src="{{ asset('js/table-animation.js') }}"></script>
+    <script src="{{ asset('js/table-animation.js') }}"></script>
 {% endblock %}
