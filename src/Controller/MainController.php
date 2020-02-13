@@ -4,6 +4,7 @@ namespace App\Controller;
 
 
 use App\Entity\Outing;
+use App\Entity\Site;
 use App\Entity\State;
 use App\Form\FilterFormType;
 use Doctrine\ORM\EntityManager;
@@ -23,8 +24,11 @@ class MainController extends Controller
         $sortieRepository = $entityManager->getRepository(Outing::class);
         $sorties = $sortieRepository->findAll();
 
-        $sortieMemberRepository = $entityManager->getRepository(Outing::class);
-        $sortiesMember = $sortieRepository->findAll();
+//        $sortieMemberRepository = $entityManager->getRepository(Outing::class);
+//        $sortiesMember = $sortieRepository->findAll();
+
+        $siteRepository = $entityManager->getRepository(Site::class);
+        $sites = $siteRepository->findAll();
 
 
 //        $filterForm = $this->createForm(FilterFormType::class);
@@ -46,7 +50,7 @@ class MainController extends Controller
 //            ]
 //        );
 
-        return $this->render('main/home.html.twig', compact('sorties'));
+        return $this->render('main/home.html.twig', compact('sorties', 'sites'));
     }
 
 //    /**
