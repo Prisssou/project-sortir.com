@@ -53,16 +53,7 @@ class MainController extends Controller
         return $this->render('main/home.html.twig', compact('sorties', 'sites'));
     }
 
-//    /**
-//     * @Route("/outing{id}", name="detail", methods{'GET'})
-//     */
-//    public function detail(EntityManagerInterface $entityManager, Outing $outing) : Response
-//    {
-////        $id = $outing->getId();
-////        $suscribersList = $entityManager->getRepository()->find($id);
-//
-//        return $this->render('outing/detailOuting.html.twig', compact('outing', 'suscribersList'));
-//    }
+
 
 
 }

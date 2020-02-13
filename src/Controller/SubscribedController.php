@@ -9,18 +9,17 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
-class SuscribedController extends Controller
+class SubscribedController extends Controller
 {
     /**
-     * @Route("/suscribed", name="suscribed")
+     * @Route("/subscribed", name="subscribed")
      */
     public function index()
     {
-        return $this->render('suscribed/index.html.twig', [
-            'controller_name' => 'SuscribedController',
+        return $this->render('subscribed/index.html.twig', [
+            'controller_name' => 'SubscribedController',
         ]);
     }
-
     public function addSubscription(EntityManagerInterface $entityManager, Request $request){
         $subscription = new Subscribed();
         $subForm = $this->createForm(SubscribedType::class, $subscription);

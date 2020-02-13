@@ -82,22 +82,22 @@
                 </tr>
 
                 {% for sortie in sorties %}
-                <tr>
-                    <td>{{ sortie.name }}</td>
-                    <td>{{ sortie.startDate|date('d/m/Y à H:i')}}</td>
-                    <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
-                    <td><small>{{ sortie.numberSub }}</small>/{{ sortie.numberMaxSub }}</td>
-                    <td>{{ sortie.state.label }}</td>
-                    <td> Oui! </td>
-{#                    <td>{{dump(sortie.member)}}</td>#}
-                    {% for member in sortie.member %}
-                    <td> {{ member.username }}</td>
-                    {% endfor %}
-                    <td>
-                      <a href="#">Afficher</a>
-{#                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>#}
-                    </td>
-                </tr>
+                    <tr>
+                        <td>{{ sortie.name }}</td>
+                        <td>{{ sortie.startDate|date('d/m/Y à H:i') }}</td>
+                        <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
+                        <td><small>{{ sortie.numberSub }}</small>/{{ sortie.numberMaxSub }}</td>
+                        <td>{{ sortie.state.label }}</td>
+                        <td> Oui!</td>
+                        {#                    <td>{{dump(sortie.member)}}</td>#}
+                        {% for member in sortie.member %}
+                            <td> {{ member.username }}</td>
+                        {% endfor %}
+                        <td>
+                            {#                            <a href="#">Afficher</a>#}
+                            <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
+                        </td>
+                    </tr>
                 {% endfor %}
 
             </table>
@@ -143,8 +143,9 @@
                                         </td>
                                     {% else %}
                                         <td>
-                                            <a href="#">Afficher</a>
-                                            {#                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>#}
+{#                                            <a href="#">Afficher</a>#}
+                                          <a href="{{ path('detail', {'id': sortie.id}) }}">Afficher</a>
+
                                         </td>
                                     {% endif %}
                                 </tr>
