@@ -59,16 +59,28 @@
         <div class="tab">
             {% for site in sites %}
 
-                <button class="tablinks" onclick="openCity(event, '{{ site.name }}')">{{ site.name }}</button>
+                {% if app.user.site == site.name %}
 
+                    <button class="tablinks active"
+                            onclick="openCity(event, '{{ site.name }}')">{{ site.name }}</button>
+                {% else %}
+                    <button class="tablinks" onclick="openCity(event, '{{ site.name }}')">{{ site.name }}</button>
+
+                {% endif %}
             {% endfor %}
         </div>
 
 
         {% for site in sites %}
 
-            <!-- Tab content -->
+        <!-- Tab content -->
+
+        {% if app.user.site == site.name %}
+
+        <div id="{{ site.name }}" class="tabcontent" style="display: block">
+            {% else %}
             <div id="{{ site.name }}" class="tabcontent">
+                {% endif %}
                 <h3>{{ site.name }}</h3>
 
                 <table style="width:100%">
@@ -84,41 +96,39 @@
                     </tr>
 
                     {% for sortie in sorties %}
-                        {% for member in sortie.member %}
-                            {% if site.name == member.site %}
+                        {% if site.name == sortie.site %}
 
-                                <tr>
-                                    <td>{{ sortie.name }}</td>
-                                    <td>{{ sortie.startDate|date('d/m/Y à H:i') }}</td>
-                                    <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
-                                    <td><small>{{ sortie.numberSub }}</small>/{{ sortie.numberMaxSub }}</td>
-                                    <td>{{ sortie.state.label }}</td>
-                                    <td> Oui!</td>
-                                    {#                    <td>{{dump(sortie.member)}}</td>#}
-                                    {% for member in sortie.member %}
-                                        <td> {{ member.username }}</td>
-                                    {% endfor %}
-                                    {% if site.name == 'ENI NANTES' %}
-                                        <td>
-                                            <a href="#">Prout</a>
-                                        </td>
-                                    {% else %}
-                                        <td>
-                                            <a href="#">Afficher</a>
-                                            {#                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>#}
-                                        </td>
-                                    {% endif %}
-                                </tr>
-                            {% endif %}
-                        {% endfor %}
+                            <tr>
+                                <td>{{ sortie.name }}</td>
+                                <td>{{ sortie.startDate|date('d/m/Y à H:i') }}</td>
+                                <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
+                                <td><small>{{ sortie.numberSub }}</small>/{{ sortie.numberMaxSub }}</td>
+                                <td>{{ sortie.state.label }}</td>
+                                <td> Oui!</td>
+                                {#                    <td>{{dump(sortie.member)}}</td>#}
+                                {% for member in sortie.member %}
+                                    <td> {{ member.username }}</td>
+                                {% endfor %}
+                                {% if site.name == 'ENI NANTES' %}
+                                    <td>
+                                        <a href="#">Prout</a>
+                                    </td>
+                                {% else %}
+                                    <td>
+                                        <a href="#">Afficher</a>
+                                        {#                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>#}
+                                    </td>
+                                {% endif %}
+                            </tr>
+                        {% endif %}
+
                     {% endfor %}
 
                 </table>
             </div>
 
 
-
-        {% endfor %}
+            {% endfor %}
 
 
     </section>
