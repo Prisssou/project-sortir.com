@@ -56,3 +56,4 @@ security:
         - { path: ^/profile, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/signup, roles: ROLE_ADMIN }
+        - { path: ^/addAPI, roles: ROLE_SUPER_ADMIN }
