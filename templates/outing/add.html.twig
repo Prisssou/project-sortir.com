@@ -4,81 +4,88 @@
 
 {% block body %}
 
-<h2> Créer une sortie </h2>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4">
+    <h2> Créer une sortie </h2>
 
-            {# Todo : ajouter upload image #}
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
 
-        </div>
+                {# Todo : ajouter upload image #}
 
-        <div class="col-lg-4">
-            {{ form_start(outingFormView) }}
+            </div>
 
-            {{ form_label(outingFormView.name) }}
-            {{ form_widget(outingFormView.name) }}
-            {{ form_errors(outingFormView.name) }} <br>
+            <div class="col-lg-4">
+                {{ form_start(outingFormView) }}
 
-            {{ form_label(outingFormView.startDate) }}
-            {{ form_widget(outingFormView.startDate) }}
-            {{ form_errors(outingFormView.startDate) }} <br>
+                {{ form_label(outingFormView.name) }}
+                {{ form_widget(outingFormView.name) }}
+                {{ form_errors(outingFormView.name) }} <br>
 
-            {{ form_label(outingFormView.limitDateSub) }}
-            {{ form_widget(outingFormView.limitDateSub) }}
-            {{ form_errors(outingFormView.limitDateSub) }} <br>
+                {{ form_label(outingFormView.startDate) }}
+                {{ form_widget(outingFormView.startDate) }}
+                {{ form_errors(outingFormView.startDate) }} <br>
 
-            {{ form_label(outingFormView.numberMaxSub) }}
-            {{ form_widget(outingFormView.numberMaxSub) }}
-            {{ form_errors(outingFormView.numberMaxSub) }} <br>
+                {{ form_label(outingFormView.limitDateSub) }}
+                {{ form_widget(outingFormView.limitDateSub) }}
+                {{ form_errors(outingFormView.limitDateSub) }} <br>
 
-            {{ form_label(outingFormView.duration) }}
-            {{ form_widget(outingFormView.duration) }}
-            {{ form_errors(outingFormView.duration) }} minutes <br>
+                {{ form_label(outingFormView.numberMaxSub) }}
+                {{ form_widget(outingFormView.numberMaxSub) }}
+                {{ form_errors(outingFormView.numberMaxSub) }} <br>
 
-            {{ form_label(outingFormView.description) }}
-            {{ form_widget(outingFormView.description) }}
-            {{ form_errors(outingFormView.description) }} <br>
+                {{ form_label(outingFormView.duration) }}
+                {{ form_widget(outingFormView.duration) }}
+                {{ form_errors(outingFormView.duration) }} minutes <br>
 
-            {{ form_label(outingFormView.department) }}
-            {{ form_widget(outingFormView.department) }}
-            {{ form_errors(outingFormView.department) }} <br>
+                {{ form_label(outingFormView.description) }}
+                {{ form_widget(outingFormView.description) }}
+                {{ form_errors(outingFormView.description) }} <br>
+
+                {{ form_label(outingFormView.ville) }}
+                {{ form_widget(outingFormView.ville) }}
+                {{ form_errors(outingFormView.ville) }} <br>
+
+                {{ form_label(outingFormView.place) }}
+                {{ form_widget(outingFormView.place) }}
+                {{ form_errors(outingFormView.place) }} <br>
 
 
-           {{ form_label(outingFormView.city) }}
-            {{ form_widget(outingFormView.city) }}
-            {{ form_errors(outingFormView.city) }} <br>
+                <a href="{{ path('add_place') }}" class="btn btn-primary"><i class="fas fa-plus-circle"></i></a>
 
+            </div>
 
+            <div class="col-lg-4">
 
-            <a href="{{ path('add_place') }}" class="btn btn-primary">Ajouter un lieu</a>
+                <br>
 
-        </div>
+            </div>
 
-        <div class="col-lg-4">
+            <div class="col-sm-12 text-center">
 
-            <br>
+                <input class="btn btn-primary" type="submit" name="submitAction" value="Enregistrer">
+                <input class="btn btn-primary" type="submit" name="submitAction" value="Publier">
+                <input class="btn btn-primary" type="submit" value="Annuler">
 
-        </div>
+                {{ form_end(outingFormView) }}
 
-        <div class="col-sm-12 text-center">
-
-            <input class="btn btn-primary" type="submit" name="submitAction" value="Enregistrer">
-            <input class="btn btn-primary" type="submit" name="submitAction" value="Publier">
-            <input class="btn btn-primary" type="submit" value="Annuler">
-
-            {{ form_end(outingFormView) }}
+            </div>
 
         </div>
 
     </div>
 
-</div>
+{% endblock %}
+
+  {%  block script %}
+      <script>
+          $(document).ready(function() {$('.select2').select2();});
+
+      </script>
+
+  {%  endblock %}
 
 
-
-{%  endblock %}
 
 
 
