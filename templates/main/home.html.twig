@@ -59,8 +59,14 @@
         <div class="tab">
             {% for site in sites %}
 
-                <button class="tablinks" onclick="openCity(event, '{{ site.name }}')">{{ site.name }}</button>
+                {% if app.user.site == site.name %}
 
+                    <button class="tablinks active"
+                            onclick="openCity(event, '{{ site.name }}')">{{ site.name }}</button>
+                {% else %}
+                    <button class="tablinks" onclick="openCity(event, '{{ site.name }}')">{{ site.name }}</button>
+
+                {% endif %}
             {% endfor %}
         </div>
 
@@ -106,8 +112,14 @@
 
         {% for site in sites %}
 
-            <!-- Tab content -->
+        <!-- Tab content -->
+
+        {% if app.user.site == site.name %}
+
+        <section id="{{ site.name }}" class="tabcontent" style="display: block">
+            {% else %}
             <div id="{{ site.name }}" class="tabcontent">
+                {% endif %}
                 <h3>{{ site.name }}</h3>
 
                 <table style="width:100%">
@@ -143,26 +155,27 @@
                                         </td>
                                     {% else %}
                                         <td>
-{#                                            <a href="#">Afficher</a>#}
-                                          <a href="{{ path('detail', {'id': sortie.id}) }}">Afficher</a>
+                                            {#                                            <a href="#">Afficher</a>#}
+                                            <a href="{{ path('detail', {'id': sortie.id}) }}">Afficher</a>
 
                                         </td>
                                     {% endif %}
                                 </tr>
                             {% endif %}
                         {% endfor %}
+
+
                     {% endfor %}
 
                 </table>
             </div>
 
 
+            {% endfor %}
 
-        {% endfor %}
 
-
+        </section>
     </section>
-
 
     <script src="{{ asset('js/table-animation.js') }}"></script>
 {% endblock %}

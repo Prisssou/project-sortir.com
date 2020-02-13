@@ -51,14 +51,10 @@ class OutingController extends Controller
                 }
             }
 
-            dump($outing);
-            die();
-
-            $this->addFlash(
-                'success',
-                'Sortie ajoutée avec succès'
-            );
-
+        $this->addFlash(
+            'success',
+            'Sortie ajoutée avec succès'
+        );
 
             $entityManager->persist($outing);
             $entityManager->flush();
@@ -71,21 +67,7 @@ class OutingController extends Controller
             ['outingFormView' => $outingForm->createView(),]
         );
     }
-//        /**
-//     * @Route("/outing/{id}", name="detail", methods{'GET'})
-//     */
-//    public function detail($id, EntityManagerInterface $entityManager, Outing $outing) : Response
-//    {
-//        // Récupération de la sortie par son id
-//         $outingRepository = $entityManager->getRepository(Outing::class);
-//         $outing = $outingRepository->find($id);
-//        dump($outing);
-////            $id = $outing->getId();
-////        $suscribersList = $entityManager->getRepository()->find($id);
-//
 
-////        return $this->render('outing/detailOuting.html.twig', compact('outing', 'suscribersList'));
-//    }
     /**
      * @Route("/detail/{id}", name="detail")
      * @param $id
@@ -112,5 +94,5 @@ class OutingController extends Controller
 
     }
 
-
 }
+
