@@ -53,7 +53,7 @@
 
                     <div class="row">
                         <div class="col">
-                            <input type="hidden" name="_target_path" value="{{ url('user_main') }}"/>
+                            <input type="hidden" name="_target_path" value="{{ url('home') }}"/>
                             <button type="submit" class="btn btn-primary">Se connecter</button>
                         </div>
                     </div>
@@ -62,7 +62,7 @@
                     {% if error %}
                         <div class="row">
                             <div class="col">
-                                <div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}🥚</div>
+                                <div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
                             </div>
                         </div>
                         <div id="spacing-div"></div>
