@@ -4,11 +4,13 @@ namespace App\Form;
 
 
 use App\Entity\Outing;
-use App\Entity\City;
+use App\Entity\Ville;
+use App\Entity\Site;
 use App\Entity\Place;
 use App\Repository\CityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\IntegerType;
@@ -64,29 +66,30 @@ class OutingType extends AbstractType
                 ]
             )
             ->add(
-                'department',
+                'ville',
                 EntityType::class,
                 [
-                    'class' => City::class,
-                    'choice_label' => 'department',
-                    'mapped' => false,
-                    'query_builder' => function (CityRepository $repo) {
-                        return $repo->createQueryBuilder('a')
-                            ->groupBy('a.department')
-                            ->orderBy('a.department', 'ASC');
+                    'class' => Ville::class,
+                    'choice_label' => function ($ville) {
+                        return $ville->getNom().' '.$ville->getCodesPostaux();
                     },
+                    'mapped' => false,
+                    'attr' => [
+                        'class' => 'select2',
+                    ],
                 ]
             )
             ->add(
-                'city',
+                'place',
                 EntityType::class,
                 [
-                    'class' => City::class,
-                    'choice_label' => 'name',
-                    'mapped' => false,
+                    'class' => Place::class,
+                    'choice_label' => function ($place) {
+                        return $place->getName();
+                    },
+
                 ]
             );
-
     }
 
     public function configureOptions(OptionsResolver $resolver)

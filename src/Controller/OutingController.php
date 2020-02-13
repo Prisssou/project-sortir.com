@@ -47,9 +47,6 @@ class OutingController extends Controller
                 }
             }
 
-            dump($outing);
-            die();
-
         $this->addFlash(
             'success',
             'Sortie ajoutée avec succès'
