@@ -130,8 +130,8 @@
                                 </td>
                             {% else %}
                                 <td>
-                                    <a href="#">Afficher</a>
-                                    {#                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>#}
+{#                                    <a href="#">Afficher</a>#}
+                                                            <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
                                 </td>
                             {% endif %}
                         </tr>
@@ -146,8 +146,8 @@
         {% endfor %}
 
 
+        </section>
     </section>
-
 
     <script src="{{ asset('js/table-animation.js') }}"></script>
 {% endblock %}
