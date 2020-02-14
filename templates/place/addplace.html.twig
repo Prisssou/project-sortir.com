@@ -1,19 +1,15 @@
 {% extends 'layout.html.twig' %}
 
-{%  block title %} Ajouter un lieu {% endblock %}
+{% block title %} Ajouter un lieu {% endblock %}
 
-{%  block body %}
+{% block body %}
     <h2> Créer un lieu</h2>
 
-{   <div class="container">
+    {
+    <div class="container">
         <div class="row">
-            <div class="col-lg-4">
 
-                 {# Todo : ajouter upload image #}
-
-            </div>
-
-            <div class="col-lg-4">
+            <div class="col-lg-6">
                 {{ form_start(placeFormView) }}
 
                 {{ form_label(placeFormView.adresse) }}
@@ -32,7 +28,7 @@
                 {{ form_widget(placeFormView.zipcode) }}
                 {{ form_errors(placeFormView.zipcode) }} <br>
 
-               {{ form_label(placeFormView.city) }}
+                {{ form_label(placeFormView.city) }}
                 {{ form_widget(placeFormView.city) }}
                 {{ form_errors(placeFormView.city) }} <br>
 
@@ -44,14 +40,12 @@
                 {{ form_widget(placeFormView.longitude) }}
                 {{ form_errors(placeFormView.longitude) }} <br>
 
-
-
             </div>
+            <div class="col-lg-6">
 
-            <div class="col-lg-4">
+                <div id='map' style="position: absolute; top: 0; bottom: 0; width: 90%; height: 80%; margin: 10px;">
 
-                <br>
-
+                </div>
             </div>
 
             <div class="col-sm-12 text-center">
@@ -62,15 +56,15 @@
                 {{ form_end(placeFormView) }}
 
             </div>
-
         </div>
 
     </div>
 
 {% endblock %}
 
- {%  block script %}
-     <script src="https://cdn.jsdelivr.net/npm/places.js@1.17.1"></script>
+ {% block script %}
+
+
      <script>
          var placesAutocomplete = places({
              appId: 'plF08LHPG3UQ',
@@ -83,7 +77,22 @@
              document.querySelector('#place_zipcode').value = e.suggestion.postcode;
              document.querySelector('#place_latitude').value = e.suggestion.latlng.lat;
              document.querySelector('#place_longitude').value = e.suggestion.latlng.lng;
+             var lat = e.suggestion.latlng.lat;
+             var long = e.suggestion.latlng.lng;
+
+             mapboxgl.accessToken = 'pk.eyJ1IjoicGF1bGluZW9obGl2ZCIsImEiOiJjazZobThqNm8yZm81M2xtZ2JiMjAwYTU4In0.rd9tpEypJqJ9VH4Z6r05lQ';
+             var map = new mapboxgl.Map({
+                 container: 'map', // Container ID
+                 style: 'mapbox://styles/mapbox/streets-v11', // Map style to use
+                 center: [long, lat], // Starting position [lng, lat]
+                 zoom: 12, // Starting zoom level
+             });
+
+             var marker = new mapboxgl.Marker() // initialize a new marker
+                 .setLngLat([long, lat]) // Marker [lng, lat] coordinates
+                 .addTo(map); // Add the marker to the map
          })
+
      </script>
 
- {%  endblock %}
+ {% endblock %}

@@ -52,8 +52,6 @@ class PlaceController extends Controller
                 return $this->redirectToRoute("add_place");
 
             }
-
-
         }
 
         return $this->render(
