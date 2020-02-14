@@ -43,7 +43,7 @@ class PlaceController extends Controller
                 $entityManager->persist($place);
                 $entityManager->flush();
 
-                return $this->redirectToRoute("home");
+                return $this->redirectToRoute("add_outing");
             } else {
                 $this->addFlash(
                     'warning',
