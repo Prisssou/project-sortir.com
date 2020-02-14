@@ -19,6 +19,22 @@ class PlaceRepository extends ServiceEntityRepository
         parent::__construct($registry, Place::class);
     }
 
+    public function findByCity($city)
+    {
+        $entityManager = $this->getEntityManager();
+        $dql = <<<DQL
+SELECT v
+FROM App\Entity\Ville v
+WHERE v.nom = :city
+DQL;
+        $query = $entityManager->createQuery($dql);
+        $query->setParameter(':city', $city);
+        $result = $query->getResult();
+
+        return $result;
+
+    }
+
     // /**
     //  * @return Place[] Returns an array of Place objects
     //  */

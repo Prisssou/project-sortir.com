@@ -33,6 +33,7 @@ class City
      */
     private $place;
 
+
     /**
      * @ORM\Column(type="string", length=3)
      */
