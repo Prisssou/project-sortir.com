@@ -57,19 +57,21 @@ class OutingRepository extends ServiceEntityRepository
                 ->andWhere('outing.duration <= :dureeMax')
                 ->setParameter('dureeMax', $search->getDureeMax());
         }
-//        if (!empty($search->getOrga())){
-//            $query = $query
-//                ->andWhere('outing.duration <= :orga')
-//                ->setParameter('orga', $search->getOrga());
-//        }
-//        if (!empty($search->getDureeMax())){
-//            if ($search->getDureeMax() == 1){
-//                $query = $query
-//                    ->andWhere('outing.duration <= :dureeMax')
-//                    ->setParameter('dureeMax', $search->getDureeMax());
-//            }
-//
-//        }
+        if (!empty($search->getOrga())){
+            if ($search->getOrga() == 1){
+                $query = $query
+                    ->andWhere('outing.duration <= :orga')
+                    ->setParameter('orga', $search->getOrga());
+            }
+
+        }
+        if (!empty($search->getDureeMax())){
+                $query = $query
+                    ->andWhere('outing.duration <= :dureeMax')
+                    ->setParameter('dureeMax', $search->getDureeMax());
+
+
+        }
 
 
 
