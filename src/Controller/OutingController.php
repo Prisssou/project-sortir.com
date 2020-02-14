@@ -87,27 +87,27 @@ class OutingController extends Controller
         );
 
     }
-    // S'inscrire à une sortie
-    /**
-     * @Route("/detail/{id}", name="detail")
-     * @param $id
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return Response
-     */
-    public function subscribe($id, EntityManagerInterface $entityManager, Request $request, Outing $outing)
-    {
-        // Récupération de la sortie
-        $outingRepository = $entityManager->getRepository(Outing::class);
-        $outing = $outingRepository->find($id);
-
-
-        return $this->render(
-            'outing/detailOuting.html.twig',
-            compact('outing')
-        );
-
-    }
+//    // S'inscrire à une sortie
+//    /**
+//     * @Route("/detail/{id}", name="detail")
+//     * @param $id
+//     * @param EntityManagerInterface $entityManager
+//     * @param Request $request
+//     * @return Response
+//     */
+//    public function subscribe($id, EntityManagerInterface $entityManager, Request $request, Outing $outing)
+//    {
+//        // Récupération de la sortie
+//        $outingRepository = $entityManager->getRepository(Outing::class);
+//        $outing = $outingRepository->find($id);
+//
+//
+//        return $this->render(
+//            'outing/detailOuting.html.twig',
+//            compact('outing')
+//        );
+//
+//    }
 
 }
 

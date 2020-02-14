@@ -74,11 +74,12 @@
                     </thead>
                     <tbody>
 
-{#                    {% for suscribers in outing.subscribeds %}#}
-{#                    <tr>#}
-{#                         <td>{{ outing_member.member.username }}</td>#}
-{#                         <td>{{ outing_member.member.firstname }} {{ outing_member.site.name }}</td>#}
-{#                    </tr>#}
+                    {% for suscribers in outing.member %}
+                    <tr>
+                         <td>{{ suscribers.username }}</td>
+                         <td>{{ suscribers.username }}</td>
+{#                         <td>{{ subscribers.member.firstname }} {{ outing_member.site.name }}</td>#}
+                    </tr>
                     <tr>
                         <td>Popo</td>
                         <td>Pauline - ENI Nantes</td>
@@ -88,7 +89,7 @@
                         <td>Alanou</td>
                         <td>Alan - ENI Nantes</td>
                     </tr>
-{#                                    {% endfor %}#}
+                                    {% endfor %}
 
                     </tbody>
                 </table>
