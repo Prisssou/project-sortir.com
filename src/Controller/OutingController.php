@@ -67,6 +67,8 @@ class OutingController extends Controller
             ['outingFormView' => $outingForm->createView(),]
         );
     }
+
+    // Afficher un sortie
     /**
      * @Route("/detail/{id}", name="detail")
      * @param $id

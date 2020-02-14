@@ -48,7 +48,7 @@
                 </div>
                 <div class="col">
                     <label>Code postal :</label>
-                    {#                    <span>{{ outing.place.city.zip }}</span>#}
+                    <span>{{ outing.place.city.zip }}</span>
                 </div>
                 <div class="col">
                     <label>Latitude :</label>
@@ -74,22 +74,21 @@
                     </thead>
                     <tbody>
 
-                    {% for suscribers in outing.member %}
-                    <tr>
-                         <td>{{ suscribers.username }}</td>
-                         <td>{{ suscribers.username }}</td>
-{#                         <td>{{ subscribers.member.firstname }} {{ outing_member.site.name }}</td>#}
-                    </tr>
-                    <tr>
-                        <td>Popo</td>
-                        <td>Pauline - ENI Nantes</td>
+{#                    {% for suscribers in outing.member %} #}{# Todo récupérer les participants et non l'oganisateur #}
+{#                        <tr>#}
+{#                            <td>{{ suscribers.username }}</td>#}
+{#                            #}{#                         <td>{{ subscribers.member.firstname }} {{ subscribers.site.name }}</td>#}
+{#                        </tr>#}
+                        <tr>
+                            <td>Popo</td>
+                            <td>Pauline - ENI Nantes</td>
 
-                    </tr>
-                    <tr>
-                        <td>Alanou</td>
-                        <td>Alan - ENI Nantes</td>
-                    </tr>
-                                    {% endfor %}
+                        </tr>
+                        <tr>
+                            <td>Alanou</td>
+                            <td>Alan - ENI Nantes</td>
+                        </tr>
+{#                    {% endfor %}#}
 
                     </tbody>
                 </table>

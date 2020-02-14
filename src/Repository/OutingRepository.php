@@ -2,6 +2,7 @@
 
 namespace App\Repository;
 
+use App\Data\SearchData;
 use App\Entity\Outing;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
@@ -23,11 +24,58 @@ class OutingRepository extends ServiceEntityRepository
      * Récupère les sorties en lien avec une recherche
      * @return Outing[]
      */
-    public function findSearch(): array
+    public function findSearch(SearchData $search): array
     {
 
+        $query = $this
+            ->createQueryBuilder('outing');
 
-        return $this->findAll();
+
+        if (!empty($search->getMotCle())){
+            $query = $query
+                ->andWhere('outing.name LIKE :motCle')
+                ->setParameter('motCle', "%{$search->getMotCle()}%");
+        }
+
+        if (!empty($search->getBeginDate())){
+            $query = $query
+                ->andWhere('outing.startDate >= :beginDate')
+                ->setParameter('beginDate', $search->getBeginDate());
+        }
+        if (!empty($search->getEndDate())){
+            $query = $query
+                ->andWhere('outing.startDate <= :endDate')
+                ->setParameter('endDate', $search->getEndDate());
+        }
+        if (!empty($search->getDureeMin())){
+            $query = $query
+                ->andWhere('outing.duration >= :dureeMin')
+                ->setParameter('dureeMin', $search->getDureeMin());
+        }
+        if (!empty($search->getDureeMax())){
+            $query = $query
+                ->andWhere('outing.duration <= :dureeMax')
+                ->setParameter('dureeMax', $search->getDureeMax());
+        }
+        if (!empty($search->getOrga())){
+            if ($search->getOrga() == 1){
+                $query = $query
+                    ->andWhere('outing.duration <= :orga')
+                    ->setParameter('orga', $search->getOrga());
+            }
+
+        }
+        if (!empty($search->getDureeMax())){
+                $query = $query
+                    ->andWhere('outing.duration <= :dureeMax')
+                    ->setParameter('dureeMax', $search->getDureeMax());
+
+
+        }
+
+
+
+        return $query->getQuery()->getResult();
     }
 
 

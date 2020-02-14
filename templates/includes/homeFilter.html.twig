@@ -1,8 +1,78 @@
 {{ form_start(form) }}
+<div class="container">
+    <div class="row">
+        <div class="container col-sm-6">
+            <div class="row">
+                {{ form_label(form.motCle) }}
+                {{ form_widget(form.motCle) }}
+                {{ form_errors(form.motCle) }}
+
+            </div>
+            <div class="row">
+                <div class="col-sm-6">
+                    {{ form_label(form.beginDate) }}
+                    {{ form_widget(form.beginDate) }}<img src="{{ asset('img/iconfinder_calendar-clock_299096.png') }}" style="width: 20px">
+                    {{ form_errors(form.beginDate) }}
+
+                </div>
+                <div class="col-sm-6">
+                    {{ form_label(form.endDate) }}
+                    {{ form_widget(form.endDate) }}<img src="{{ asset('img/iconfinder_calendar-clock_299096.png') }}" style="width: 20px">
+                    {{ form_errors(form.endDate) }}
+
+                </div>
+            </div>
 
 
 
 
+        </div>
 
+        <div class="container col-sm-3">
+            <div class="row">
+                {{ form_label(form.dureeMin) }}
+                {{ form_widget(form.dureeMin) }}
+                {{ form_errors(form.dureeMin) }}
+            </div>
+            <div class="row">
+                {{ form_label(form.dureeMax) }}
+                {{ form_widget(form.dureeMax) }}
+                {{ form_errors(form.dureeMax) }}
+            </div>
+            <div class="row">
+                {{ form_label(form.orga) }}
+                {{ form_widget(form.orga) }}
+                {{ form_errors(form.orga) }}
+
+            </div>
+            <div class="row">
+                {{ form_label(form.inscrit) }}
+                {{ form_widget(form.inscrit) }}
+                {{ form_errors(form.inscrit) }}
+
+            </div>
+            <div class="row">
+                {{ form_label(form.notInscrit) }}
+                {{ form_widget(form.notInscrit) }}
+                {{ form_errors(form.notInscrit) }}
+
+            </div>
+            <div class="row">
+                {{ form_label(form.passee) }}
+                {{ form_widget(form.passee) }}
+                {{ form_errors(form.passee) }}
+
+            </div>
+
+        </div>
+
+        <div class="container col-sm-3">
+            <button type="submit" class="btn btn-primary w-100">Rechercher</button>
+
+        </div>
+
+
+    </div>
+</div>
 {{ form_end(form) }}
 
