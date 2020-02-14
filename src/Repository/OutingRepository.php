@@ -19,6 +19,18 @@ class OutingRepository extends ServiceEntityRepository
         parent::__construct($registry, Outing::class);
     }
 
+    /**
+     * Récupère les sorties en lien avec une recherche
+     * @return Outing[]
+     */
+    public function findSearch(): array
+    {
+
+
+        return $this->findAll();
+    }
+
+
     // /**
     //  * @return Outing[] Returns an array of Outing objects
     //  */

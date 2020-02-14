@@ -67,7 +67,6 @@ class OutingController extends Controller
             ['outingFormView' => $outingForm->createView(),]
         );
     }
-
     /**
      * @Route("/detail/{id}", name="detail")
      * @param $id
@@ -80,15 +79,31 @@ class OutingController extends Controller
         // Récupération de la sortie
         $outingRepository = $entityManager->getRepository(Outing::class);
         $outing = $outingRepository->find($id);
-        dump($outing);
 
-        // Récupération de la liste des participants
-//        $id = $outing->getId();
-//        $subList = $entityManager->getRepository(Subscribed::class)->find($id);
 
         return $this->render(
             'outing/detailOuting.html.twig',
-//            compact('outing', 'subList')
+            compact('outing')
+        );
+
+    }
+    // S'inscrire à une sortie
+    /**
+     * @Route("/detail/{id}", name="detail")
+     * @param $id
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function subscribe($id, EntityManagerInterface $entityManager, Request $request, Outing $outing)
+    {
+        // Récupération de la sortie
+        $outingRepository = $entityManager->getRepository(Outing::class);
+        $outing = $outingRepository->find($id);
+
+
+        return $this->render(
+            'outing/detailOuting.html.twig',
             compact('outing')
         );
 
