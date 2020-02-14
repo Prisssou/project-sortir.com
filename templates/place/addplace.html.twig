@@ -1,9 +1,89 @@
 {% extends 'layout.html.twig' %}
 
-{% block body %}
-    <h1>Page d'ajout de lieu de sortie!</h1>
+{%  block title %} Ajouter un lieu {% endblock %}
+
+{%  block body %}
+    <h2> Créer un lieu</h2>
+
+{   <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+
+                 {# Todo : ajouter upload image #}
+
+            </div>
+
+            <div class="col-lg-4">
+                {{ form_start(placeFormView) }}
+
+                {{ form_label(placeFormView.adresse) }}
+                {{ form_widget(placeFormView.adresse) }}
+                {{ form_errors(placeFormView.adresse) }} <br>
+
+                {{ form_label(placeFormView.name) }}
+                {{ form_widget(placeFormView.name) }}
+                {{ form_errors(placeFormView.name) }} <br>
+
+                {{ form_label(placeFormView.street) }}
+                {{ form_widget(placeFormView.street) }}
+                {{ form_errors(placeFormView.street) }} <br>
+
+                {{ form_label(placeFormView.zipcode) }}
+                {{ form_widget(placeFormView.zipcode) }}
+                {{ form_errors(placeFormView.zipcode) }} <br>
+
+               {{ form_label(placeFormView.city) }}
+                {{ form_widget(placeFormView.city) }}
+                {{ form_errors(placeFormView.city) }} <br>
+
+                {{ form_label(placeFormView.latitude) }}
+                {{ form_widget(placeFormView.latitude) }}
+                {{ form_errors(placeFormView.latitude) }} <br>
+
+                {{ form_label(placeFormView.longitude) }}
+                {{ form_widget(placeFormView.longitude) }}
+                {{ form_errors(placeFormView.longitude) }} <br>
+
+
+
+            </div>
+
+            <div class="col-lg-4">
+
+                <br>
+
+            </div>
+
+            <div class="col-sm-12 text-center">
+
+                <input class="btn btn-primary" type="submit" name="submitAction" value="Enregistrer">
+                {#<input class="btn btn-primary" type="submit" value="Annuler">#}
+
+                {{ form_end(placeFormView) }}
+
+            </div>
+
+        </div>
+
+    </div>
+
 {% endblock %}
 
-{% block title %}
+ {%  block script %}
+     <script src="https://cdn.jsdelivr.net/npm/places.js@1.17.1"></script>
+     <script>
+         var placesAutocomplete = places({
+             appId: 'plF08LHPG3UQ',
+             apiKey: 'c68f096186cd99643002baf53e425d81',
+             container: document.querySelector('#place_adresse')
+         });
+         placesAutocomplete.on('change', e => {
+             document.querySelector('#place_city').value = e.suggestion.city;
+             document.querySelector('#place_street').value = e.suggestion.name;
+             document.querySelector('#place_zipcode').value = e.suggestion.postcode;
+             document.querySelector('#place_latitude').value = e.suggestion.latlng.lat;
+             document.querySelector('#place_longitude').value = e.suggestion.latlng.lng;
+         })
+     </script>
 
-{% endblock %}
+ {%  endblock %}

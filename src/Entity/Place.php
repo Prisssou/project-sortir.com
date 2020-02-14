@@ -44,10 +44,15 @@ class Place
     private $outing;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\City", inversedBy="place")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Ville", inversedBy="place")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $city;
+    private $ville;
+
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $zipcode;
 
     public function __construct()
     {
@@ -138,14 +143,26 @@ class Place
         return $this;
     }
 
-    public function getCity(): ?City
+    public function getCity(): ?Ville
     {
-        return $this->city;
+        return $this->ville;
     }
 
-    public function setCity(?City $city): self
+    public function setCity(?Ville $ville): self
     {
-        $this->city = $city;
+        $this->ville = $ville;
+
+        return $this;
+    }
+
+    public function getZipcode(): ?string
+    {
+        return $this->zipcode;
+    }
+
+    public function setZipcode(string $zipcode): self
+    {
+        $this->zipcode = $zipcode;
 
         return $this;
     }

@@ -2,6 +2,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -40,6 +42,11 @@ class Ville
      * @ORM\Column(type="string", length=255)
      */
     private $departement;
+
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Place", mappedBy="city")
+     */
+    private $place;
 
     public function getId(): ?int
     {
@@ -90,6 +97,37 @@ class Ville
     public function setCodeDepartement(int $codeDepartement): self
     {
         $this->codeDepartement = $codeDepartement;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Place[]
+     */
+    public function getPlace(): Collection
+    {
+        return $this->place;
+    }
+
+    public function addPlace(Place $place)
+    {
+        if (!$this->place->contains($place)) {
+            $this->place[] = $place;
+            $place->setCity($this);
+        }
+
+        return $this;
+    }
+
+    public function removePlace(Place $place)
+    {
+        if ($this->place->contains($place)) {
+            $this->place->removeElement($place);
+            // set the owning side to null (unless already changed)
+            if ($place->getCity() === $this) {
+                $place->setCity(null);
+            }
+        }
 
         return $this;
     }
