@@ -20,8 +20,11 @@ class MainController extends Controller
 {
     /**
      * @Route("/", name="home")
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
      */
-    public function home(EntityManagerInterface $entityManager)
+    public function home(EntityManagerInterface $entityManager, Request $request)
     {
         $sortieRepository = $entityManager->getRepository(Outing::class);
         $sorties = $sortieRepository->findAll();
@@ -36,7 +39,11 @@ class MainController extends Controller
 
         $data = new SearchData();
         $form = $this->createForm(SearchFormType::class, $data);
-        $sortiesFiltered = $sortieRepository->findSearch();
+        $form->handleRequest($request);
+
+
+        $sortiesFiltered = $sortieRepository->findSearch($data);
+        $sorties = $sortiesFiltered;
 
 //        $filterForm = $this->createForm(FilterFormType::class);
 //        $filterForm->handleRequest($request);

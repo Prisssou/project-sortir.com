@@ -43,7 +43,7 @@ class SearchData
     }
 
     /**
-     * @var DateTime
+     * @var DateTime|null
      */
     private $beginDate;
 
@@ -60,7 +60,8 @@ class SearchData
     }
 
     /**
-     * @var DateTime
+     * @var DateTime|null
+     *
      */
     private $endDate;
 
@@ -79,16 +80,33 @@ class SearchData
     /**
      * @var integer
      */
-    private $duree;
+    private $dureeMin;
 
-    public function getDuree(): ?int
+    public function getDureeMin(): ?int
     {
-        return $this->duree;
+        return $this->dureeMin;
     }
 
-    public function setDuree(int $duree): self
+    public function setDureeMin(int $dureeMin): self
     {
-        $this->duree = $duree;
+        $this->dureeMin = $dureeMin;
+
+        return $this;
+    }
+
+    /**
+     * @var integer
+     */
+    private $dureeMax;
+
+    public function getDureeMax(): ?int
+    {
+        return $this->dureeMax;
+    }
+
+    public function setDureeMax(int $dureeMax): self
+    {
+        $this->dureeMax = $dureeMax;
 
         return $this;
     }

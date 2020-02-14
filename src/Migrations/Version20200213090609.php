@@ -23,7 +23,7 @@ final class Version20200213090609 extends AbstractMigration
         $this->abortIf($this->connection->getDatabasePlatform()->getName() !== 'mysql', 'Migration can only be executed safely on \'mysql\'.');
 
        // $this->addSql('ALTER TABLE city CHANGE name name VARCHAR(255) NOT NULL, CHANGE zip zip VARCHAR(10) NOT NULL');
-        $this->addSql('ALTER TABLE ville ADD departement VARCHAR(255) NOT NULL');
+//        $this->addSql('ALTER TABLE ville ADD departement VARCHAR(255) NOT NULL');
     }
 
     public function down(Schema $schema) : void
