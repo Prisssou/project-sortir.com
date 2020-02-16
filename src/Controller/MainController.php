@@ -42,7 +42,13 @@ class MainController extends Controller
         $form->handleRequest($request);
 
 
-        $sortiesFiltered = $sortieRepository->findSearch($data);
+        $userId= null;
+        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
+            $userId = $this->getUser()->getId();
+        }
+
+
+        $sortiesFiltered = $sortieRepository->findSearch($data,$userId);
         $sorties = $sortiesFiltered;
 
 //        $filterForm = $this->createForm(FilterFormType::class);

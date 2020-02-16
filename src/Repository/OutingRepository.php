@@ -24,7 +24,7 @@ class OutingRepository extends ServiceEntityRepository
      * Récupère les sorties en lien avec une recherche
      * @return Outing[]
      */
-    public function findSearch(SearchData $search): array
+    public function findSearch(SearchData $search, $user): array
     {
 
         $query = $this
@@ -37,12 +37,12 @@ class OutingRepository extends ServiceEntityRepository
                 ->setParameter('motCle', "%{$search->getMotCle()}%");
         }
 
-        if (!empty($search->getBeginDate())){
+        if ($search->getBeginDate() != null){
             $query = $query
                 ->andWhere('outing.startDate >= :beginDate')
                 ->setParameter('beginDate', $search->getBeginDate());
         }
-        if (!empty($search->getEndDate())){
+        if ($search->getEndDate() != null){
             $query = $query
                 ->andWhere('outing.startDate <= :endDate')
                 ->setParameter('endDate', $search->getEndDate());
@@ -60,8 +60,8 @@ class OutingRepository extends ServiceEntityRepository
         if (!empty($search->getOrga())){
             if ($search->getOrga() == 1){
                 $query = $query
-                    ->andWhere('outing.duration <= :orga')
-                    ->setParameter('orga', $search->getOrga());
+                    ->andWhere('outing.member = :orga')
+                    ->setParameter('orga', $user);
             }
 
         }
