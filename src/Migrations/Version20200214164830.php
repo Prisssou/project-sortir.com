@@ -10,7 +10,7 @@
 ///**
 // * Auto-generated Migration: Please modify to your needs!
 // */
-//final class Version20200214133517 extends AbstractMigration
+//final class Version20200214164830 extends AbstractMigration
 //{
 //    public function getDescription() : string
 //    {
@@ -29,9 +29,6 @@
 //        $this->addSql('CREATE TABLE place (id INT AUTO_INCREMENT NOT NULL, ville_id INT NOT NULL, name VARCHAR(255) NOT NULL, street VARCHAR(255) NOT NULL, latitude DOUBLE PRECISION NOT NULL, longitude DOUBLE PRECISION NOT NULL, zipcode VARCHAR(10) NOT NULL, INDEX IDX_741D53CDA73F0036 (ville_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
 //        $this->addSql('CREATE TABLE site (id INT AUTO_INCREMENT NOT NULL, name VARCHAR(100) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
 //        $this->addSql('CREATE TABLE state (id INT AUTO_INCREMENT NOT NULL, label VARCHAR(50) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-//        $this->addSql('CREATE TABLE subscribed (id INT AUTO_INCREMENT NOT NULL, member_id INT NOT NULL, INDEX IDX_59D4EE387597D3FE (member_id), PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-//        $this->addSql('CREATE TABLE subscribed_outing (subscribed_id INT NOT NULL, outing_id INT NOT NULL, INDEX IDX_7620E9D0D7AB9EE (subscribed_id), INDEX IDX_7620E9D0AF4C7531 (outing_id), PRIMARY KEY(subscribed_id, outing_id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
-//        $this->addSql('CREATE TABLE ville (id INT AUTO_INCREMENT NOT NULL, nom VARCHAR(255) NOT NULL, code VARCHAR(6) NOT NULL, codes_postaux VARCHAR(255) NOT NULL, code_departement INT NOT NULL, departement VARCHAR(255) NOT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
 //        $this->addSql('ALTER TABLE member ADD CONSTRAINT FK_70E4FA783DA5256D FOREIGN KEY (image_id) REFERENCES image (id)');
 //        $this->addSql('ALTER TABLE member ADD CONSTRAINT FK_70E4FA78F6BD1646 FOREIGN KEY (site_id) REFERENCES site (id)');
 //        $this->addSql('ALTER TABLE outing ADD CONSTRAINT FK_F2A106253DA5256D FOREIGN KEY (image_id) REFERENCES image (id)');
@@ -61,8 +58,6 @@
 //        $this->addSql('ALTER TABLE member DROP FOREIGN KEY FK_70E4FA78F6BD1646');
 //        $this->addSql('ALTER TABLE outing DROP FOREIGN KEY FK_F2A10625F6BD1646');
 //        $this->addSql('ALTER TABLE outing DROP FOREIGN KEY FK_F2A106255D83CC1');
-//        $this->addSql('ALTER TABLE subscribed_outing DROP FOREIGN KEY FK_7620E9D0D7AB9EE');
-//        $this->addSql('ALTER TABLE place DROP FOREIGN KEY FK_741D53CDA73F0036');
 //        $this->addSql('DROP TABLE image');
 //        $this->addSql('DROP TABLE member');
 //        $this->addSql('DROP TABLE outing');
@@ -70,8 +65,6 @@
 //        $this->addSql('DROP TABLE place');
 //        $this->addSql('DROP TABLE site');
 //        $this->addSql('DROP TABLE state');
-//        $this->addSql('DROP TABLE subscribed');
-//        $this->addSql('DROP TABLE subscribed_outing');
-//        $this->addSql('DROP TABLE ville');
+//        $this->addSql('ALTER TABLE subscribed_outing DROP FOREIGN KEY FK_7620E9D0D7AB9EE');
 //    }
 //}

@@ -96,10 +96,16 @@ class Outing
      */
     private $subscribeds;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Subscription", mappedBy="outing")
+     */
+    private $subscriptions;
+
     public function __construct()
     {
         $this->member = new ArrayCollection();
         $this->subscribeds = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -312,6 +318,37 @@ class Outing
         if ($this->subscribeds->contains($subscribed)) {
             $this->subscribeds->removeElement($subscribed);
             $subscribed->removeOuting($this);
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subscription[]
+     */
+    public function getSubscriptions(): Collection
+    {
+        return $this->subscriptions;
+    }
+
+    public function addSubscription(Subscription $subscription): self
+    {
+        if (!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions[] = $subscription;
+            $subscription->setOuting($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscription(Subscription $subscription): self
+    {
+        if ($this->subscriptions->contains($subscription)) {
+            $this->subscriptions->removeElement($subscription);
+            // set the owning side to null (unless already changed)
+            if ($subscription->getOuting() === $this) {
+                $subscription->setOuting(null);
+            }
         }
 
         return $this;

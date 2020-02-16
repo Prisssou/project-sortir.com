@@ -7,9 +7,12 @@ use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity(repositoryClass="App\Repository\MemberRepository")
+ * @UniqueEntity(fields="email", message="Email déjà pris")
+ * @UniqueEntity(fields="username", message="Pseudo déjà pris")
  */
 class Member implements UserInterface
 {
@@ -81,10 +84,16 @@ class Member implements UserInterface
      */
     private $subscribeds;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Subscription", mappedBy="member")
+     */
+    private $subscriptions;
+
     public function __construct()
     {
         $this->outing = new ArrayCollection();
         $this->subscribeds = new ArrayCollection();
+        $this->subscriptions = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -294,6 +303,37 @@ class Member implements UserInterface
             // set the owning side to null (unless already changed)
             if ($subscribed->getMember() === $this) {
                 $subscribed->setMember(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Subscription[]
+     */
+    public function getSubscriptions(): Collection
+    {
+        return $this->subscriptions;
+    }
+
+    public function addSubscription(Subscription $subscription): self
+    {
+        if (!$this->subscriptions->contains($subscription)) {
+            $this->subscriptions[] = $subscription;
+            $subscription->setMember($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSubscription(Subscription $subscription): self
+    {
+        if ($this->subscriptions->contains($subscription)) {
+            $this->subscriptions->removeElement($subscription);
+            // set the owning side to null (unless already changed)
+            if ($subscription->getMember() === $this) {
+                $subscription->setMember(null);
             }
         }
 

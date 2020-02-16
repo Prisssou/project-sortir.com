@@ -6,6 +6,13 @@
 
 {% endblock %}
 {% block body %}
+
+    {% for message in app.flashes('success') %}
+        <div class=" container flash-notice">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     <div>
         <h1>Bienvenue sur Sortir.com !</h1>
         <h2 class="d-none d-md-block"> Envie <span class="typing"></span></h2>
@@ -84,6 +91,7 @@
             {% endif %}
             <h3>{{ site.name }}</h3>
 
+            {# Tableau des sorties #}
             <table style="width:100%">
                 <tr>
                     <th>Nom de la sortie</th>
@@ -115,6 +123,9 @@
 
                             {% endif %}
                             <td>{{ sortie.state.label }}</td>
+
+                            {# Indique si l'utilisateur est inscrit à la sortie #}
+
                             <td> Oui!</td>
                             {#                    <td>{{dump(sortie.member)}}</td>#}
                             {% for member in sortie.member %}
@@ -122,12 +133,13 @@
                             {% endfor %}
                             {% if site.name == 'ENI NANTES' %}
                                 <td>
-                                    <a href="#">Prout</a>
+                                    <a href="{{ path('detail', {id: sortie.id}) }}">Prout</a>
+                                    <a href="#">S'inscrire</a>
                                 </td>
                             {% else %}
                                 <td>
                                     <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
-                                    <a href="#">S'inscrire</a>
+                                    <a href="{{ path('subscribe', {id: sortie.id}) }}">S'inscrire</a>
                                 </td>
                             {% endif %}
                         </tr>

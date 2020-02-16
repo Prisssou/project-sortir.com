@@ -2,17 +2,20 @@
 
 namespace App\Controller;
 
+use App\Entity\Member;
 use App\Entity\Outing;
 use App\Entity\State;
 use App\Entity\Place;
+use App\Entity\Subscribed;
+use App\Entity\Subscription;
 use App\Form\OutingType;
 use App\Form\SubscribedType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
 
 
 class OutingController extends Controller
@@ -51,10 +54,10 @@ class OutingController extends Controller
                 }
             }
 
-        $this->addFlash(
-            'success',
-            'Sortie ajoutée avec succès'
-        );
+            $this->addFlash(
+                'success',
+                'Sortie ajoutée avec succès'
+            );
 
             $entityManager->persist($outing);
             $entityManager->flush();
@@ -69,6 +72,7 @@ class OutingController extends Controller
     }
 
     // Afficher un sortie
+
     /**
      * @Route("/detail/{id}", name="detail")
      * @param $id
@@ -89,27 +93,60 @@ class OutingController extends Controller
         );
 
     }
-//    // S'inscrire à une sortie
-//    /**
-//     * @Route("/detail/{id}", name="detail")
-//     * @param $id
-//     * @param EntityManagerInterface $entityManager
-//     * @param Request $request
-//     * @return Response
-//     */
-//    public function subscribe($id, EntityManagerInterface $entityManager, Request $request, Outing $outing)
-//    {
-//        // Récupération de la sortie
-//        $outingRepository = $entityManager->getRepository(Outing::class);
-//        $outing = $outingRepository->find($id);
-//
-//
-//        return $this->render(
-//            'outing/detailOuting.html.twig',
-//            compact('outing')
-//        );
-//
-//    }
+
+    // S'inscrire à une sortie
+
+    /**
+     * @Route("/subscribe/{id}", name="subscribe")
+     */
+    public function addSubscription($id, EntityManagerInterface $entityManager, Request $request)
+    {
+        // Récupération de la sortie
+        $outingRepository = $entityManager->getRepository(Outing::class);
+        $outing = $outingRepository->find($id);
+
+        // Récuparation de l'utilisateur courant
+        $user = $this->getUser();
+
+
+        $subscription = new Subscription();
+        $subscription->setMember($user);
+        $subscription->setOuting($outing);
+        $subscription->setSubDate(new \DateTime('now'));
+
+        $entityManager->persist($subscription);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Votre inscription a bien été prise en compte !');
+
+        return $this->redirectToRoute('home');
+
+    }
+
+    // Se désinscrire d'une sortie
+
+    /**
+     * @Route("/unsubscribe/{id}", name="unsubscribe")
+     * @param Outing $outing
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function cancelSubscription(Outing $outing, EntityManagerInterface $entityManager, Request $request)
+    {
+
+        $member = $this->getMember();
+        $member->removeOuting($outing);
+        $outing->removeSubscribed($member);
+        $entityManager->persist();
+        $entityManager->flush();
+
+
+        $this->addFlash('success', 'Votre annulation a bien été prise en compte');
+        return $this->render($this->generateUrl('home'));
+
+    }
+
 
 }
 
