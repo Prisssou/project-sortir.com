@@ -26,6 +26,8 @@ INSERT INTO `outing_member` (`outing_id`, `member_id`) VALUES ('1', '5'), ('2', 
 //Pour la table outing_member LAST VERSION
 INSERT INTO `outing_member` (`outing_id`, `member_id`) VALUES ('1', '5'), ('2', '3'), ('3', '1'), ('4', '1'), ('5', '1'), ('6', '2'), ('7', '2'), ('8', '3'), ('9', '5'), ('10', '4'), ('11', '4');
 
+//Premier jet pour les subscriptions (id 1 à 12)
+INSERT INTO `subscription` (`id`, `member_id`, `outing_id`, `sub_date`) VALUES (NULL, '1', '1', '2020-02-19 00:00:00'), (NULL, '1', '2', '2020-02-19 00:00:00'), (NULL, '2', '3', '2020-02-19 00:00:00'), (NULL, '2', '11', '2020-02-26 00:00:00'), (NULL, '3', '9', '2020-02-19 00:00:00'), (NULL, '3', '3', '2020-02-12 00:00:00'), (NULL, '4', '6', '2020-02-18 00:00:00'), (NULL, '4', '4', '2020-02-12 00:00:00'), (NULL, '5', '4', '2020-02-18 00:00:00'), (NULL, '2', '1', '2020-02-18 00:00:00'), (NULL, '2', '6', '2020-02-11 00:00:00'), (NULL, '2', '7', '2020-02-19 00:00:00');
 
 
 

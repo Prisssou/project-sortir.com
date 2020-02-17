@@ -30,58 +30,67 @@ class OutingRepository extends ServiceEntityRepository
     {
 
 
-
         $query = $this
             ->createQueryBuilder('outing');
 
 
-        if (!empty($search->getMotCle())){
+        if (!empty($search->getMotCle())) {
             $query = $query
                 ->andWhere('outing.name LIKE :motCle')
                 ->setParameter('motCle', "%{$search->getMotCle()}%");
         }
 
-        if ($search->getBeginDate() != null){
+        if ($search->getBeginDate() != null) {
             $query = $query
                 ->andWhere('outing.startDate >= :beginDate')
                 ->setParameter('beginDate', $search->getBeginDate());
         }
-        if ($search->getEndDate() != null){
+        if ($search->getEndDate() != null) {
             $query = $query
                 ->andWhere('outing.startDate <= :endDate')
                 ->setParameter('endDate', $search->getEndDate());
         }
-        if (!empty($search->getDureeMin())){
+        if (!empty($search->getDureeMin())) {
             $query = $query
                 ->andWhere('outing.duration >= :dureeMin')
                 ->setParameter('dureeMin', $search->getDureeMin());
         }
-        if (!empty($search->getDureeMax())){
+        if (!empty($search->getDureeMax())) {
             $query = $query
                 ->andWhere('outing.duration <= :dureeMax')
                 ->setParameter('dureeMax', $search->getDureeMax());
         }
-        if (!empty($search->getOrga())){
-            if ($search->getOrga() == 1){
+        if (!empty($search->getOrga())) {
+            if ($search->getOrga() == 1) {
                 $query = $query
                     ->addSelect('i')
                     ->leftJoin('outing.member', 'i')
                     ->andWhere('i = :organisateur')
-                    ->setParameter('organisateur', $user)
-
-                ;
+                    ->setParameter('organisateur', $user);
 
             }
 
         }
-//        if (!empty($search->getDureeMax())){
+//        if (!empty($search->getPassee())) {
+//            if ($search->getPassee() == 1) {
 //                $query = $query
-//                    ->andWhere('outing.duration <= :dureeMax')
-//                    ->setParameter('dureeMax', $search->getDureeMax());
+//                    ->andWhere('outing.state = :passe')
+//                    ->setParameter('passe', "5");
 //
+//            }
 //
 //        }
+        if (!empty($search->getPassee())) {
+            if ($search->getPassee() == 1) {
+                $query = $query
+                    ->addSelect('e')
+                    ->leftJoin('outing.state', 'e')
+                    ->andWhere('e.label = :passe')
+                    ->setParameter('passe', "Passée");
 
+            }
+
+        }
 
 
         return $query->getQuery()->getResult();
