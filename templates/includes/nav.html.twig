@@ -44,6 +44,7 @@
     </div>
 
     <ul class="navbar-nav ml-auto">
+{#        <li class="nav-item">{{ "now"|date("H:i:s \O\n d/m/Y") }}</li>#}
 
         {% if is_granted("ROLE_ADMIN") %}
             <li class="nav-item"><a class="nav-link" href="{{ path('city') }}">Villes</a></li>

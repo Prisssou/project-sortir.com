@@ -50,6 +50,7 @@ class MainController extends Controller
 
         $sortiesFiltered = $sortieRepository->findSearch($data,$userId);
         $sorties = $sortiesFiltered;
+    dump($sorties);
 
 //        $filterForm = $this->createForm(FilterFormType::class);
 //        $filterForm->handleRequest($request);

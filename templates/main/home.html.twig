@@ -126,16 +126,27 @@
 
                             {# Indique si l'utilisateur est inscrit à la sortie #}
 
-                            <td> Oui!</td>
+{#                            {% for sub in sortie.subscriptions %}#}
+{#                            {% if sub.id == app.user.id %}#}
+{#                                <td> Oui</td>#}
+{#                            {% else %}#}
+{#                                <td> </td>#}
+{#                            {% endif %}#}
+{#                            {% endfor %}#}
+
+                            <td> Oui</td>
+
                             {#                    <td>{{dump(sortie.member)}}</td>#}
                             {% for member in sortie.member %}
                                 <td> {{ member.username }}</td>
                             {% endfor %}
 
+
                                 <td>
                                     <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
                                     <a href="{{ path('subscribe', {id: sortie.id}) }}">S'inscrire</a>
                                 </td>
+
 
                         </tr>
                     {% endif %}
@@ -153,7 +164,7 @@
 
     <section>
 
-        <button class="btn btn-primary"><a href="{{ path('add_outing') }}">Créer une nouvelle sortie</a></button>
+        <button class="btn btn-primary"><a href="{{ path('add_outing') }}" style="color: white; text-decoration: none">Créer une nouvelle sortie</a></button>
 
 
     </section>
