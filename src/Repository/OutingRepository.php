@@ -22,10 +22,14 @@ class OutingRepository extends ServiceEntityRepository
 
     /**
      * Récupère les sorties en lien avec une recherche
+     * @param SearchData $search
+     * @param $user
      * @return Outing[]
      */
     public function findSearch(SearchData $search, $user): array
     {
+
+
 
         $query = $this
             ->createQueryBuilder('outing');
@@ -60,18 +64,23 @@ class OutingRepository extends ServiceEntityRepository
         if (!empty($search->getOrga())){
             if ($search->getOrga() == 1){
                 $query = $query
-                    ->andWhere('outing.member = :orga')
-                    ->setParameter('orga', $user);
+                    ->addSelect('i')
+                    ->leftJoin('outing.member', 'i')
+                    ->andWhere('i = :organisateur')
+                    ->setParameter('organisateur', $user)
+
+                ;
+
             }
 
         }
-        if (!empty($search->getDureeMax())){
-                $query = $query
-                    ->andWhere('outing.duration <= :dureeMax')
-                    ->setParameter('dureeMax', $search->getDureeMax());
-
-
-        }
+//        if (!empty($search->getDureeMax())){
+//                $query = $query
+//                    ->andWhere('outing.duration <= :dureeMax')
+//                    ->setParameter('dureeMax', $search->getDureeMax());
+//
+//
+//        }
 
 
 
