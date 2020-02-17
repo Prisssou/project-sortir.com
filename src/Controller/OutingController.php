@@ -89,11 +89,15 @@ class OutingController extends Controller
         //Récupération de l'inscription
         $subscriptionRepository = $entityManager->getRepository(Subscription::class);
         $subscription = $subscriptionRepository->find($id);
+        $subList = $subscription->getMember();
+        dump($subList);
+
+
 
 
         return $this->render(
             'outing/detailOuting.html.twig',
-            compact('outing', 'subscription')
+            compact('outing', 'subList')
         );
 
     }

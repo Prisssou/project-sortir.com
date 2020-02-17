@@ -131,17 +131,12 @@
                             {% for member in sortie.member %}
                                 <td> {{ member.username }}</td>
                             {% endfor %}
-                            {% if site.name == 'ENI NANTES' %}
-                                <td>
-                                    <a href="{{ path('detail', {id: sortie.id}) }}">Prout</a>
-                                    <a href="{{ path('subscribe', {id: sortie.id}) }}">S'inscrire</a>
-                                </td>
-                            {% else %}
+
                                 <td>
                                     <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
                                     <a href="{{ path('subscribe', {id: sortie.id}) }}">S'inscrire</a>
                                 </td>
-                            {% endif %}
+
                         </tr>
                     {% endif %}
 
