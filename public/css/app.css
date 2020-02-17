@@ -1,5 +1,10 @@
+body {
+
+
+}
+
 h1 {
-    color: #209387;
+    color: #142340;
     text-align: center;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -22,7 +27,7 @@ h2, h3 {
     content: '';
     display: block;
     margin: auto;
-    height: 4px;
+    height: 2px;
     width: 0px;
     background: transparent;
     transition: width .5s ease, background-color .5s ease;
@@ -30,7 +35,7 @@ h2, h3 {
 
 .navbar-brand:hover:after {
     width: 100%;
-    background: #209387;
+    background: #FFC952;
 }
 
 .btn-primary {
