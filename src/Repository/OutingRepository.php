@@ -71,6 +71,33 @@ class OutingRepository extends ServiceEntityRepository
             }
 
         }
+
+        if (!empty($search->getInscrit())) {
+            if ($search->getInscrit() == 1) {
+                $query = $query
+                    ->addSelect('s')
+                    ->innerJoin('outing.subscriptions', 's')
+//                    ->innerJoin('outing.member', 'm')
+                    ->andWhere('s.member = :inscrit')
+//                    ->andWhere('m = :inscrit')
+//                    ->andWhere('m = :inscrit OR s = :inscrit')
+                    ->setParameter('inscrit', $user);
+
+            }
+
+        }
+        if (!empty($search->getNotInscrit())) {
+            if ($search->getNotInscrit() == 1) {
+                $query = $query
+                    ->addSelect('sa')
+                    ->innerJoin('outing.subscriptions', 'sa')
+                    ->andWhere('sa.member != :notinscrit')
+                    ->setParameter('notinscrit', $user);
+
+            }
+
+        }
+
 //        if (!empty($search->getPassee())) {
 //            if ($search->getPassee() == 1) {
 //                $query = $query

@@ -46,6 +46,7 @@ class SearchFormType extends AbstractType
                     'choice_translation_domain' => true,
                     'date_widget' => 'single_text',
 
+
                 ]
             )
             ->add(
@@ -86,7 +87,8 @@ class SearchFormType extends AbstractType
             ->add('notInscrit', CheckboxType::class,
                 [
                     'label'=>'Sorties auxquelles je ne suis pas inscrit/e',
-                    'required'=> false
+                    'required'=> false,
+
                 ])
             ->add('passee', CheckboxType::class,
                 [
