@@ -134,7 +134,7 @@
                             {% if site.name == 'ENI NANTES' %}
                                 <td>
                                     <a href="{{ path('detail', {id: sortie.id}) }}">Prout</a>
-                                    <a href="#">S'inscrire</a>
+                                    <a href="{{ path('subscribe', {id: sortie.id}) }}">S'inscrire</a>
                                 </td>
                             {% else %}
                                 <td>

@@ -48,7 +48,7 @@
                 </div>
                 <div class="col">
                     <label>Code postal :</label>
-{#                    <span>{{ outing.place.city.zip }}</span>#}
+                    <span>{{ outing.place.city.codesPostaux }}</span>
                 </div>
                 <div class="col">
                     <label>Latitude :</label>
@@ -74,11 +74,11 @@
                     </thead>
                     <tbody>
 
-{#                    {% for suscribers in outing.member %} #}{# Todo récupérer les participants et non l'oganisateur #}
-{#                        <tr>#}
-{#                            <td>{{ suscribers.username }}</td>#}
-{#                            #}{#                         <td>{{ subscribers.member.firstname }} {{ subscribers.site.name }}</td>#}
-{#                        </tr>#}
+                    {% for suscribers in subscription %}
+                        <tr>
+                            <td>{{ suscribers.member.username }}</td>
+                            <td>{{ subscribers.member.firstname }} {{ subscribers.site.name }}</td>
+                        </tr>
                         <tr>
                             <td>Popo</td>
                             <td>Pauline - ENI Nantes</td>
@@ -88,15 +88,21 @@
                             <td>Alanou</td>
                             <td>Alan - ENI Nantes</td>
                         </tr>
-{#                    {% endfor %}#}
+                    {% endfor %}
 
                     </tbody>
                 </table>
             </div>
 
             <div class="col-md-6 text-center">
-                <input class="btn btn-primary" type="submit" name="submitAction" value="S'inscrire">
-                <input class="btn btn-primary" type="submit" value="Annuler">
+                <div>
+                    <input class="btn btn-primary" type="submit" name="submitAction" value="S'inscrire">
+                </div>
+                <div>
+                    <input type="hidden" name="_target_path" value="{{ url('home') }}"/>
+                    <button class="btn btn-primary" type="submit">Annuler</button>
+                </div>
+
 
             </div>
         </div>
