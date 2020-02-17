@@ -127,7 +127,35 @@ h2, h3 {
 }
 
 
+/*!* Custom ScrollBar *!*/
+/*!* width *!*/
+/*::-webkit-scrollbar {*/
+/*    width: 1.5rem;*/
 
+/*}*/
+
+/*!* Track *!*/
+/*::-webkit-scrollbar-track {*/
+/*    !*background: linear-gradient(90deg,#201c29,#201c29 1px,#100e17 0,#100e17);*!*/
+/*    box-shadow: inset 0 0 3px #e52e71;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*!* Handle *!*/
+/*::-webkit-scrollbar-thumb {*/
+/*    background: linear-gradient(180deg,#ff8a00,#e52e71);*/
+/*    border-radius: 2rem;*/
+/*}*/
+
+/*!* Handle on hover *!*/
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background: #b30000;*/
+/*}*/
+
+/*!* Little corners on top*!*/
+/*::-webkit-scrollbar-track-piece{*/
+/*    !*background: linear-gradient(90deg,#201c29,#201c29 1px,#100e17 0,#100e17);*!*/
+/*}*/
 
 
 
