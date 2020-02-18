@@ -16,6 +16,9 @@
     <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet" id="font-awesome-5-kit-css">
     <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet' />
     <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
+
+    {#    Custom Scrollbar#}
+    <link rel="stylesheet" href="{{ asset('css/mdb-scrollbar.css') }}">
     <title>{% block title %} Sortir.com - Votre site de sortie {% endblock %}</title>
 
 
@@ -23,7 +26,7 @@
     {% block stylesheet %}{% endblock %}
 
 </head>
-<body>
+<body class="scrollbar-sunny-morning">
 
 {% include 'includes/nav.html.twig' %}
 {% for label, messages in app.flashes %}

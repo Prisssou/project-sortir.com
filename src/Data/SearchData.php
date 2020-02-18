@@ -52,7 +52,7 @@ class SearchData
         return $this->beginDate;
     }
 
-    public function setBeginDate(\DateTimeInterface $beginDate): self
+    public function setBeginDate(?\DateTimeInterface $beginDate): self
     {
         $this->beginDate = $beginDate;
 
@@ -70,7 +70,7 @@ class SearchData
         return $this->endDate;
     }
 
-    public function setEndDate(\DateTimeInterface $endDate): self
+    public function setEndDate(?\DateTimeInterface $endDate): self
     {
         $this->endDate = $endDate;
 

@@ -124,7 +124,7 @@ class OutingController extends Controller
 
         return $this->redirectToRoute('home');
 
-        if ()
+//        if ()
 
     }
 

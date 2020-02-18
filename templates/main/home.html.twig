@@ -129,6 +129,7 @@
 
                             {# Etat de la sortie #}
                             <td>{{ sortie.state.label }}</td>
+
                             {# Déjà inscrit? #}
                             {% set subscribed = false %}
                             {% for subscription in app.user.subscriptions %}
@@ -143,6 +144,25 @@
                             {% else %}
                                 <td>Pas encore !</td>
                             {% endif %}
+{#=======#}
+
+
+{#                            #}{# Indique si l'utilisateur est inscrit à la sortie #}
+
+{#                            {% for sub in subscriptions %}#}
+{#                            {% if sub.member.id == app.user.id %}#}
+{#                                {% if sortie.subscriptions == sub.id %}#}
+{#                                <td> Oui</td>#}
+{#                            {% else %}#}
+{#                                <td></td>#}
+{#                                    {% endif %}#}
+{#                            {% endif %}#}
+{#                            {% endfor %}#}
+
+{#                            <td> Oui</td>#}
+
+
+{#>>>>>>> d1ad8484d3566cd9b5c6490b7930b5b5c5428b0b#}
                             {#                    <td>{{dump(sortie.member)}}</td>#}
                             {# Organisateur #}
                             {% for member in sortie.member %}
@@ -228,5 +248,11 @@
 
     </section>
 
+    <footer>
+        <div></div>
+        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>
+
+
+    </footer>
     <script src="{{ asset('js/table-animation.js') }}"></script>
 {% endblock %}
