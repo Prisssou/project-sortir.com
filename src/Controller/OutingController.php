@@ -2,17 +2,14 @@
 
 namespace App\Controller;
 
-use App\Entity\Member;
 use App\Entity\Outing;
 use App\Entity\State;
 use App\Entity\Place;
-use App\Entity\Subscribed;
-use App\Entity\Subscription;
 use App\Form\OutingType;
+use App\Form\PlaceType;
 use App\Form\SubscribedType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -35,16 +32,15 @@ class OutingController extends Controller
         $outingForm = $this->createForm(OutingType::class, $outing);
         $outingForm->handleRequest($request);
 
-        if ($outingForm->isSubmitted()) {
+        $place = new Place();
+        $placeForm = $this->createForm(PlaceType::class, $place);
 
-            $outing->setClosingDate(new \DateTime('2020-02-11'));
+        if ($outingForm->isSubmitted()) {
+            $outing->setClosingDate($outing->getLimitDateSub());
             $outing->setNumberSub('0');
             $stateRepository = $entityManager->getRepository(State::class);
-            $placeRepository = $entityManager->getRepository(Place::class);
-            $outing->setPlace($place = $placeRepository->find('1'));
 
             $outing->setSite($user->getSite());
-
 
             if ($request->get('submitAction') == 'Enregistrer') {
                 $outing->setState($state = $stateRepository->find('1'));
@@ -67,11 +63,12 @@ class OutingController extends Controller
 
         return $this->render(
             'outing/add.html.twig',
-            ['outingFormView' => $outingForm->createView(),]
+            [
+                'outingFormView' => $outingForm->createView(),
+                'placeFormView' => $placeForm->createView(),
+            ]
         );
     }
-
-    // Afficher un sortie
 
     /**
      * @Route("/detail/{id}", name="detail")
@@ -85,80 +82,19 @@ class OutingController extends Controller
         // Récupération de la sortie
         $outingRepository = $entityManager->getRepository(Outing::class);
         $outing = $outingRepository->find($id);
+        dump($outing);
 
-        //Récupération de la liste des inscrits
-        $subscriptionRepository = $entityManager->getRepository(Subscription::class);
-        $subList = $subscriptionRepository->findBy(['outing'=>$outing->getId()]);
+        // Récupération de la liste des participants
+//        $id = $outing->getId();
+//        $subList = $entityManager->getRepository(Subscribed::class)->find($id);
 
         return $this->render(
             'outing/detailOuting.html.twig',
-            compact('outing', 'subList')
+//            compact('outing', 'subList')
+            compact('outing')
         );
 
     }
-
-    // S'inscrire à une sortie
-
-    /**
-     * @Route("/subscribe/{id}", name="subscribe")
-     */
-    public function addSubscription($id, EntityManagerInterface $entityManager, Request $request)
-    {
-        // Récupération de la sortie
-        $outingRepository = $entityManager->getRepository(Outing::class);
-        $outing = $outingRepository->find($id);
-
-        // Récuparation de l'utilisateur courant
-        $user = $this->getUser();
-
-        // Hydratation de la BDD
-        $subscription = new Subscription();
-        $subscription->setMember($user);
-        $subscription->setOuting($outing);
-        $subscription->setSubDate(new \DateTime('now'));
-
-        $entityManager->persist($subscription);
-        $entityManager->flush();
-
-        $this->addFlash('success', 'Votre inscription a bien été prise en compte !');
-
-        return $this->redirectToRoute('home');
-
-//        if ()
-
-    }
-
-    // Se désinscrire d'une sortie
-
-    /**
-     * @Route("/unsubscribe/{id}", name="unsubscribe")
-     * @param $id
-     * @param EntityManagerInterface $em
-     * @param Request $request
-     * @return Response
-     */
-    public function cancelSubscription($id, EntityManagerInterface $em, Request $request)
-    {
-        // Récupération de l'utilisateur courant
-        $member = $this->getUser();
-
-        // Récupération de la sortie
-        $outingRepository = $em->getRepository(Outing::class);
-        $outing = $outingRepository->find($id);
-
-        // Récupération de l'inscription
-        $subRepository = $em->getRepository(Subscription::class);
-        $subscription = $subRepository->findBy(['outing'=> $outing->getId(), 'member'=>$member->getId()], ['outing'=>'ASC'] );
-
-        $em->remove($subscription[0]);
-        $em->flush();
-
-
-        $this->addFlash('success', 'Votre annulation a bien été prise en compte');
-        return $this->redirectToRoute('home');
-
-    }
-
 
 }
 

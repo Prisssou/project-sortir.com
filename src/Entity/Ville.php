@@ -44,7 +44,7 @@ class Ville
     private $departement;
 
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Place", mappedBy="city")
+     * @ORM\OneToMany(targetEntity="App\Entity\Place", mappedBy="ville")
      */
     private $place;
 
