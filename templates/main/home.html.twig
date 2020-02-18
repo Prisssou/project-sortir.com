@@ -183,7 +183,7 @@
                                         {% endif %}
                                     {% endfor %}
                                 {% endfor %}
-                                {% if sortie.state.label == 'Ouverte'
+                                {% if sortie.state.label == 'Ouverte' or sortie.state.label == "Activité en cours"
                                     and subscribed == false
                                     and sortie.subscriptions|length != sortie.numberMaxSub
                                     and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
@@ -202,6 +202,7 @@
                                 {% endfor %}
 
                                 {% if  subscribed
+                                    and sortie.state.label == 'Ouverte' or sortie.state.label == "Activité en cours"
                                     and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')
                                     and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y') %}
                                     <a href="{{ path('unsubscribe', {id: sortie.id}) }}">Se désister</a>
