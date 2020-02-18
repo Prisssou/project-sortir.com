@@ -8,20 +8,57 @@
                 {{ form_errors(form.motCle) }}
 
             </div>
-            <div class="row">
-                <div class="col-sm-6">
-                    {{ form_label(form.beginDate) }}
-                    {{ form_widget(form.beginDate) }}<img src="{{ asset('img/iconfinder_calendar-clock_299096.png') }}" style="width: 20px">
-                    {{ form_errors(form.beginDate) }}
 
-                </div>
-                <div class="col-sm-6">
-                    {{ form_label(form.endDate) }}
-                    {{ form_widget(form.endDate) }}<img src="{{ asset('img/iconfinder_calendar-clock_299096.png') }}" style="width: 20px">
-                    {{ form_errors(form.endDate) }}
+
+
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm-9">
+                                <div class="form-group">
+                                    {{ form_label(form.beginDate) }}<div class="col-sm-1"></div>
+                                    <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+
+
+                                        {{ form_widget(form.beginDate) }}
+                                        {{ form_errors(form.beginDate) }}
+
+{#                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>#}
+                                        <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+
+
+
+                
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-9">
+                        <div class="form-group">
+                            {{ form_label(form.endDate) }}<div class="col-sm-1"></div>
+                            <div class="input-group date" id="datetimepicker2" data-target-input="nearest">
+
+
+                                {{ form_widget(form.endDate) }}
+                                {{ form_errors(form.endDate) }}
+
+                                {#                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>#}
+                                <div class="input-group-append" data-target="#datetimepicker2" data-toggle="datetimepicker">
+                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
                 </div>
             </div>
+
 
 
 
@@ -66,32 +103,18 @@
 
         </div>
 
+
+
+
+
         <div class="container col-sm-3">
             <button type="submit" class="btn btn-primary w-100">Rechercher</button>
 
         </div>
 
-        <div class="container">
-            <div class="row">
-                <div class="col-sm-6">
-                    <div class="form-group">
-                        <div class="input-group date" id="datetimepicker1" data-target-input="nearest">
-                            <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker1"/>
-                            <div class="input-group-append" data-target="#datetimepicker1" data-toggle="datetimepicker">
-                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <script type="text/javascript">
-                    $(function () {
-                        $('#datetimepicker1').datetimepicker();
-                    });
-                </script>
-            </div>
-        </div>
-
     </div>
 </div>
 {{ form_end(form) }}
+
+
 

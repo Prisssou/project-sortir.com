@@ -146,7 +146,7 @@
 
                                 {# Organisateur #}
                                 {% for member in sortie.member %}
-                                    <td> {{ member.username }}</td>
+                                    <td><a href="{{ path('user_other_profile', {id: member.id}) }}">{{ member.username }}</a> </td>
                                 {% endfor %}
 
                                 {# Actions possibles #}

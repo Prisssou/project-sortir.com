@@ -86,13 +86,13 @@ class OutingController extends Controller
         dump($outing);
 
         // Récupération de la liste des participants
-//        $id = $outing->getId();
-//        $subList = $entityManager->getRepository(Subscribed::class)->find($id);
+        $subscriptionRepository = $entityManager->getRepository(Subscription::class);
+        $subList = $subscriptionRepository->findBy(['outing'=>$outing->getId()]);
 
         return $this->render(
             'outing/detailOuting.html.twig',
-//            compact('outing', 'subList')
-            compact('outing')
+            compact('outing', 'subList')
+//            compact('outing')
         );
 
     }
