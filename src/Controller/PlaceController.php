@@ -2,16 +2,14 @@
 
 namespace App\Controller;
 
-
-use App\Form\PlaceType;
 use App\Entity\Place;
-use App\Entity\City;
+use App\Entity\Ville;
 use Doctrine\ORM\EntityManagerInterface;
-use App\Form\SubscribedType;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\HttpFoundation\Response;
+
 
 
 class PlaceController extends Controller
@@ -22,41 +20,28 @@ class PlaceController extends Controller
     public function addPlace(EntityManagerInterface $entityManager, Request $request)
     {
 
-      $place = new Place();
+        $place = new Place();
 
-       $placeForm = $this->createForm(PlaceType::class, $place);
-       $placeForm->handleRequest($request);
+        $data = $request ->request->all();
+        $place->setName($data['place']['name']);
+        $place->setStreet($data['place']['street']);
+        $place->setZipcode($data['place']['zipcode']);
+        $place->setLatitude($data['place']['latitude']);
+        $place->setLongitude($data['place']['longitude']);
 
-        if ($placeForm->isSubmitted()) {
-            $villeStr = $placeForm->get('city')->getData();
+        $villeRepository = $entityManager->getRepository(Ville::class);
+        $ville = $villeRepository->findBy(['nom' => $data['place']['city']]);
+        $place->setCity($ville['0']);
 
-            $placeRepository = $entityManager->getRepository(Place::class);
-            $ville = $placeRepository->findByCity($villeStr);
+        $entityManager->persist($place);
+        $entityManager->flush();
 
-            if (!empty($ville)) {
-                $place->setCity($ville[0]);
 
-                $this->addFlash(
-                    'success',
-                    'Lieu ajouté avec succès'
-                );
-                $entityManager->persist($place);
-                $entityManager->flush();
+        return new JsonResponse([
+            'status'=> 'ok',
+            'place'=> $place,
+        ]);
 
-                return $this->redirectToRoute("add_outing");
-            } else {
-                $this->addFlash(
-                    'warning',
-                    'Le lieu est en dehors de la zone géographique'
-                );
-                return $this->redirectToRoute("add_place");
-
-            }
-        }
-
-        return $this->render(
-            'place/addplace.html.twig',
-            ['placeFormView' => $placeForm->createView(),]
-        );
     }
 }
+

@@ -9,8 +9,14 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PlaceRepository")
  */
-class Place
+class Place implements \JsonSerializable
 {
+    public function jsonSerialize()
+    {
+        return ['id' => $this->getId(),
+            'name' => $this->getName()];
+    }
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()
@@ -48,6 +54,7 @@ class Place
      * @ORM\JoinColumn(nullable=false)
      */
     private $ville;
+
 
     /**
      * @ORM\Column(type="string", length=10)
