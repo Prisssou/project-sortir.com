@@ -7,7 +7,6 @@ use App\Entity\Outing;
 use App\Entity\Ville;
 use App\Entity\Site;
 use App\Entity\Place;
-use App\Repository\CityRepository;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;

@@ -15,13 +15,6 @@
 
     <div>
         <h1>Bienvenue sur Sortir.com !</h1>
-        {#        <h2 class="d-none d-md-block"> Envie <span class="typing"></span></h2>#}
-        {#        <script#}
-        {#                src="https://code.jquery.com/jquery-3.4.1.min.js"#}
-        {#                integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="#}
-        {#                crossorigin="anonymous"></script>#}
-        {#        <script src="js/typed.min.js"></script>#}
-        {#        <script src="js/animation.js"></script>#}
 
         <h2> Rejoignez le réseau de l'ENI !</h2>
 
@@ -132,8 +125,8 @@
                                 {% endif %}
                                 {# Etat de la sortie #}
                                 <td>{{ sortie.state.label }}</td>
-                                {# Déjà Inscrit ? #}
 
+                                {# Déjà Inscrit ? #}
                                 {% set subscribed = false %}
                                 {% for subscription in app.user.subscriptions %}
                                     {% for subscriptions in sortie.subscriptions %}
@@ -148,7 +141,9 @@
                                     <td>Pas encore !</td>
                                 {% endif %}
 
-                                {#                    <td>{{dump(sortie.member)}}</td>#}
+
+
+
                                 {# Organisateur #}
                                 {% for member in sortie.member %}
                                     <td> {{ member.username }}</td>
@@ -168,8 +163,7 @@
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
-                                    {% if subscribed
-                                        and sortie.subscriptions|length != sortie.numberMaxSub
+                                    {% if sortie.subscriptions|length != sortie.numberMaxSub
                                         and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
                                         and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y') %}
                                         <a href="{{ path('subscribe', {id: sortie.id}) }}">S'inscrire</a>
