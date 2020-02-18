@@ -72,31 +72,63 @@ class OutingRepository extends ServiceEntityRepository
 
         }
 
-        if (!empty($search->getInscrit())) {
-            if ($search->getInscrit() == 1) {
-                $query = $query
-                    ->addSelect('s')
-                    ->innerJoin('outing.subscriptions', 's')
+        if(!empty($search->getInscrit())&&!empty($search->getNotInscrit())){
+            if ($search->getInscrit() == 1 && $search->getNotInscrit() == 1){
+//nothing to do
+            } else{
+                if ($search->getInscrit() == 1){
+                    $query = $query
+                        ->addSelect('s')
+                        ->innerJoin('outing.subscriptions', 's')
 //                    ->innerJoin('outing.member', 'm')
-                    ->andWhere('s.member = :inscrit')
+                        ->andWhere('s.member = :inscrit')
 //                    ->andWhere('m = :inscrit')
 //                    ->andWhere('m = :inscrit OR s = :inscrit')
-                    ->setParameter('inscrit', $user);
+                        ->setParameter('inscrit', $user);
+                }
+                if ($search->getNotInscrit() == 1) {
+                    $subQb = $this->createQueryBuilder('sq')
+                        ->innerJoin('sq.subscriptions', 'sqb')
+                        ->Where('sqb.user = :user');
+                    $query = $query
+                        ->addselect('i')
+                        ->leftJoin('outing.subscriptions', 'i')
+                        ->andWhere('outing NOT IN ('. $subQb->getDQL().')')
+                        ->setParameter(':user', $user);
+                    dump($user);
 
+
+                }
             }
 
-        }
-        if (!empty($search->getNotInscrit())) {
-            if ($search->getNotInscrit() == 1) {
-                $query = $query
-                    ->addSelect('sa')
-                    ->innerjoin('outing.subscriptions', 'sa')
-                    ->andWhere('sa.member != :notinscrit')
-                    ->setParameter('notinscrit', $user);
-
-            }
 
         }
+
+//        if (!empty($search->getInscrit())) {
+//            if ($search->getInscrit() == 1) {
+//                $query = $query
+//                    ->addSelect('s')
+//                    ->innerJoin('outing.subscriptions', 's')
+////                    ->innerJoin('outing.member', 'm')
+//                    ->andWhere('s.member = :inscrit')
+////                    ->andWhere('m = :inscrit')
+////                    ->andWhere('m = :inscrit OR s = :inscrit')
+//                    ->setParameter('inscrit', $user);
+//
+//            }
+//
+//        }
+//        if (!empty($search->getNotInscrit())) {
+//            if ($search->getNotInscrit() == 1) {
+//                $query = $query
+//                    ->addSelect('sa')
+//                    ->innerjoin('outing.subscriptions', 'sa')
+//                    ->andWhere('sa.member != :notinscrit')
+//                    ->setParameter('notinscrit', $user);
+//
+//            }
+//
+//        }
 
 //        if (!empty($search->getPassee())) {
 //            if ($search->getPassee() == 1) {
