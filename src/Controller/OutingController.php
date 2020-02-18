@@ -7,6 +7,7 @@ use App\Entity\State;
 use App\Entity\Place;
 use App\Form\OutingType;
 use App\Form\PlaceType;
+use App\Entity\Subscription;
 use App\Form\SubscribedType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
