@@ -76,7 +76,7 @@
 
                     {% for members in subList %}
                         <tr>
-                            <td> {{ members.member.username }}</td>
+                            <td><a href="{{ path('user_other_profile', {id: members.member.id}) }}">{{ members.member.username }}</a></td>
                             <td>{{ members.member.firstname }} </td>
                         </tr>
                     {% endfor %}
