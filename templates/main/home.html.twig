@@ -163,7 +163,8 @@
                                             {% endif %}
                                         {% endfor %}
                                     {% endfor %}
-                                    {% if sortie.subscriptions|length != sortie.numberMaxSub
+                                    {% if subscribed == false
+                                        and sortie.subscriptions|length != sortie.numberMaxSub
                                         and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
                                         and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y') %}
                                         <a href="{{ path('subscribe', {id: sortie.id}) }}">S'inscrire</a>
