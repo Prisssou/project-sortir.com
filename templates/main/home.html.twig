@@ -108,10 +108,13 @@
                             <tr>
                                 {# Titre de la sortie #}
                                 <td>{{ sortie.name }}</td>
+
                                 {# Date de la sortie #}
                                 <td>{{ sortie.startDate|date('d/m/Y à H:i') }}</td>
+
                                 {# Date de cloture de l'inscription #}
                                 <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
+
                                 {# Nb inscrits / Nb places #}
                                 {% if sortie.numberSub == sortie.numberMaxSub %}
                                     <td>
@@ -123,6 +126,7 @@
                                     </td>
 
                                 {% endif %}
+                                
                                 {# Etat de la sortie #}
                                 <td>{{ sortie.state.label }}</td>
 

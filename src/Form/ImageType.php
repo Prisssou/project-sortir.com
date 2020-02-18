@@ -6,6 +6,8 @@ use App\Entity\Image;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormInterface;
+use Symfony\Component\Form\FormView;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 
@@ -23,6 +25,7 @@ class ImageType extends AbstractType
                     'label' => false,
 
                     // unmapped means that this field is not associated to any entity property
+                    'mapped' => false,
 
 
                     // make it optional so you don't have to re-upload the PDF file
@@ -50,10 +53,20 @@ class ImageType extends AbstractType
 //            ->add('Outing');
     }
 
+    public function buildView(FormView $view, FormInterface $form, array $options)
+    {
+     $entity = $form->getParent()->getData();
+
+     if ($entity) {
+         $view->vars['file_uri'] = (null === $entity->getImage()->getUrl()) ? null : '/uploads/images' . $entity->getImage()->getUrl();
+     }
+    }
+
     public function configureOptions(OptionsResolver $resolver)
     {
         $resolver->setDefaults(
             [
+                'file_uri' => null,
                 'data_class' => Image::class,
             ]
         );

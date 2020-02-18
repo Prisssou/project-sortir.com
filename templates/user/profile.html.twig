@@ -11,6 +11,10 @@
                 {{ form_start(memberFormView) }}
                 {{ form_label(memberFormView.image) }}
                 {{ form_widget(memberFormView.image) }}
+                <!-- image preview -->
+                {% if file_uri is defined and file_uri is not null %}
+                    <img src="{{ file_uri }}" class="img img-responsive img-preview thumbnail" alt="avatar">
+                {% endif %}
                 {{ form_errors(memberFormView.image) }} <br>
 
             </div>
