@@ -20,6 +20,10 @@
 
 {#    Custom Scrollbar#}
     <link rel="stylesheet" href="{{ asset('css/mdb-scrollbar.css') }}">
+    <script type="text/javascript" src="{{ asset('tempusDominusImport/jquery.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/js/tempusdominus-bootstrap-4.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tempusdominus-bootstrap-4/5.0.0-alpha14/css/tempusdominus-bootstrap-4.min.css" />
+
     <title>{% block title %} Sortir.com - Votre site de sorties {% endblock %}</title>
 
 
@@ -49,6 +53,13 @@
 <script src="https://cdn.jsdelivr.net/npm/places.js@1.17.1"></script>
 {#Custom Scrollbar#}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/overlayscrollbars/1.10.3/js/jquery.overlayScrollbars.min.js" integrity="sha256-tuiqRu0+T8St8iILGYhLhgMs2iCLPG0HVJCIPm4uduE=" crossorigin="anonymous"></script>
+
+{#TEMPUS DOMINUS#}
+<script type="text/javascript" src="{{ asset('tempusDominusImport/jquery.js') }}"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment-with-locales.min.js" integrity="sha256-AdQN98MVZs44Eq2yTwtoKufhnU+uZ7v2kXnD5vqzZVo=" crossorigin="anonymous"></script>
+
+
+
 {% block script %}
 {% endblock %}
 </body>
