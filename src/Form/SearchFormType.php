@@ -44,7 +44,9 @@ class SearchFormType extends AbstractType
                     'label' => 'Entre le ',
                     'required' => false,
                     'choice_translation_domain' => true,
-                    'date_widget' => 'single_text',
+                    'widget' => 'single_text',
+                    'format' =>'dd/MM/yyyy H:mm',
+                    'html5' => false,
 
 
                 ]
@@ -56,7 +58,9 @@ class SearchFormType extends AbstractType
                     'label' => 'Et le ',
                     'required' => false,
                     'choice_translation_domain' => true,
-                    'date_widget' => 'single_text',
+                    'widget' => 'single_text',
+                    'format' =>'dd/MM/yyyy H:mm',
+                    'html5' => false,
 
                 ]
             )
