@@ -96,5 +96,67 @@ class OutingController extends Controller
 
     }
 
+    // S'inscrire à une sortie
+
+    /**
+     * @Route("/subscribe/{id}", name="subscribe")
+     */
+    public function addSubscription($id, EntityManagerInterface $entityManager, Request $request)
+    {
+        // Récupération de la sortie
+        $outingRepository = $entityManager->getRepository(Outing::class);
+        $outing = $outingRepository->find($id);
+
+        // Récuparation de l'utilisateur courant
+        $user = $this->getUser();
+
+        // Hydratation de la BDD
+        $subscription = new Subscription();
+        $subscription->setMember($user);
+        $subscription->setOuting($outing);
+        $subscription->setSubDate(new \DateTime('now'));
+
+        $entityManager->persist($subscription);
+        $entityManager->flush();
+
+        $this->addFlash('success', 'Votre inscription a bien été prise en compte !');
+
+        return $this->redirectToRoute('home');
+
+//        if ()
+
+    }
+
+    // Se désinscrire d'une sortie
+
+    /**
+     * @Route("/unsubscribe/{id}", name="unsubscribe")
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return Response
+     */
+    public function cancelSubscription($id, EntityManagerInterface $em, Request $request)
+    {
+        // Récupération de l'utilisateur courant
+        $member = $this->getUser();
+
+        // Récupération de la sortie
+        $outingRepository = $em->getRepository(Outing::class);
+        $outing = $outingRepository->find($id);
+
+        // Récupération de l'inscription
+        $subRepository = $em->getRepository(Subscription::class);
+        $subscription = $subRepository->findBy(['outing'=> $outing->getId(), 'member'=>$member->getId()], ['outing'=>'ASC'] );
+
+        $em->remove($subscription[0]);
+        $em->flush();
+
+
+        $this->addFlash('success', 'Votre annulation a bien été prise en compte');
+        return $this->redirectToRoute('home');
+
+    }
+
 }
 
