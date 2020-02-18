@@ -6,6 +6,7 @@ namespace App\Controller;
 
 use App\Entity\Image;
 use App\Entity\Member;
+use App\Entity\Outing;
 use App\Form\MemberFormType;
 use App\Form\ImageType;
 use App\Form\MemberType;
@@ -141,6 +142,29 @@ class UserController extends Controller
             );
 
         }
+
+    /**
+     * @Route("/otherProfile/{id}", name="other_profile")
+     * @param $id
+     * @param EntityManagerInterface $entityManager
+     * @param Request $request
+     * @return Response
+     */
+    public function displayProfile($id, EntityManagerInterface $entityManager, Request $request)
+    {
+        // Récupération de l'utilisateur
+        $memberRepository = $entityManager->getRepository(Member::class);
+        $member = $memberRepository->find($id);
+        dump($member);
+
+
+
+        return $this->render(
+            'user/otherProfile.html.twig',
+            compact('member')
+        );
+
+    }
 
 
 
