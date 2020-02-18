@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Outing;
 use App\Entity\State;
 use App\Entity\Place;
+use App\Entity\Subscription;
 use App\Form\OutingType;
 use App\Form\PlaceType;
 use App\Entity\Subscription;
