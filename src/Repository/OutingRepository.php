@@ -90,7 +90,7 @@ class OutingRepository extends ServiceEntityRepository
             if ($search->getNotInscrit() == 1) {
                 $query = $query
                     ->addSelect('sa')
-                    ->innerJoin('outing.subscriptions', 'sa')
+                    ->innerjoin('outing.subscriptions', 'sa')
                     ->andWhere('sa.member != :notinscrit')
                     ->setParameter('notinscrit', $user);
 

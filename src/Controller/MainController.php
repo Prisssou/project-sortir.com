@@ -7,6 +7,7 @@ use App\Data\SearchData;
 use App\Entity\Outing;
 use App\Entity\Site;
 use App\Entity\State;
+use App\Entity\Subscription;
 use App\Form\FilterFormType;
 use App\Form\SearchFormType;
 use Doctrine\ORM\EntityManager;
@@ -36,6 +37,8 @@ class MainController extends Controller
         $siteRepository = $entityManager->getRepository(Site::class);
         $sites = $siteRepository->findAll();
 
+        $subRepository = $entityManager->getRepository(Subscription::class);
+        $subscriptions = $subRepository->findAll();
 
         $data = new SearchData();
         $form = $this->createForm(SearchFormType::class, $data);
@@ -77,6 +80,7 @@ class MainController extends Controller
                 'sorties' => $sorties,
                 'sites' => $sites,
                 'sortiesFiltered' => $sortiesFiltered,
+                'subscriptions' => $subscriptions,
                 'form' => $form->createView(),
             ]
         );
