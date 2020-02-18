@@ -148,14 +148,47 @@ class OutingController extends Controller
 
         // Récupération de l'inscription
         $subRepository = $em->getRepository(Subscription::class);
-        $subscription = $subRepository->findBy(['outing'=> $outing->getId(), 'member'=>$member->getId()], ['outing'=>'ASC'] );
+        $subscription = $subRepository->findBy(
+            ['outing' => $outing->getId(), 'member' => $member->getId()],
+            ['outing' => 'ASC']
+        );
 
         $em->remove($subscription[0]);
         $em->flush();
 
 
         $this->addFlash('success', 'Votre annulation a bien été prise en compte');
+
         return $this->redirectToRoute('home');
+
+    }
+
+    /**
+     * @Route("/cancel/{id}", name="cancel")
+     * @param $id
+     * @param EntityManagerInterface $em
+     * @param Request $request
+     * @return Response
+     */
+    public function cancelOuting($id, EntityManagerInterface $em, Request $request)
+    {
+        // Récupération de la sortie
+        $outingRepository = $em->getRepository(Outing::class);
+        $outing = $outingRepository->find($id);
+
+        $stateRepository = $em->getRepository(State::class);
+        $outing->setState($state = $stateRepository->find('6'));
+
+        $this->addFlash(
+            'success',
+            'Sortie annulée avec succès'
+        );
+
+        $em->persist($outing);
+        $em->flush();
+
+        return $this->redirectToRoute('home');
+
 
     }
 
