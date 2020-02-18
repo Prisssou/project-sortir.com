@@ -110,9 +110,9 @@
                     <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
                 </li>
                 <div class="avatar d-none d-md-block">
-                    <a href="{{ path('user_profile', {'id' : app.user.id}) }}">
-                        <img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="avatar">
-                    </a>
+{#                    <a href="{{ path('user_profile', {'id' : app.user.id}) }}">#}
+{#                        <img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="avatar">#}
+{#                    </a>#}
                     <p>Hello {{ app.user.username }} !</p>
                 </div>
             {% else %}

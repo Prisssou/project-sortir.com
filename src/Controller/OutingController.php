@@ -124,6 +124,8 @@ class OutingController extends Controller
 
         return $this->redirectToRoute('home');
 
+//        if ()
+
     }
 
     // Se désinscrire d'une sortie

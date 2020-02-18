@@ -126,11 +126,28 @@
                                 </td>
 
                             {% endif %}
+
                             {# Etat de la sortie #}
                             <td>{{ sortie.state.label }}</td>
 
+                            {# Déjà inscrit? #}
+                            {% set subscribed = false %}
+                            {% for subscription in app.user.subscriptions %}
+                                {% for subscriptions in sortie.subscriptions %}
+                                    {% if subscription == subscriptions %}
+                                        {% set subscribed = true %}
+                                    {% endif %}
+                                {% endfor %}
+                            {% endfor %}
+                            {% if subscribed %}
+                                <td> Oui</td>
+                            {% else %}
+                                <td>Pas encore !</td>
+                            {% endif %}
+{#=======#}
 
-                            {# Indique si l'utilisateur est inscrit à la sortie #}
+
+{#                            #}{# Indique si l'utilisateur est inscrit à la sortie #}
 
 {#                            {% for sub in subscriptions %}#}
 {#                            {% if sub.member.id == app.user.id %}#}
@@ -145,6 +162,7 @@
                             <td> Oui</td>
 
 
+{#>>>>>>> d1ad8484d3566cd9b5c6490b7930b5b5c5428b0b#}
                             {#                    <td>{{dump(sortie.member)}}</td>#}
                             {# Organisateur #}
                             {% for member in sortie.member %}
@@ -157,7 +175,16 @@
                                 <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
 
                                 {# S'inscrire | Cloturer la sortie #}
-                                {% if sortie.state.label == 'En cours'
+                                {% set subscribed = false %}
+                                {% for subscription in app.user.subscriptions %}
+                                    {% for subscriptions in sortie.subscriptions %}
+                                        {% if subscription == subscriptions %}
+                                            {% set subscribed = true %}
+                                        {% endif %}
+                                    {% endfor %}
+                                {% endfor %}
+                                {% if sortie.state.label == 'Ouverte'
+                                    and subscribed == false
                                     and sortie.subscriptions|length != sortie.numberMaxSub
                                     and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
                                     and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y') %}
