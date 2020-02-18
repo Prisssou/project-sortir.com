@@ -1,45 +1,128 @@
-<nav class="navbar navbar-expand-lg navbar-light justify-content-between d-flex align-items-center"
-     style="background-color: #CFC8C6;">
-    <div class="nav">
-        <a class="navbar-brand" href="{{ path('home') }}"> <img src="{{ asset('img/favicon/command.png') }}"></a>
-        {#        {% if app.user %}
-                <a class="navbar-brand" href="{{ path('profil') }}"> Mon profil</a>
-                <a class="navbar-brand" href="{{ path('create') }}"> Echange </a>
-                <a class="navbar-brand" href=" {{ path('logout') }}"> Déconnexion</a>
-            </div>
-            <div class="avatar d-none d-md-block">
-                <a href="{{ path('profil') }}"><img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="avatar"></a>
-                <p>Hello {{ app.user.username }} !</p>
-            </div>
-            #}{#<a href="{{ path('profil') }}"><img src="{{ asset(app.user.image) }}" alt="avatar" height="150" width="150"></a>#}{#
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    {# Mise en place de l'icone de l'onglet #}
+    <link rel="icon" href="{{ asset('img/favicon/command.png') }}"/>
+    {# Mise en place du fichier CSS #}
+    <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/home.css') }}">
+    {# Mise en place de de Bootstrap #}
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+          integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.13/dist/css/select2.min.css" rel="stylesheet"/>
+    <link href="https://kit-free.fontawesome.com/releases/latest/css/free.min.css" media="all" rel="stylesheet"
+          id="font-awesome-5-kit-css">
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.css' rel='stylesheet'/>
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.7.0/mapbox-gl.js'></script>
+
+</head>
+<body>
+
+
+{#<nav class="navbar navbar-expand-lg navbar-light justify-content-between d-flex align-items-center "#}
+{#     style="background-color: #CFC8C6;">#}
+{#    <div class="nav">#}
+{#        <a class="navbar-brand" href="{{ path('home') }}"> <img src="{{ asset('img/favicon/command.png') }}"></a>#}
+{#        #}{#        {% if app.user %}#}
+{#                <a class="navbar-brand" href="{{ path('profil') }}"> Mon profil</a>#}
+{#                <a class="navbar-brand" href="{{ path('create') }}"> Echange </a>#}
+{#                <a class="navbar-brand" href=" {{ path('logout') }}"> Déconnexion</a>#}
+{#            </div>#}
+{#            <div class="avatar d-none d-md-block">#}
+{#                <a href="{{ path('profil') }}"><img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="avatar"></a>#}
+{#                <p>Hello {{ app.user.username }} !</p>#}
+{#            </div>#}
+{#            #}{##}{#<a href="{{ path('profil') }}"><img src="{{ asset(app.user.image) }}" alt="avatar" height="150" width="150"></a>#}{##}{##}
 
 
 
+{#            {% else %}#}
+{#                <a class="navbar-brand" href=" {{ path('login') }}"> Connexion</a>#}
+{#                <a class="navbar-brand" href=" {{ path('app_register') }}"> S'enregistrer</a>#}
+{#            {% endif %}#}
+{#    </div>#}
+
+{#    <ul class="navbar-nav ml-auto">#}
+{#        #}{#        <li class="nav-item">{{ "now"|date("H:i:s \O\n d/m/Y") }}</li>#}
+
+{#        {% if is_granted("ROLE_ADMIN") %}#}
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" href="{{ path('city') }}">Villes</a>#}
+{#            </li>#}
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" href="{{ path('site') }}">Sites</a>#}
+{#            </li>#}
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" href="{{ path('user_signup') }}">Créer un compte</a>#}
+{#            </li>#}
+
+{#        {% endif %}#}
+
+{#        {% if app.user %}#}
+{#            <li class="nav-item">#}
+{#                <a class="nav-link" href="{{ path('user_profile', {'id' : app.user.id}) }}">Mon#}
+{#                    profil</a>#}
+{#            </li>#}
+{#            <li class="nav-item"><a class="nav-link" href="{{ path('logout') }}">Déconnexion</a></li>#}
+{#        {% else %}#}
+{#            <li class="nav-item"><a class="nav-link" href="{{ path('user_login') }}">Connexion</a></li>#}
+
+{#        {% endif %}#}
+
+{#    </ul>#}
+{#</nav>#}
+
+<nav id="events" class="navbar navbar-expand-lg navbar-default">
+    {# MENU BURGER #}
+    <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
+            data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false"
+            aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    {# LOGO #}
+    <a class="navbar-brand" href="{{ path('home') }}"><img id="logo" src="{{ asset('img/favicon/command.png') }}"></a>
+
+    <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
+        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
+            {# NAVBAR FOR ADMIN ROLE #}
+            {% if is_granted("ROLE_ADMIN") %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('city') }}">Villes</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('site') }}">Sites</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('user_signup') }}">Créer un compte</a></li>
+
+            {% endif %}
+
+            {# NAVBAR FOR USER ROLE #}
+            {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('add_outing') }}">Créer une sortie</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('user_profile', {'id' : app.user.id}) }}">Mon
+                        profil</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
+                </li>
+                <div class="avatar d-none d-md-block">
+                    <a href="{{ path('user_profile', {'id' : app.user.id}) }}">
+                        <img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="avatar">
+                    </a>
+                    <p>Hello {{ app.user.username }} !</p>
+                </div>
             {% else %}
-                <a class="navbar-brand" href=" {{ path('login') }}"> Connexion</a>
-                <a class="navbar-brand" href=" {{ path('app_register') }}"> S'enregistrer</a>
-            {% endif %}#}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('user_login') }}">Connexion</a>
+                </li>
+
+            {% endif %}
+
+        </ul>
     </div>
-
-    <ul class="navbar-nav ml-auto">
-{#        <li class="nav-item">{{ "now"|date("H:i:s \O\n d/m/Y") }}</li>#}
-
-        {% if is_granted("ROLE_ADMIN") %}
-            <li class="nav-item"><a class="nav-link" href="{{ path('city') }}">Villes</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('site') }}">Sites</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('user_signup') }}">Créer un compte</a></li>
-
-        {% endif %}
-
-        {% if app.user %}
-            <li class="nav-item"><a class="nav-link" href="{{ path('user_profile', {'id' : app.user.id}) }}">Mon
-                    profil</a></li>
-            <li class="nav-item"><a class="nav-link" href="{{ path('logout') }}">Déconnexion</a></li>
-        {% else %}
-            <li class="nav-item"><a class="nav-link" href="{{ path('user_login') }}">Connexion</a></li>
-
-        {% endif %}
-
-    </ul>
 </nav>
-
+</body>

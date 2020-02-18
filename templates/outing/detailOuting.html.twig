@@ -64,7 +64,7 @@
         <div class="row mt-3">
             {# Affiche la liste des participants à la sortie #}
             <h3>Liste des participants inscrits :</h3><br>
-            <div class="scrollbar scrollbar-juicy-peach bordered-warning">
+            <div class="scrollbar scrollbar-juicy-peach bordered-warning"> {# Todo CSS à faire#}
                 <table class="table col-md-6">
                     <thead>
                     <tr>
@@ -74,19 +74,10 @@
                     </thead>
                     <tbody>
 
-                    {% for suscribers in subscription %}
+                    {% for members in subList %}
                         <tr>
-                            <td>{{ suscribers.member.username }}</td>
-                            <td>{{ subscribers.member.firstname }} {{ subscribers.site.name }}</td>
-                        </tr>
-                        <tr>
-                            <td>Popo</td>
-                            <td>Pauline - ENI Nantes</td>
-
-                        </tr>
-                        <tr>
-                            <td>Alanou</td>
-                            <td>Alan - ENI Nantes</td>
+                            <td>{{ members.member.username }}</td>
+                            <td>{{ members.member.firstname }} </td>
                         </tr>
                     {% endfor %}
 

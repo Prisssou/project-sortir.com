@@ -86,14 +86,13 @@ class OutingController extends Controller
         $outingRepository = $entityManager->getRepository(Outing::class);
         $outing = $outingRepository->find($id);
 
-        //Récupération de l'inscription
+        //Récupération de la liste des inscrits
         $subscriptionRepository = $entityManager->getRepository(Subscription::class);
-        $subscription = $subscriptionRepository->find($id);
-
+        $subList = $subscriptionRepository->findBy(['outing'=>$outing->getId()]);
 
         return $this->render(
             'outing/detailOuting.html.twig',
-            compact('outing', 'subscription')
+            compact('outing', 'subList')
         );
 
     }
@@ -112,7 +111,7 @@ class OutingController extends Controller
         // Récuparation de l'utilisateur courant
         $user = $this->getUser();
 
-
+        // Hydratation de la BDD
         $subscription = new Subscription();
         $subscription->setMember($user);
         $subscription->setOuting($outing);
@@ -131,23 +130,30 @@ class OutingController extends Controller
 
     /**
      * @Route("/unsubscribe/{id}", name="unsubscribe")
-     * @param Outing $outing
-     * @param EntityManagerInterface $entityManager
+     * @param $id
+     * @param EntityManagerInterface $em
      * @param Request $request
      * @return Response
      */
-    public function cancelSubscription(Outing $outing, EntityManagerInterface $entityManager, Request $request)
+    public function cancelSubscription($id, EntityManagerInterface $em, Request $request)
     {
+        // Récupération de l'utilisateur courant
+        $member = $this->getUser();
 
-        $member = $this->getMember();
-        $member->removeOuting($outing);
-        $outing->removeSubscribed($member);
-        $entityManager->persist();
-        $entityManager->flush();
+        // Récupération de la sortie
+        $outingRepository = $em->getRepository(Outing::class);
+        $outing = $outingRepository->find($id);
+
+        // Récupération de l'inscription
+        $subRepository = $em->getRepository(Subscription::class);
+        $subscription = $subRepository->findBy(['outing'=> $outing->getId(), 'member'=>$member->getId()], ['outing'=>'ASC'] );
+
+        $em->remove($subscription[0]);
+        $em->flush();
 
 
         $this->addFlash('success', 'Votre annulation a bien été prise en compte');
-        return $this->render($this->generateUrl('home'));
+        return $this->redirectToRoute('home');
 
     }
 

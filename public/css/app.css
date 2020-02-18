@@ -1,5 +1,10 @@
+body {
+
+
+}
+
 h1 {
-    color: #209387;
+    color: #142340;
     text-align: center;
     padding-top: 1em;
     padding-bottom: 1em;
@@ -22,7 +27,7 @@ h2, h3 {
     content: '';
     display: block;
     margin: auto;
-    height: 4px;
+    height: 2px;
     width: 0px;
     background: transparent;
     transition: width .5s ease, background-color .5s ease;
@@ -30,7 +35,7 @@ h2, h3 {
 
 .navbar-brand:hover:after {
     width: 100%;
-    background: #209387;
+    background: #FFC952;
 }
 
 .btn-primary {
@@ -122,7 +127,35 @@ h2, h3 {
 }
 
 
+/*!* Custom ScrollBar *!*/
+/*!* width *!*/
+/*::-webkit-scrollbar {*/
+/*    width: 1.5rem;*/
 
+/*}*/
+
+/*!* Track *!*/
+/*::-webkit-scrollbar-track {*/
+/*    !*background: linear-gradient(90deg,#201c29,#201c29 1px,#100e17 0,#100e17);*!*/
+/*    box-shadow: inset 0 0 3px #e52e71;*/
+/*    border-radius: 10px;*/
+/*}*/
+
+/*!* Handle *!*/
+/*::-webkit-scrollbar-thumb {*/
+/*    background: linear-gradient(180deg,#ff8a00,#e52e71);*/
+/*    border-radius: 2rem;*/
+/*}*/
+
+/*!* Handle on hover *!*/
+/*::-webkit-scrollbar-thumb:hover {*/
+/*    background: #b30000;*/
+/*}*/
+
+/*!* Little corners on top*!*/
+/*::-webkit-scrollbar-track-piece{*/
+/*    !*background: linear-gradient(90deg,#201c29,#201c29 1px,#100e17 0,#100e17);*!*/
+/*}*/
 
 
 
