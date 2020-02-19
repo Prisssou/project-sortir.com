@@ -60,6 +60,10 @@ h2, h3 {
     align-items: center;
 }
 
+div#dropdownMenuButton {
+    margin-right: 2rem;
+}
+
 
 .vignette {
     margin: 20px;
@@ -126,6 +130,10 @@ h2, h3 {
         margin-right: 18em;
         margin-left: 18em;
     }
+}
+
+i.fas.fa-plus {
+    color: #FCC258;
 }
 
 
