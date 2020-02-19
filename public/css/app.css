@@ -134,6 +134,11 @@ div#dropdownMenuButton {
 
 }
 
+.btn blue-gradient btn-block btn-rounded z-depth-1a {
+    background-color: #142340;
+    color: #FFC952;
+}
+
 i.fas.fa-plus {
     color: #FF0000;
 }
@@ -142,6 +147,13 @@ i.fas.fa-plus {
     color: #FF0000;
     font-size: smaller;
 }
+
+#placeChoice col-lg-8{
+    display : inline-flex;
+
+}
+
+
 
 
 /*!* Custom ScrollBar *!*/
