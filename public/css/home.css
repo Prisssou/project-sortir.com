@@ -4,7 +4,16 @@
         url('welcome_2019-webfont.woff') format('woff');
         font-weight: normal;
         font-style: normal;
-        
+
+    }
+
+    @font-face {
+        font-family: 'averta';
+        src: url('Averta.woff2') format('woff2'),
+        url('Averta.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+
     }
 
     html, body {
@@ -17,17 +26,26 @@
     }
     /*Header Home Page */
     .full-height {
-        height: 100vh;
+        min-height: 100vh;
         font-family: 'welcome';
         color: #FFC952;
         background-color: #142340;
-        font-size: 10em;
         text-align: center;
         padding-top: 1em;
     }
 
+    .full-height h1 {
+
+        font-family: 'welcome';
+        color: #FFC952;
+        background-color: #142340;
+        font-size: 10em;
+        /*text-align: center;*/
+
+    }
+
     .full-height p {
-        font-size: 0.2em;
+        font-size: 4em;
         font-family: 'Playfair Display', serif;
         font-style: italic;
     }
@@ -49,7 +67,7 @@
     }
 
         .full-screen-navbar {
-        height: 100vh;
+        min-height: 100vh;
 
     }
         /* Logo */
@@ -94,8 +112,9 @@
     @media only screen and (max-width: 768px) {
         /* For mobile phones: */
         #welcome {font-size: 2em;}
-        #typing, #arrow {display: none;}
-        .full-height {display: none;}
+        #typing {display: none}
+        /*#arrow {display: none;}*/
+        /*.full-height {display: none;}*/
     }
 
 

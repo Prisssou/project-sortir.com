@@ -65,6 +65,7 @@ class Member implements UserInterface
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Image", inversedBy="member", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true)
      */
     private $image;
 

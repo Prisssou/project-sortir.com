@@ -11,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 
 
-
 class PlaceController extends Controller
 {
     /**
@@ -22,7 +21,8 @@ class PlaceController extends Controller
 
         $place = new Place();
 
-        $data = $request ->request->all();
+        $data = $request->request->all();
+
         $place->setName($data['place']['name']);
         $place->setStreet($data['place']['street']);
         $place->setZipcode($data['place']['zipcode']);
@@ -31,16 +31,24 @@ class PlaceController extends Controller
 
         $villeRepository = $entityManager->getRepository(Ville::class);
         $ville = $villeRepository->findBy(['nom' => $data['place']['city']]);
-        $place->setCity($ville['0']);
+        if (empty($ville)) {
+            return new JsonResponse(
+                [
+                    'status' => 'nok',
+                ]
+            );
+        } else {
+            $place->setCity($ville['0']);
+            $entityManager->persist($place);
+            $entityManager->flush();
 
-        $entityManager->persist($place);
-        $entityManager->flush();
-
-
-        return new JsonResponse([
-            'status'=> 'ok',
-            'place'=> $place,
-        ]);
+            return new JsonResponse(
+                [
+                    'status' => 'ok',
+                    'place' => $place,
+                ]
+            );
+        }
 
     }
 }

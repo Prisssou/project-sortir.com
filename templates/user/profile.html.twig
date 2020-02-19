@@ -6,20 +6,20 @@
     <div class="container">
         <div class="row">
             <div class="col-lg-4">
-                <img id="image-create" src="{{ asset('img/articleimage.png') }}" alt="">
-                {# Image + Upload #}
+{#                <img id="image-create" src="{{ asset('img/articleimage.png') }}" alt="">#}
+                <img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image.url) }}" alt="avatar">
+
                 {{ form_start(memberFormView) }}
+                {# Image + Upload #}
+
                 {{ form_label(memberFormView.image) }}
                 {{ form_widget(memberFormView.image) }}
-                <!-- image preview -->
-                {% if file_uri is defined and file_uri is not null %}
-                    <img src="{{ file_uri }}" class="img img-responsive img-preview thumbnail" alt="avatar">
-                {% endif %}
+                <div id="image-holder"></div>
                 {{ form_errors(memberFormView.image) }} <br>
 
             </div>
 
-            <div class="col-lg-8">
+                <div class="col-lg-8">
 
 
                 {{ form_label(memberFormView.username) }}
@@ -46,6 +46,10 @@
                 {{ form_widget(memberFormView.plainPassword) }}
                 {{ form_errors(memberFormView.plainPassword) }} <br>
 
+                {{ form_label(memberFormView.newPassword) }}
+                {{ form_widget(memberFormView.newPassword) }}
+                {{ form_errors(memberFormView.newPassword) }} <br>
+
                 {{ form_label(memberFormView.site) }}
                 {{ form_widget(memberFormView.site) }}
                 {{ form_errors(memberFormView.site) }} <br>
@@ -64,6 +68,40 @@
         {{ form_end(memberFormView) }}
 
     </div>
+
+    <script>
+        $(document).ready(function() {
+            $("#member_image_imagePath").on('change', function() {
+                //Get count of selected files
+                var countFiles = $(this)[0].files.length;
+                var imgPath = $(this)[0].value;
+                var extn = imgPath.substring(imgPath.lastIndexOf('.') + 1).toLowerCase();
+                var image_holder = $("#image-holder");
+                image_holder.empty();
+                if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
+                    if (typeof(FileReader) != "undefined") {
+                        //loop for each file selected for uploaded.
+                        for (var i = 0; i < countFiles; i++)
+                        {
+                            var reader = new FileReader();
+                            reader.onload = function(e) {
+                                $("<img />", {
+                                    "src": e.target.result,
+                                    "class": "thumb-image"
+                                }).appendTo(image_holder);
+                            }
+                            image_holder.show();
+                            reader.readAsDataURL($(this)[0].files[i]);
+                        }
+                    } else {
+                        alert("This browser does not support FileReader.");
+                    }
+                } else {
+                    alert("Pls select only images");
+                }
+            });
+        });
+    </script>
 {% endblock %}
 
 

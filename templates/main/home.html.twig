@@ -3,7 +3,7 @@
 {% block title %}Sortir.com{% endblock %}
 {% block stylesheet %}
     <link rel="stylesheet" href="{{ asset('css/style-table.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/style-filter.css') }}">
 {% endblock %}
 {% block body %}
 
@@ -41,8 +41,6 @@
                         {% else %}
                             Il n'y a pas d'articles à échanger.
                         {% endfor %}#}
-
-
         </div>
     </div>
 
@@ -97,6 +95,7 @@
                 </tr>
 
                 {% for sortie in sorties %}
+                    <!-- CLOTURE DE LA SORTIE -->
                     {% set closingDate = sortie.closingDate|date('m/d/Y') %}
                     {% set today = "now"|date('m/d/Y') %}
                     {% set difference = date(today).diff(date(closingDate)) %}
@@ -116,7 +115,7 @@
                                 <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
 
                                 {# Nb inscrits / Nb places #}
-                                {% if sortie.numberSub == sortie.numberMaxSub %}
+                                {% if sortie.subscriptions|length == sortie.numberMaxSub %}
                                     <td>
                                         <span style="color: red; font-weight: bold">{{ sortie.subscriptions|length }}</span>/{{ sortie.numberMaxSub }}
                                     </td>
@@ -126,9 +125,9 @@
                                     </td>
 
                                 {% endif %}
-                                
+
                                 {# Etat de la sortie #}
-                                <td>{{ sortie.state.label }}</td>
+                                <td class="stateLabel">{{ sortie.state.label }}</td>
 
                                 {# Déjà Inscrit ? #}
                                 {% set subscribed = false %}
@@ -150,15 +149,17 @@
 
                                 {# Organisateur #}
                                 {% for member in sortie.member %}
-                                    <td><a href="{{ path('user_other_profile', {id: member.id}) }}">{{ member.username }}</a> </td>
+                                    <td>
+                                        <a href="{{ path('user_other_profile', {id: member.id}) }}">{{ member.username }}</a>
+                                    </td>
                                 {% endfor %}
 
                                 {# Actions possibles #}
-                                <td>
+                                <td class="actions">
                                     {# Afficher la sortie #}
                                     <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
 
-                                    {# S'inscrire | Cloturer la sortie #}
+                                    {# S'INSCRIRE #}
                                     {% set subscribed = false %}
                                     {% for subscription in app.user.subscriptions %}
                                         {% for subscriptions in sortie.subscriptions %}
@@ -170,8 +171,10 @@
                                     {% if subscribed == false
                                         and sortie.subscriptions|length != sortie.numberMaxSub
                                         and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
-                                        and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y') %}
-                                        <a href="{{ path('subscribe', {id: sortie.id}) }}">S'inscrire</a>
+                                        and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y')
+                                        and sortie.state.label != "Annulée"
+                                        and sortie.state.label != "Passée" %}
+                                        <a href="{{ path('subscribe', {id: sortie.id}) }}" class="subscribeLink">S'inscrire</a>
                                     {% endif %}
 
                                     {# Se Désister #}
@@ -186,18 +189,20 @@
 
                                     {% if  subscribed
                                         and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')
-                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y') %}
-                                        <a href="{{ path('unsubscribe', {id: sortie.id}) }}">Se désister</a>
+                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
+                                        and sortie.state.label != "Annulée" %}
+                                        <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se désister</a>
                                     {% endif %}
 
 
                                     {# Annuler la sortie en tant qu'organisateur ou qu'admin #}
                                     {% for member in sortie.member %}
-                                        {% if app.user == member
-                                            or app.user.roles == ['ROLE_ADMIN']
+                                        {% if (app.user == member
+                                            or app.user.roles == ['ROLE_ADMIN'])
                                             and sortie.state.label != "Annulée" %}
                                             <a href="{{ path('cancel', {id: sortie.id}) }}" data-toggle="modal"
-                                               data-target="#exampleModal"> Annuler </a>
+                                               data-target="#cancelModal" class="cancelLink">
+                                                Annuler </a>
                                         {% endif %}
                                     {% endfor %}
 
@@ -221,7 +226,7 @@
         {% endfor %}
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+        <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -233,11 +238,13 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                       <p> Un mail sera envoyé à tous les participants. </p>
+                        <p> Un courriel sera envoyé à tous les participants. </p>
                         <p> Voulez-vous vraiment annuler la sortie ? </p>
+                        <p id="alertCancel"><i class="fas fa-exclamation-triangle"> Attention cette action est
+                                définitive !</i></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="cancelOuting">Annuler la
+                        <button type="button" class="btn btn-primary" id="cancelOuting"> Annuler la
                             sortie
                         </button>
                     </div>
@@ -270,6 +277,93 @@
     {#    #}{#    </footer>#}
 
     <script src="{{ asset('js/table-animation.js') }}"></script>
+
+{% endblock %}
+
+{% block script %}
+
+    <script>
+        var url;
+        var selectedTr;
+        var selectedLink;
+        var selected
+
+        $('.cancelLink').on("click", function (e) {
+            console.log('test');
+            url = $(this).attr('href');
+            console.log('test final');
+            selectedTr = $(this).parents('tr');
+            selectedLink = $(this).parents('td');
+        });
+        $('#cancelOuting').on("click", function (e) {
+            console.log('test2');
+            e.preventDefault();
+            $.ajax({
+                "url": url,
+                "method": "get"
+            })
+                .done(function (response) {
+                    console.log('test3');
+                    selectedTr.find('.stateLabel').html('Annulée');
+                    selectedLink.find('.desistLink').remove();
+                    selectedLink.find('.subscribeLink').remove();
+                    selectedLink.find('.cancelLink').remove();
+                    $('#cancelModal').modal('hide');
+                });
+        });
+
+        // $(function () {
+        //     $('#datetimepicker2a').datetimepicker();
+        // });
+
+        // $(function () {
+        //     $('#datetimepicker2a').datetimepicker({
+        //         viewMode: 'years'
+        //     });
+        // });
+        // $(function () {
+        //     $('#datetimepicker2a').datetimepicker();
+        //     $('#datetimepicker2b').datetimepicker({
+        //         useCurrent: false
+        //     });
+        //     $("#datetimepicker2a").on("change.datetimepicker", function (e) {
+        //         $('#datetimepicker2b').datetimepicker('minDate', e.date);
+        //     });
+        //     $("#datetimepicker2b").on("change.datetimepicker", function (e) {
+        //         $('#datetimepicker2a').datetimepicker('maxDate', e.date);
+        //     });
+        // });
+        // $(function () {
+        //     $('#datetimepicker2a').datetimepicker({
+        //         locale: 'fr',
+        //         icons: {
+        //             time: "fa fa-clock-o",
+        //             date: "fa fa-calendar",
+        //             up: "fa fa-arrow-up",
+        //             down: "fa fa-arrow-down"
+        //         }
+        //     });
+        // });
+        // $(function () {
+        //     $('#datetimepicker2b').datetimepicker({
+        //         locale: 'fr',
+        //         icons: {
+        //             time: "fa fa-clock-o",
+        //             date: "fa fa-calendar",
+        //             up: "fa fa-arrow-up",
+        //             down: "fa fa-arrow-down"
+        //         }
+        //     });
+        // });
+        // $(function () {
+        //     $(".scrollbar-sunny-morning").onclick(function (){
+        //         $('#datetimepicker2b').hide.datetimepicker();
+        //     });
+        // });
+    </script>
+
+
+
 {% endblock %}
 
 
