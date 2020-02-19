@@ -127,7 +127,12 @@ h2, h3 {
 }
 
 i.fas.fa-plus {
-    color: #FCC258;
+    color: #FF0000;
+}
+
+#alertCancel {
+    color: #FF0000;
+    font-size: smaller;
 }
 
 
