@@ -72,7 +72,7 @@ class OutingRepository extends ServiceEntityRepository
 
         }
 
-        if(!empty($search->getInscrit())&&!empty($search->getNotInscrit())){
+        if(!empty($search->getInscrit()) || !empty($search->getNotInscrit())){
             if ($search->getInscrit() == 1 && $search->getNotInscrit() == 1){
 //nothing to do
             } else{
@@ -86,21 +86,37 @@ class OutingRepository extends ServiceEntityRepository
 //                    ->andWhere('m = :inscrit OR s = :inscrit')
                         ->setParameter('inscrit', $user);
                 }
+
                 if ($search->getNotInscrit() == 1) {
                     $subQb = $this->createQueryBuilder('sq')
-                        ->addselect('sqb')
                         ->innerJoin('sq.subscriptions', 'sqb')
-                        ->Where('sqb.member = :inscrit')
-                        ->setParameter('inscrit', $user);
+                        ->Where('sqb.member = :user');
                     $query = $query
-                        ->addselect('i')
-                        ->leftJoin('outing.subscriptions', 'i')
+                        ->addselect('unsub')
+                        ->leftJoin('outing.subscriptions', 'unsub')
                         ->andWhere('outing NOT IN ('. $subQb->getDQL().')')
                         ->setParameter(':user', $user);
                     dump($user);
+//                    dump($search->getNotInscrit());
 
 
                 }
+//                if ($search->getNotInscrit() == 1) {
+//                    $subQb = $this->createQueryBuilder('sq')
+//                        ->addselect('sqb')
+//                        ->innerJoin('sq.subscriptions', 'sqb')
+//                        ->Where('sqb.member = :user')
+//                        ->setParameter('user', $user);
+//                    $query = $query
+//                        ->addselect('unsub')
+//                        ->leftJoin('outing.subscriptions', 'unsub')
+//                        ->andWhere('outing NOT IN ('. $subQb->getDQL().')')
+//                        ->setParameter(':user', $user);
+//                    dump($user);
+////                    dump($search->getNotInscrit());
+//
+//
+//                }
             }
 
 
