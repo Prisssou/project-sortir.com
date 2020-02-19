@@ -1,46 +1,40 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-<h1> Profil </h1>
-<div class="container">
-    <div class="row">
-        <div class="col-lg-4">
-            <img id="image-create" src="{{ asset('img/articleimage.png') }}" alt="image">
-            <label> {{ member.username }} </label>
-{#            <span>{{ member.image }}</span>#}
+    <h1> Profil </h1>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <img id="image-create" src="{{ asset('img/articleimage.png') }}" alt="image">
+                <label> {{ member.username }} </label>
+                {#            <span>{{ member.image }}</span>#}
+
+            </div>
+
+            <div class="col-lg-8">
+
+                <div class="col">
+                    <label> </label>
+                    <span>{{ member.username }}</span>
+                </div>
+                <div class="col">
+                    <label> </label>
+                    <span>{{ member.firstname }}</span>
+                </div>
+                <div class="col">
+                    <label> </label>
+                    <span>{{ member.email }}</span>
+                </div>
+                <div class="col">
+                    <label> </label>
+                    <span>{{ member.site }}</span>
+                </div>
+
+
+            </div>
 
         </div>
 
-        <div class="col-lg-8">
-
-            <div class="col" >
-                <label> </label>
-                <span>{{ member.username }}</span>
-            </div>
-            <div class="col" >
-                <label> </label>
-                <span>{{ member.firstname }}</span>
-            </div>
-            <div class="col" >
-                <label> </label>
-                <span>{{ member.email }}</span>
-            </div>
-            <div class="col" >
-                <label> </label>
-                <span>{{ member.site }}</span>
-            </div>
-
-
-
-
-        </div>
 
     </div>
-    <div class="col-sm-12 text-center">
-        <input class="btn btn-primary" type="submit" value="Enregistrer">
-        <a href="{{ path('home') }}"><input class="btn btn-primary" type="button" value="Annuler"></a>
-    </div>
-
-
-</div>
 {% endblock %}
