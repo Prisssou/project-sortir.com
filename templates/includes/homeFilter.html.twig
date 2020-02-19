@@ -1,81 +1,97 @@
 {{ form_start(form) }}
-<div class="container">
+<div class="small-margin">
     <div class="row">
-        <div class="container col-sm-6">
+        <div class="col-sm-4 no-padding">
             <div class="row">
-                {{ form_label(form.motCle) }}
-                {{ form_widget(form.motCle) }}
-                {{ form_errors(form.motCle) }}
-
-            </div>
-
-
-
-
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-9">
-                                <div class="form-group">
-                                    {{ form_label(form.beginDate) }}<div class="col-sm-1"></div>
-                                    <div class="input-group date" id="datetimepicker2a" data-target-input="nearest">
-
-
-                                        {{ form_widget(form.beginDate) }}
-                                        {{ form_errors(form.beginDate) }}
-
-{#                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>#}
-                                        <div class="input-group-append" data-target="#datetimepicker2a" data-toggle="datetimepicker">
-                                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                        </div>
-                    </div>
-
-
-
-
-            <div class="container">
-                <div class="row">
-                    <div class="col-sm-9">
-                        <div class="form-group">
-                            {{ form_label(form.endDate) }}<div class="col-sm-1"></div>
-                            <div class="input-group date" id="datetimepicker2b" data-target-input="nearest">
-
-
-                                {{ form_widget(form.endDate) }}
-                                {{ form_errors(form.endDate) }}
-
-                                {#                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>#}
-                                <div class="input-group-append" data-target="#datetimepicker2b" data-toggle="datetimepicker">
-                                    <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
+                <div class="col-sm-5">
+                    {{ form_label(form.motCle) }}
                 </div>
+                <div class="col-sm-5 no-padding input-group">
+
+                    {{ form_widget(form.motCle) }}
+                    <div class="input-group-append">
+                        <div class="input-group-text"><i class="fa fa-search"></i></div>
+                    </div>
+                    {{ form_errors(form.motCle) }}
+                </div>
+
+
+                <div class="col-sm-2"></div>
+
+            </div>
+
+            <br>
+
+
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
+
+                        <div class="input-group date" id="datetimepicker2a" data-target-input="nearest">
+                            <div class="col-sm-3 no-padding"> {{ form_label(form.beginDate) }}</div>
+
+
+                            {{ form_widget(form.beginDate) }}
+                            {{ form_errors(form.beginDate) }}
+
+
+                            {#                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>#}
+                            <div class="input-group-append" data-target="#datetimepicker2a"
+                                 data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+
+                            <div class="col-sm-3"></div>
+
+                        </div>
+                    </div>
+                </div>
+
             </div>
 
 
+            <div class="row">
+                <div class="col-sm-12">
+                    <div class="form-group">
 
+                        <div class="input-group date" id="datetimepicker2b" data-target-input="nearest">
+                            <div class="col-sm-3 no-padding">{{ form_label(form.endDate) }} </div>
+
+                            {{ form_widget(form.endDate) }}
+                            {{ form_errors(form.endDate) }}
+
+                            {#                                        <input type="text" class="form-control datetimepicker-input" data-target="#datetimepicker2"/>#}
+                            <div class="input-group-append" data-target="#datetimepicker2b"
+                                 data-toggle="datetimepicker">
+                                <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                            </div>
+
+                            <div class="col-sm-3"></div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
 
 
         </div>
 
-        <div class="container col-sm-3">
+        <div class=" col-sm-3">
             <div class="row">
-                {{ form_label(form.dureeMin) }}
-                {{ form_widget(form.dureeMin) }}
-                {{ form_errors(form.dureeMin) }}
+                <div class="col-sm-6">
+                    {{ form_label(form.dureeMin) }}
+                    {{ form_widget(form.dureeMin) }}
+                    {{ form_errors(form.dureeMin) }}
+                </div>
+                <div class="col-sm-6">
+                    {{ form_label(form.dureeMax) }}
+                    {{ form_widget(form.dureeMax) }}
+                    {{ form_errors(form.dureeMax) }}
+                </div>
             </div>
-            <div class="row">
-                {{ form_label(form.dureeMax) }}
-                {{ form_widget(form.dureeMax) }}
-                {{ form_errors(form.dureeMax) }}
-            </div>
+
+
             <div class="row">
                 {{ form_label(form.orga) }}
                 {{ form_widget(form.orga) }}
@@ -88,7 +104,7 @@
                 {{ form_errors(form.inscrit) }}
 
             </div>
-            <div class="row" >
+            <div class="row">
                 {{ form_label(form.notInscrit) }}
                 {{ form_widget(form.notInscrit) }}
                 {{ form_errors(form.notInscrit) }}
@@ -104,10 +120,7 @@
         </div>
 
 
-
-
-
-        <div class="container col-sm-3">
+        <div class="col-sm-3">
             <button type="submit" class="btn btn-primary w-100">Rechercher</button>
 
         </div>
