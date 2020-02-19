@@ -4,7 +4,16 @@
         url('welcome_2019-webfont.woff') format('woff');
         font-weight: normal;
         font-style: normal;
-        
+
+    }
+
+    @font-face {
+        font-family: 'averta';
+        src: url('Averta.woff2') format('woff2'),
+        url('Averta.woff') format('woff');
+        font-weight: normal;
+        font-style: normal;
+
     }
 
     html, body {
