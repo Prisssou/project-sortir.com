@@ -9,8 +9,15 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="App\Repository\OutingRepository")
  */
-class Outing
+class Outing implements \JsonSerializable
 {
+    public function jsonSerialize()
+    {
+        return ['id' => $this->getId(),
+                'state' => $this->getState()];
+    }
+
+
     /**
      * @ORM\Id()
      * @ORM\GeneratedValue()

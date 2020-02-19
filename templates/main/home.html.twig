@@ -126,9 +126,9 @@
                                     </td>
 
                                 {% endif %}
-                                
+
                                 {# Etat de la sortie #}
-                                <td>{{ sortie.state.label }}</td>
+                                <td id="stateLabel">{{ sortie.state.label }}</td>
 
                                 {# Déjà Inscrit ? #}
                                 {% set subscribed = false %}
@@ -195,11 +195,12 @@
 
                                     {# Annuler la sortie en tant qu'organisateur ou qu'admin #}
                                     {% for member in sortie.member %}
-                                        {% if app.user == member
-                                            or app.user.roles == ['ROLE_ADMIN']
+                                        {% if (app.user == member
+                                            or app.user.roles == ['ROLE_ADMIN'])
                                             and sortie.state.label != "Annulée" %}
                                             <a href="{{ path('cancel', {id: sortie.id}) }}" data-toggle="modal"
-                                               data-target="#exampleModal"> Annuler </a>
+                                               data-target="#cancelModal" data-id="{{ sortie.id }}" class="cancelLink">
+                                                Annuler </a>
                                         {% endif %}
                                     {% endfor %}
 
@@ -223,19 +224,19 @@
         {% endfor %}
 
         <!-- Modal -->
-        <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog"
+        <div class="modal fade" id="cancelModal" tabindex="-1" role="dialog"
              aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"> Annuler la sortie </h5>
+                        <h5 class="modal-title" id="exampleModalLabel"> Annuler la sortie  </h5>
                         <button type="button" class="close" data-dismiss="modal"
                                 aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
                     </div>
                     <div class="modal-body">
-                        <p> Un mail sera envoyé à tous les participants. </p>
+                        <p> Un courriel sera envoyé à tous les participants. </p>
                         <p> Voulez-vous vraiment annuler la sortie ? </p>
                     </div>
                     <div class="modal-footer">
@@ -275,7 +276,29 @@
 {% endblock %}
 
 {% block script %}
+    <script>
+        $('.cancelLink').on("click", function (e) {
+            e.preventDefault();
+            var id = $(this).data('id')
+            console.log(id);
+            var url = '{{ path("cancel", {'id': 'id'}) }}';
+            url = url.replace("id", id);
+            $.ajax({
+                "url": url,
+                /*"data": $("#cancelOuting").serialize(),*/
+                "method": "get"
+            })
+                .done(function (response) {
+                    console.log(response);
+                    $('#cancelOuting').on("click", function (e) {
+                        console.log('close');
+                        location.reload();
+                        $("#cancelModal").modal('hide');
+                    });
+                });
+        });
 
+    </script>
 
 
 {% endblock %}
