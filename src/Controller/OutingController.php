@@ -11,6 +11,7 @@ use App\Form\PlaceType;
 use App\Form\SubscribedType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -87,7 +88,7 @@ class OutingController extends Controller
 
         // Récupération de la liste des participants
         $subscriptionRepository = $entityManager->getRepository(Subscription::class);
-        $subList = $subscriptionRepository->findBy(['outing'=>$outing->getId()]);
+        $subList = $subscriptionRepository->findBy(['outing' => $outing->getId()]);
 
         return $this->render(
             'outing/detailOuting.html.twig',
@@ -104,27 +105,49 @@ class OutingController extends Controller
      */
     public function addSubscription($id, EntityManagerInterface $entityManager, Request $request)
     {
+        // Attributs
+
+
         // Récupération de la sortie
         $outingRepository = $entityManager->getRepository(Outing::class);
         $outing = $outingRepository->find($id);
 
+        // Attributs pour conditions
+        $numSubs = $outing->getSubscriptions();
+        dump($numSubs);
+        $maxSubs = $outing->getNumberMaxSub();
+        $dateMaxSub = $outing->getLimitDateSub();
+        $today = date('now');
+
         // Récuparation de l'utilisateur courant
         $user = $this->getUser();
 
-        // Hydratation de la BDD
-        $subscription = new Subscription();
-        $subscription->setMember($user);
-        $subscription->setOuting($outing);
-        $subscription->setSubDate(new \DateTime('now'));
+        if (sizeof($numSubs) < $maxSubs and $dateMaxSub > $today) {
+            // Hydratation de la BDD
+            $subscription = new Subscription();
+            $subscription->setMember($user);
+            $subscription->setOuting($outing);
+            $subscription->setSubDate(new \DateTime('now'));
 
-        $entityManager->persist($subscription);
-        $entityManager->flush();
+            $entityManager->persist($subscription);
+            $entityManager->flush();
 
-        $this->addFlash('success', 'Votre inscription a bien été prise en compte !');
+            $this->addFlash('success', 'Votre inscription a bien été prise en compte !');
 
+            return $this->redirectToRoute('home');
+        }
+
+
+        if (sizeof($numSubs) > $maxSubs) {
+            $this->addFlash('error', 'Le nombre maximum de participant est atteint :( ');
+        }
+
+        if ($dateMaxSub < $today) {
+            $this->addFlash('error', 'La date limite d\'inscription est dépassée :( ');
+
+        }
         return $this->redirectToRoute('home');
 
-//        if ()
 
     }
 
@@ -172,6 +195,7 @@ class OutingController extends Controller
      */
     public function cancelOuting($id, EntityManagerInterface $em, Request $request)
     {
+
         // Récupération de la sortie
         $outingRepository = $em->getRepository(Outing::class);
         $outing = $outingRepository->find($id);
@@ -187,8 +211,10 @@ class OutingController extends Controller
         $em->persist($outing);
         $em->flush();
 
-        return $this->redirectToRoute('home');
-
+        return new JsonResponse([
+            'status' => 'ok',
+            'outing' => $outing,
+        ]);
 
     }
 
