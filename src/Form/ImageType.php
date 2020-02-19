@@ -17,7 +17,7 @@ class ImageType extends AbstractType
     {
         $builder
             ->add(
-                'url',
+                'imagePath',
                 FileType::class,
 
                 [
@@ -31,6 +31,7 @@ class ImageType extends AbstractType
                     // make it optional so you don't have to re-upload the PDF file
                     // everytime you edit the Product details
                     'required' => false,
+                    'mapped' =>false
 
                     // unmapped fields can't define their validation using annotations
                     // in the associated entity, so you can use the PHP constraint classes
@@ -53,14 +54,14 @@ class ImageType extends AbstractType
 //            ->add('Outing');
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-     $entity = $form->getParent()->getData();
-
-     if ($entity) {
-         $view->vars['file_uri'] = (null === $entity->getImage()->getUrl()) ? null : '/uploads/images' . $entity->getImage()->getUrl();
-     }
-    }
+//    public function buildView(FormView $view, FormInterface $form, array $options)
+//    {
+//     $entity = $form->getParent()->getData();
+//
+//     if ($entity) {
+//         $view->vars['file_uri'] = (null === $entity->getImage()->getUrl()) ? null : '/uploads/images' . $entity->getImage()->getUrl();
+//     }
+//    }
 
     public function configureOptions(OptionsResolver $resolver)
     {

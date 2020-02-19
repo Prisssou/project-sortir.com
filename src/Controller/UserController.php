@@ -3,7 +3,6 @@
 namespace App\Controller;
 
 
-
 use App\Entity\Image;
 use App\Entity\Member;
 use App\Entity\Outing;
@@ -94,54 +93,83 @@ class UserController extends Controller
      * Afficher la page de gestion du profil
      * @Route("/profile{id}", name="profile", requirements={"id" : "\d+"} )
      */
-    public function profil($id, EntityManagerInterface $entityManager, Request $request, UserPasswordEncoderInterface $passwordEncoder, FileUploader $fileUploader): Response
-    {
+    public function profil(
+        $id,
+        EntityManagerInterface $entityManager,
+        Request $request,
+        UserPasswordEncoderInterface $passwordEncoder,
+        FileUploader $fileUploader
+    ): Response {
 //        if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {        }
 
+        // Récupération du membre par son id
+        $memberRepository = $entityManager->getRepository(Member::class);
+        $member = $memberRepository->find($id);
+//            dump($member);
+//            $imageURL = clone $member->getImage();
 
-        // Formulaire générale de gestion de profil
-            // Récupération du membre par son id
-            $memberRepository = $entityManager->getRepository(Member::class);
-            $member = $memberRepository->find($id);
-            dump($member);
-            // Création du formulaire de mise à jour du profil
-            $memberForm = $this->createForm(MemberType::class, $member);
-            $memberForm->handleRequest($request);
+        // Récupération de l'image
+        $imageURL = $member->getImage();
+//            dump($imageURL);
+
+        // Récupération du mot de passe actuel
+        $currentPassword = $member->getPassword();
+
+        // Création du formulaire de mise à jour du profil
+        $memberForm = $this->createForm(MemberType::class, $member);
+        $memberForm->handleRequest($request);
+
+        if ($memberForm->isSubmitted() && $memberForm->isValid()) {
 
 
-            if ($memberForm->isSubmitted() && $memberForm->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $formData = $request->request->all();
 
+            // Récupération de l'image du formulaire Image
+            $image = new Image();
+            $imageFile = $memberForm['image']['imagePath']->getData();
 
-                $entityManager = $this->getDoctrine()->getManager();
-                $formData = $request->request->all();
-
-                // Récupération de l'image
-                $image = new Image();
-                $imageFile = $memberForm['image']['url']->getData();
+            if (!empty($imageFile)) {
                 $imageFileName = $fileUploader->upload($imageFile);
                 $image->setUrl($imageFileName);
-
-                // Hydratation de la la table Image de la BDD
+                $member->setImage($image);
+                // Hydratation de la la table Image de la BDD avec le nouvel avatar
                 $entityManager->persist($image);
                 $entityManager->flush();
 
-                $member->setImage($image);
-                $entityManager->persist($member);
-                $entityManager->flush();
+            } else {
+                //Persistance de l'avatar actuel
+                $member->setImage($imageURL);
 
-                return $this->redirectToRoute("home");
+            }
+//            dump($member);
+            // Mise à jour du mot de passe
+            $newPassword = $memberForm['newPassword']->getData();
+            if(!empty($newPassword)){
+                $member->setPassword($passwordEncoder->encodePassword($member, $newPassword));
+            }
+            else {
+                $member->setPassword($currentPassword);
             }
 
-            return $this->render(
-                'user/profile.html.twig',
-                [
-                    'member' => $member,
-                    'memberFormView' => $memberForm->createView(),
+//                $imageURL->setMember($member);
+            $entityManager->persist($imageURL);
+            $entityManager->persist($member);
+            $entityManager->flush();
 
-                ]
-            );
-
+            return $this->redirectToRoute("home");
         }
+
+        return $this->render(
+            'user/profile.html.twig',
+            [
+                'member' => $member,
+                'memberFormView' => $memberForm->createView(),
+
+            ]
+        );
+
+    }
 
     /**
      * @Route("/otherProfile/{id}", name="other_profile")
@@ -158,18 +186,12 @@ class UserController extends Controller
         dump($member);
 
 
-
         return $this->render(
             'user/otherProfile.html.twig',
             compact('member')
         );
 
     }
-
-
-
-
-
 
 
 }

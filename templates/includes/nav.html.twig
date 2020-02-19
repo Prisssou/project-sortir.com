@@ -105,16 +105,7 @@
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('add_outing') }}">Créer une sortie</a>
                 </li>
-                <div class="dropdown">
-                    <div class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                         aria-haspopup="true" aria-expanded="false">
-                        Hello {{ app.user.username }} !
-                    </div>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="{{ path('user_profile', {'id' : app.user.id}) }}">Mon profil</a>
-                        <a class="dropdown-item" href="{{ path('logout') }}">Déconnexion</a>
-                    </div>
-                </div>
+
 
                 {#<div class="avatar d-none d-md-block">
 #}{#                    <a href="{{ path('user_profile', {'id' : app.user.id}) }}">#}{#
@@ -124,16 +115,31 @@
                 </div>#}
 
 
-            {% else %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('user_login') }}">Connexion</a>
-                </li>
 
-
-
-            {% endif %}
 
         </ul>
+
+        <div class="dropdown navbar-nav ml-auto">
+            <div class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false">
+                Hello {{ app.user.username }} !
+            </div>
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <a class="dropdown-item" href="{{ path('user_profile', {'id' : app.user.id}) }}">Mon profil</a>
+                <a class="dropdown-item" href="{{ path('logout') }}">Déconnexion</a>
+            </div>
+        </div>
+
+        {% else %}
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('user_login') }}">Connexion</a>
+            </li>
+
+
+
+        {% endif %}
+
+
     </div>
 </nav>
 </body>
