@@ -54,14 +54,14 @@ class ImageType extends AbstractType
 //            ->add('Outing');
     }
 
-    public function buildView(FormView $view, FormInterface $form, array $options)
-    {
-     $entity = $form->getParent()->getData();
-
-     if ($entity) {
-         $view->vars['file_uri'] = (null === $entity->getImage()->getUrl()) ? null : '/uploads/images' . $entity->getImage()->getUrl();
-     }
-    }
+//    public function buildView(FormView $view, FormInterface $form, array $options)
+//    {
+//     $entity = $form->getParent()->getData();
+//
+//     if ($entity) {
+//         $view->vars['file_uri'] = (null === $entity->getImage()->getUrl()) ? null : '/uploads/images' . $entity->getImage()->getUrl();
+//     }
+//    }
 
     public function configureOptions(OptionsResolver $resolver)
     {
