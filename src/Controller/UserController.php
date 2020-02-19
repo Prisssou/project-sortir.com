@@ -183,7 +183,7 @@ class UserController extends Controller
         // Récupération de l'utilisateur
         $memberRepository = $entityManager->getRepository(Member::class);
         $member = $memberRepository->find($id);
-        dump($member);
+
 
 
         return $this->render(

@@ -97,6 +97,7 @@
                 </tr>
 
                 {% for sortie in sorties %}
+                    <!-- CLOTURE DE LA SORTIE -->
                     {% set closingDate = sortie.closingDate|date('m/d/Y') %}
                     {% set today = "now"|date('m/d/Y') %}
                     {% set difference = date(today).diff(date(closingDate)) %}
@@ -160,7 +161,7 @@
                                     {# Afficher la sortie #}
                                     <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
 
-                                    {# S'inscrire | Cloturer la sortie #}
+                                    {# S'INSCRIRE #}
                                     {% set subscribed = false %}
                                     {% for subscription in app.user.subscriptions %}
                                         {% for subscriptions in sortie.subscriptions %}

@@ -1,10 +1,8 @@
-body {
 
-
-}
 
 h1 {
     font-family: 'Playfair Display', serif;
+    font-style: italic;
     color: #142340;
     text-align: center;
     padding-top: 1em;
@@ -130,6 +128,10 @@ div#dropdownMenuButton {
         margin-right: 18em;
         margin-left: 18em;
     }
+}
+
+@media only screen and (max-width: 600px) {
+
 }
 
 i.fas.fa-plus {
