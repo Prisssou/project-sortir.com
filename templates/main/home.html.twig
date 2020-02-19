@@ -146,7 +146,9 @@
 
                                 {# Organisateur #}
                                 {% for member in sortie.member %}
-                                    <td><a href="{{ path('user_other_profile', {id: member.id}) }}">{{ member.username }}</a> </td>
+                                    <td>
+                                        <a href="{{ path('user_other_profile', {id: member.id}) }}">{{ member.username }}</a>
+                                    </td>
                                 {% endfor %}
 
                                 {# Actions possibles #}
@@ -228,7 +230,7 @@
                         </button>
                     </div>
                     <div class="modal-body">
-                       <p> Un mail sera envoyé à tous les participants. </p>
+                        <p> Un mail sera envoyé à tous les participants. </p>
                         <p> Voulez-vous vraiment annuler la sortie ? </p>
                     </div>
                     <div class="modal-footer">
@@ -265,6 +267,12 @@
     {#    #}{#    </footer>#}
 
     <script src="{{ asset('js/table-animation.js') }}"></script>
+{% endblock %}
+
+{% block script %}
+
+
+
 {% endblock %}
 
 
