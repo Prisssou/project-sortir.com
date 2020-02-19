@@ -126,6 +126,10 @@ h2, h3 {
     }
 }
 
+i.fas.fa-plus {
+    color: #FCC258;
+}
+
 
 /*!* Custom ScrollBar *!*/
 /*!* width *!*/

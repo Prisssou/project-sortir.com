@@ -80,6 +80,7 @@
                             <div class="row">
                                 <div class="col-lg-6">
 
+
                                     {# partie formulaire#}
 
                                     {{ form_start(placeFormView, {'attr': {'id': 'startForm'}}) }}
@@ -156,26 +157,30 @@
         <script src="{{ asset('js/geoloc.js') }}"></script>
 
         <script>
-        $('#startForm').on("submit", function (e) {
-            e.preventDefault();
-            console.log('test');
-            $.ajax({
-                "url": "{{ path('add_place') }}",
-                "data": $("#startForm").serialize(),
-                "method": "post"
-            })
-                .done(function (response) {
-                    console.log(response);
-                    var option = $("<option>").attr("value", response.place.id);
-                    option.html(response.place.name);
-                    option.prop('selected', true);
-                    $("#outing_place").prepend(option);
-                    $("#placeForm").modal('hide');
+            $('#startForm').on("submit", function (e) {
+                e.preventDefault();
+                $.ajax({
+                    "url": "{{ path('add_place') }}",
+                    "data": $("#startForm").serialize(),
+                    "method": "post"
+                })
+                    .done(function (response) {
+                        console.log(response.status);
+                        if (response.status == "nok") {
+                            console.log('error');
+                            var linkCity = $("<p style=\"color:#FCC258;;\"> La ville n\'existe pas, ajoutez là ! <a href=\"{{ path('city') }}\" > <i class=\"fas fa-plus\" ></i></a></p>")
+                            $('#startForm').prepend(linkCity);
+                        } else {
+                            var option = $("<option>").attr("value", response.place.id);
+                            option.html(response.place.name);
+                            option.prop('selected', true);
+                            $("#outing_place").prepend(option);
+                            $("#placeForm").modal('hide');
+                        }
+                    });
+            });
 
-                });
-        });
-
-    </script>
+        </script>
 
     {% endblock %}
 

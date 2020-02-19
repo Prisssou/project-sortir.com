@@ -10,7 +10,7 @@ class CityController extends Controller
     /**
      * @Route("/city", name="city")
      */
-    public function index()
+    public function addCity()
     {
         return $this->render('outing/cities.html.twig', [
             'controller_name' => 'CityController',

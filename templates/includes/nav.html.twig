@@ -90,22 +90,26 @@
 
             {# NAVBAR FOR ADMIN ROLE #}
             {% if is_granted("ROLE_ADMIN") %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('city') }}">Villes</a></li>
-                <li class="nav-item"><a class="nav-link" href="{{ path('site') }}">Sites</a></li>
                 <li class="nav-item"><a class="nav-link" href="{{ path('user_signup') }}">Créer un compte</a></li>
+                <li class="nav-item"><a class="nav-link" href="{{ path('site') }}">Sites</a></li>
 
             {% endif %}
 
             {# NAVBAR FOR USER ROLE #}
             {% if app.user %}
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('city') }}">Villes</a></li>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="{{ path('add_outing') }}">Créer une sortie</a>
+                </li>
                 <div class="dropdown">
-                    <div class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                         aria-haspopup="true" aria-expanded="false">
                         Hello {{ app.user.username }} !
                     </div>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                         <a class="dropdown-item" href="{{ path('user_profile', {'id' : app.user.id}) }}">Mon profil</a>
-                        <a class="dropdown-item" href="{{ path('add_outing') }}"> Créer une sortie</a>
                         <a class="dropdown-item" href="{{ path('logout') }}">Déconnexion</a>
                     </div>
                 </div>
