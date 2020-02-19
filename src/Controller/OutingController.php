@@ -11,6 +11,7 @@ use App\Form\PlaceType;
 use App\Form\SubscribedType;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -194,6 +195,7 @@ class OutingController extends Controller
      */
     public function cancelOuting($id, EntityManagerInterface $em, Request $request)
     {
+
         // Récupération de la sortie
         $outingRepository = $em->getRepository(Outing::class);
         $outing = $outingRepository->find($id);
@@ -209,8 +211,10 @@ class OutingController extends Controller
         $em->persist($outing);
         $em->flush();
 
-        return $this->redirectToRoute('home');
-
+        return new JsonResponse([
+            'status' => 'ok',
+            'outing' => $outing,
+        ]);
 
     }
 

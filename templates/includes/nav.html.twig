@@ -99,16 +99,17 @@
 
             {# NAVBAR FOR USER ROLE #}
             {% if app.user %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('add_outing') }}">Créer une sortie</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('user_profile', {'id' : app.user.id}) }}">Mon
-                        profil</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('logout') }}">Déconnexion</a>
-                </li>
+                <div class="dropdown">
+                    <div class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Hello {{ app.user.username }} !
+                    </div>
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                        <a class="dropdown-item" href="{{ path('user_profile', {'id' : app.user.id}) }}">Mon profil</a>
+                        <a class="dropdown-item" href="{{ path('add_outing') }}"> Créer une sortie</a>
+                        <a class="dropdown-item" href="{{ path('logout') }}">Déconnexion</a>
+                    </div>
+                </div>
+
                 {#<div class="avatar d-none d-md-block">
 #}{#                    <a href="{{ path('user_profile', {'id' : app.user.id}) }}">#}{#
 #}{#                        <img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="avatar">#}{#
@@ -116,16 +117,7 @@
                     <p>Hello {{ app.user.username }} !</p>
                 </div>#}
 
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Hello {{ app.user.username }} !
-                    </button>
-                    <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                        <a class="dropdown-item" href="#">Action</a>
-                        <a class="dropdown-item" href="#">Another action</a>
-                        <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                </div>
+
             {% else %}
                 <li class="nav-item">
                     <a class="nav-link" href="{{ path('user_login') }}">Connexion</a>
