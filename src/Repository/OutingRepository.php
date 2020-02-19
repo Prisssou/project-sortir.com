@@ -88,8 +88,10 @@ class OutingRepository extends ServiceEntityRepository
                 }
                 if ($search->getNotInscrit() == 1) {
                     $subQb = $this->createQueryBuilder('sq')
+                        ->addselect('sqb')
                         ->innerJoin('sq.subscriptions', 'sqb')
-                        ->Where('sqb.user = :user');
+                        ->Where('sqb.member = :inscrit')
+                        ->setParameter('inscrit', $user);
                     $query = $query
                         ->addselect('i')
                         ->leftJoin('outing.subscriptions', 'i')
