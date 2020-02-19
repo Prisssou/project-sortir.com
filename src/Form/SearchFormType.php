@@ -66,14 +66,14 @@ class SearchFormType extends AbstractType
             )
             ->add('dureeMin', NumberType::class,
                 [
-                    'label'=>'Durée minimum:',
+                    'label'=>'Durée min:',
                     'required'=>false,
                     'scale'=>0,
 
                 ])
             ->add('dureeMax', NumberType::class,
                 [
-                    'label'=>'Durée maximum:',
+                    'label'=>'Durée max:',
                     'required'=>false,
                     'scale'=>0,
 

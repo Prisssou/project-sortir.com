@@ -3,7 +3,7 @@
 {% block title %}Sortir.com{% endblock %}
 {% block stylesheet %}
     <link rel="stylesheet" href="{{ asset('css/style-table.css') }}">
-
+    <link rel="stylesheet" href="{{ asset('css/style-filter.css') }}">
 {% endblock %}
 {% block body %}
 
@@ -41,8 +41,6 @@
                         {% else %}
                             Il n'y a pas d'articles à échanger.
                         {% endfor %}#}
-
-
         </div>
     </div>
 
@@ -129,7 +127,7 @@
                                 {% endif %}
 
                                 {# Etat de la sortie #}
-                                <td id="stateLabel">{{ sortie.state.label }}</td>
+                                <td class="stateLabel">{{ sortie.state.label }}</td>
 
                                 {# Déjà Inscrit ? #}
                                 {% set subscribed = false %}
@@ -157,7 +155,7 @@
                                 {% endfor %}
 
                                 {# Actions possibles #}
-                                <td>
+                                <td class="actions">
                                     {# Afficher la sortie #}
                                     <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
 
@@ -173,8 +171,10 @@
                                     {% if subscribed == false
                                         and sortie.subscriptions|length != sortie.numberMaxSub
                                         and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
-                                        and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y') %}
-                                        <a href="{{ path('subscribe', {id: sortie.id}) }}">S'inscrire</a>
+                                        and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y')
+                                        and sortie.state.label != "Annulée"
+                                        and sortie.state.label != "Passée" %}
+                                        <a href="{{ path('subscribe', {id: sortie.id}) }}" class="subscribeLink">S'inscrire</a>
                                     {% endif %}
 
                                     {# Se Désister #}
@@ -189,8 +189,9 @@
 
                                     {% if  subscribed
                                         and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')
-                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y') %}
-                                        <a href="{{ path('unsubscribe', {id: sortie.id}) }}">Se désister</a>
+                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
+                                        and sortie.state.label != "Annulée" %}
+                                        <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se désister</a>
                                     {% endif %}
 
 
@@ -200,7 +201,7 @@
                                             or app.user.roles == ['ROLE_ADMIN'])
                                             and sortie.state.label != "Annulée" %}
                                             <a href="{{ path('cancel', {id: sortie.id}) }}" data-toggle="modal"
-                                               data-target="#cancelModal" data-id="{{ sortie.id }}" class="cancelLink">
+                                               data-target="#cancelModal" class="cancelLink">
                                                 Annuler </a>
                                         {% endif %}
                                     {% endfor %}
@@ -230,7 +231,7 @@
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel"> Annuler la sortie  </h5>
+                        <h5 class="modal-title" id="exampleModalLabel"> Annuler la sortie </h5>
                         <button type="button" class="close" data-dismiss="modal"
                                 aria-label="Close">
                             <span aria-hidden="true">&times;</span>
@@ -239,9 +240,11 @@
                     <div class="modal-body">
                         <p> Un courriel sera envoyé à tous les participants. </p>
                         <p> Voulez-vous vraiment annuler la sortie ? </p>
+                        <p id="alertCancel"><i class="fas fa-exclamation-triangle"> Attention cette action est
+                                définitive !</i></p>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" id="cancelOuting">Annuler la
+                        <button type="button" class="btn btn-primary" id="cancelOuting"> Annuler la
                             sortie
                         </button>
                     </div>
@@ -274,32 +277,91 @@
     {#    #}{#    </footer>#}
 
     <script src="{{ asset('js/table-animation.js') }}"></script>
+
 {% endblock %}
 
 {% block script %}
+
     <script>
+        var url;
+        var selectedTr;
+        var selectedLink;
+        var selected
+
         $('.cancelLink').on("click", function (e) {
+            console.log('test');
+            url = $(this).attr('href');
+            console.log('test final');
+            selectedTr = $(this).parents('tr');
+            selectedLink = $(this).parents('td');
+        });
+        $('#cancelOuting').on("click", function (e) {
+            console.log('test2');
             e.preventDefault();
-            var id = $(this).data('id')
-            console.log(id);
-            var url = '{{ path("cancel", {'id': 'id'}) }}';
-            url = url.replace("id", id);
             $.ajax({
                 "url": url,
-                /*"data": $("#cancelOuting").serialize(),*/
                 "method": "get"
             })
                 .done(function (response) {
-                    console.log(response);
-                    $('#cancelOuting').on("click", function (e) {
-                        console.log('close');
-                        location.reload();
-                        $("#cancelModal").modal('hide');
-                    });
+                    console.log('test3');
+                    selectedTr.find('.stateLabel').html('Annulée');
+                    selectedLink.find('.desistLink').remove();
+                    selectedLink.find('.subscribeLink').remove();
+                    selectedLink.find('.cancelLink').remove();
+                    $('#cancelModal').modal('hide');
                 });
         });
 
+        // $(function () {
+        //     $('#datetimepicker2a').datetimepicker();
+        // });
+
+        // $(function () {
+        //     $('#datetimepicker2a').datetimepicker({
+        //         viewMode: 'years'
+        //     });
+        // });
+        // $(function () {
+        //     $('#datetimepicker2a').datetimepicker();
+        //     $('#datetimepicker2b').datetimepicker({
+        //         useCurrent: false
+        //     });
+        //     $("#datetimepicker2a").on("change.datetimepicker", function (e) {
+        //         $('#datetimepicker2b').datetimepicker('minDate', e.date);
+        //     });
+        //     $("#datetimepicker2b").on("change.datetimepicker", function (e) {
+        //         $('#datetimepicker2a').datetimepicker('maxDate', e.date);
+        //     });
+        // });
+        // $(function () {
+        //     $('#datetimepicker2a').datetimepicker({
+        //         locale: 'fr',
+        //         icons: {
+        //             time: "fa fa-clock-o",
+        //             date: "fa fa-calendar",
+        //             up: "fa fa-arrow-up",
+        //             down: "fa fa-arrow-down"
+        //         }
+        //     });
+        // });
+        // $(function () {
+        //     $('#datetimepicker2b').datetimepicker({
+        //         locale: 'fr',
+        //         icons: {
+        //             time: "fa fa-clock-o",
+        //             date: "fa fa-calendar",
+        //             up: "fa fa-arrow-up",
+        //             down: "fa fa-arrow-down"
+        //         }
+        //     });
+        // });
+        // $(function () {
+        //     $(".scrollbar-sunny-morning").onclick(function (){
+        //         $('#datetimepicker2b').hide.datetimepicker();
+        //     });
+        // });
     </script>
+
 
 
 {% endblock %}

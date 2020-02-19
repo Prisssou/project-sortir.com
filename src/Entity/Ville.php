@@ -24,7 +24,7 @@ class Ville
     private $nom;
 
     /**
-     * @ORM\Column(type="string", length=6)
+     * @ORM\Column(type="string", length=6, nullable=true)
      */
     private $code;
 
@@ -34,7 +34,7 @@ class Ville
     private $codesPostaux;
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="integer", nullable=true)
      */
     private $codeDepartement;
 
