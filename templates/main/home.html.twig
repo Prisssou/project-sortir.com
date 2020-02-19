@@ -116,7 +116,7 @@
                                 <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
 
                                 {# Nb inscrits / Nb places #}
-                                {% if sortie.numberSub == sortie.numberMaxSub %}
+                                {% if sortie.subscriptions|length == sortie.numberMaxSub %}
                                     <td>
                                         <span style="color: red; font-weight: bold">{{ sortie.subscriptions|length }}</span>/{{ sortie.numberMaxSub }}
                                     </td>
