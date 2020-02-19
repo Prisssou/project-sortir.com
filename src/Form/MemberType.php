@@ -58,14 +58,40 @@ class MemberType extends AbstractType
             )
             ->add(
                 'plainPassword',
+                PasswordType::class,
+                [
+                    // instead of being set onto the object directly,
+                    // this is read and encoded in the controller
+                    'label' => 'Votre mot de passe actuel : ',
+                    'mapped' => false,
+                    'constraints' => [
+                        new NotBlank(
+                            [
+                                'message' => 'Merci d\'entrer un mot de passe',
+                            ]
+                        ),
+                        new Length(
+                            [
+                                'min' => 8,
+                                'minMessage' => 'Votre mot de passe doit contenir au minimum {{ limit }} caractères!',
+                                // max length allowed by Symfony for security reasons
+                                'max' => 50,
+                                'maxMessage' => 'Votre mot de passe doit contenir au maximum {{ limit }} caractères!',
+                            ]
+                        ),
+                    ],
+                ]
+            )
+            ->add(
+                'newPassword',
                 RepeatedType::class,
                 [
                     'type' => PasswordType::class,
                     'invalid_message' => 'Les mots de passe ne correspondent pas.',
                     'options' => ['attr' => ['class' => 'password-field']],
-                    'required' => true,
-                    'first_options' => ['label' => 'Mot de passe :'],
-                    'second_options' => ['label' => 'Confirmation du mot de passe :'],
+                    'required' => false,
+                    'first_options' => ['label' => 'Nouveau mot de passe :'],
+                    'second_options' => ['label' => 'Confirmation du nouveau mot de passe :'],
                     'label' => ' ',
                     'mapped' => false,
                     'constraints' => [
