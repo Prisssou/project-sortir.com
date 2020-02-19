@@ -12,75 +12,75 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ImageController extends Controller
 {
-    /**
-     * @Route("/image", name="image")
-     */
-    public function index()
-    {
-        return $this->render('image/addplace.html.twig', [
-            'controller_name' => 'ImageController',
-        ]);
-    }
-
-    /**
-     * @Route("/image", name="image")
-     * @param EntityManagerInterface $entityManager
-     * @param Request $request
-     * @return \Symfony\Component\HttpFoundation\Response
-     */
-    public function upload(EntityManagerInterface $entityManager, Request $request)
-    {
-        $image = new Image();
-        $imageForm = $this->createForm(ImageType::class, $image);
-        $imageForm->handleRequest($request);
-
-        if ($imageForm->isSubmitted() && $imageForm->isValid()){
-
-            /**
-             * @var UploadedFile $imageFile
-             */
-            $imageFile = $imageForm['url']->getData();
-            dump($imageFile);
-            die();
-            $fileName = $this->generateUniqueFileName().'.'.$imageFile->guessExtension();
-//          $fileName = $this->generateUniqueFileName().'.'.$imageFile->getMimeType();
-
-
-//            dump($fileName);
+//    /**
+//     * @Route("/image", name="image")
+//     */
+//    public function index()
+//    {
+//        return $this->render('image/addplace.html.twig', [
+//            'controller_name' => 'ImageController',
+//        ]);
+//    }
+//
+//    /**
+//     * @Route("/image", name="image")
+//     * @param EntityManagerInterface $entityManager
+//     * @param Request $request
+//     * @return \Symfony\Component\HttpFoundation\Response
+//     */
+//    public function upload(EntityManagerInterface $entityManager, Request $request)
+//    {
+//        $image = new Image();
+//        $imageForm = $this->createForm(ImageType::class, $image);
+//        $imageForm->handleRequest($request);
+//
+//        if ($imageForm->isSubmitted() && $imageForm->isValid()){
+//
+//            /**
+//             * @var UploadedFile $imageFile
+//             */
+//            $imageFile = $imageForm['url']->getData();
+//            dump($imageFile);
 //            die();
-
-            // Move the file to the directory where images are stored
-
-            $imageFile->move(
-                $this->getParameter('images_directory'),
-                $fileName
-            );
-
-            // updates the 'imageFilename' property to store the Images file name
-            // instead of its contents
-            $image->setUrl($fileName);
-
-
-            $this->addFlash(
-                'success',
-                'Votre image a été ajoutée avec succès!'
-            );
-
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($image);
-            $entityManager->flush();
-
-//            return $this->redirectToRoute("home");
-        }
-
-        return $imageForm;
-
-
-
-    }
-    private function generateUniqueFileName()
-    {
-        return md5(uniqid());
-    }
+//            $fileName = $this->generateUniqueFileName().'.'.$imageFile->guessExtension();
+////          $fileName = $this->generateUniqueFileName().'.'.$imageFile->getMimeType();
+//
+//
+////            dump($fileName);
+////            die();
+//
+//            // Move the file to the directory where images are stored
+//
+//            $imageFile->move(
+//                $this->getParameter('images_directory'),
+//                $fileName
+//            );
+//
+//            // updates the 'imageFilename' property to store the Images file name
+//            // instead of its contents
+//            $image->setUrl($fileName);
+//
+//
+//            $this->addFlash(
+//                'success',
+//                'Votre image a été ajoutée avec succès!'
+//            );
+//
+//            $entityManager = $this->getDoctrine()->getManager();
+//            $entityManager->persist($image);
+//            $entityManager->flush();
+//
+////            return $this->redirectToRoute("home");
+//        }
+//
+//        return $imageForm;
+//
+//
+//
+//    }
+//    private function generateUniqueFileName()
+//    {
+//        return md5(uniqid());
+//    }
 
 }

@@ -103,10 +103,15 @@ class UserController extends Controller
             // Récupération du membre par son id
             $memberRepository = $entityManager->getRepository(Member::class);
             $member = $memberRepository->find($id);
-            dump($member);
+//            dump($member);
+            $imageURL = clone $member->getImage();
+//            dump($imageURL);
+
             // Création du formulaire de mise à jour du profil
             $memberForm = $this->createForm(MemberType::class, $member);
             $memberForm->handleRequest($request);
+
+
 
 
             if ($memberForm->isSubmitted() && $memberForm->isValid()) {
@@ -117,15 +122,29 @@ class UserController extends Controller
 
                 // Récupération de l'image
                 $image = new Image();
-                $imageFile = $memberForm['image']['url']->getData();
-                $imageFileName = $fileUploader->upload($imageFile);
-                $image->setUrl($imageFileName);
+                $imageFile = $memberForm['image']['imagePath']->getData();
 
-                // Hydratation de la la table Image de la BDD
-                $entityManager->persist($image);
-                $entityManager->flush();
+                if (!empty($imageFile) ) {
+                    $imageFileName = $fileUploader->upload($imageFile);
+                    $image->setUrl($imageFileName);
+                    $member->setImage($image);
+                    // Hydratation de la la table Image de la BDD
+                    $entityManager->persist($image);
+                    $entityManager->flush();
 
-                $member->setImage($image);
+                }
+                else {
+                    $member->setImage($imageURL);
+
+                }
+                dump($member);
+
+
+
+
+
+                $imageURL->setMember($member);
+                $entityManager->persist($imageURL);
                 $entityManager->persist($member);
                 $entityManager->flush();
 
