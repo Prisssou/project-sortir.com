@@ -1,9 +1,49 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <h1>Page de présentation et modification des villes pour les administateurs!</h1>
-{% endblock %}
+    <h1>Ajouter une ville <i class="fas fa-map-marked-alt"></i>
+    </h1>
 
-{% block title %}
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4">
 
+            {{ form_start(villeFormView) }}
+
+            {{ form_label(villeFormView.nom) }}
+            {{ form_widget(villeFormView.nom) }}
+            {{ form_errors(villeFormView.nom) }}
+
+            {{ form_label(villeFormView.codesPostaux) }}
+            {{ form_widget(villeFormView.codesPostaux) }}
+            {{ form_errors(villeFormView.codesPostaux) }}
+
+            {{ form_label(villeFormView.departement) }}
+            {{ form_widget(villeFormView.departement) }}
+            {{ form_errors(villeFormView.departement) }}
+
+            <div class="col-sm-12 text-center">
+
+                <input class="btn btn-primary" type="submit" name="submitAction" value="Enregistrer">
+
+                {{ form_end(villeFormView) }}
+
+                <a href="{{ path('home') }}"><input class="btn btn-primary" type="button" value="Annuler"></a>
+
+
+            </div>
+
+
+
+        </div>
+
+        <div class="col-lg-4">
+        </div>
+
+            {% endblock %}
+
+
+
+        {% block title %}
+        Ajout de ville
 {% endblock %}
