@@ -58,6 +58,10 @@ h2, h3 {
     align-items: center;
 }
 
+div#dropdownMenuButton {
+    margin-right: 2rem;
+}
+
 
 .vignette {
     margin: 20px;
