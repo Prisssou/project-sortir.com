@@ -13,6 +13,12 @@ h2, h3 {
     padding-bottom: 1em;
 }
 
+div.modal-header{
+    color: #142340;
+    padding-bottom: 1em;
+    text-align: center;
+}
+
 /* Middle Out */
 .nav-link {
     font-size: 20px;
@@ -199,9 +205,22 @@ i.fas.fa-plus {
     margin-bottom: 50px;
 }
 
+
 .contenantForm {
     background-color: rgba(20, 35, 64, 0.1);
-    padding-top: 20px;
+    padding-top: 0.5em;
+    padding-bottom : 0.5em;
+    border-radius: 10px!important;
+
+
+}
+
+.contenantForm form{
+    padding : 2em 2em 0em 2em;
+}
+
+div.modal-body {
+    margin : 10px;
 }
 
 

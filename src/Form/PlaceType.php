@@ -47,14 +47,14 @@ class PlaceType extends AbstractType
                 'latitude',
                 TextType::class,
                 [
-                    'label' => 'latitude',
+                    'label' => 'Latitude',
                 ]
             )
             ->add(
                 'longitude',
                 TextType::class,
                 [
-                    'label' => 'longitude',
+                    'label' => 'Longitude',
                 ]
             )
             ->add(

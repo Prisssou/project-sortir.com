@@ -8,7 +8,7 @@
     <div class="row">
         <div class="col-lg-2"></div>
 
-        <div class="col-lg-8">
+        <div class="contenantForm col-lg-8">
 
             {{ form_start(villeFormView) }}
 
@@ -22,15 +22,17 @@
 
             {{ form_label(villeFormView.departement) }}
             {{ form_widget(villeFormView.departement) }}
-            {{ form_errors(villeFormView.departement) }}
+            {{ form_errors(villeFormView.departement) }}<br>
 
             <div class="col-sm-12 text-center">
 
-                <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" type="submit" name="submitAction" value="Enregistrer">
+                <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
+                color: #FFC952;" type="submit" name="submitAction" value="Enregistrer"><br>
 
                 {{ form_end(villeFormView) }}
 
-                <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a" type="button" value="Annuler"></a>
+                <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
+                color: #FFC952;" type="button" value="Annuler"></a>
             </div>
 
         </div>

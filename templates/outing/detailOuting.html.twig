@@ -17,11 +17,11 @@
                 </div>
                 <div class="col">
                     <label>Date et heure : </label>
-                    <span>{{ outing.startDate|date('d-m-Y h:i', "Europe/Paris") }}</span>
+                    <span>{{ outing.startDate|date('d-m-Y H:i', "Europe/Paris") }}</span>
                 </div>
                 <div class="col">
                     <label>Date limite d'inscription : </label>
-                    <span>{{ outing.limitDateSub|date('d-m-Y h:i', "Europe/Paris") }}</span>
+                    <span>{{ outing.limitDateSub|date('d-m-Y', "Europe/Paris") }}</span>
                 </div>
                 <div class="col">
                     <label>Nom de places : </label>

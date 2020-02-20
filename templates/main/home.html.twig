@@ -70,6 +70,7 @@
 
 
                 {% for sortie in sorties %}
+
                 <!-- CLOTURE DE LA SORTIE -->
                 {% set closingDate = sortie.closingDate|date('m/d/Y') %}
                 {% set today = "now"|date('m/d/Y') %}
@@ -121,9 +122,6 @@
                         <td>Pas encore !</td>
                     {% endif %}
 
-
-
-
                     {# Organisateur #}
                     {% for member in sortie.member %}
                         <td>
@@ -135,6 +133,7 @@
                     <td class="actions">
                         {# Afficher la sortie #}
                         <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
+
 
                         {# S'INSCRIRE #}
                         {% set subscribed = false %}
@@ -186,8 +185,14 @@
 
 
                         {# Modifier la sortie ? #}
-                        {#                        <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>#}
+                        {% for member in sortie.member %}
+                        {% if (app.user == member
+                            or app.user.roles == ['ROLE_ADMIN'])
+                            and sortie.state.label != "Annulée" %}
+                        <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>
                     </td>
+                        {% endif %}
+                        {% endfor %}
 
 
                 </tr>
