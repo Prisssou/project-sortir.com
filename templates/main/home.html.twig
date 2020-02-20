@@ -13,38 +13,10 @@
         </div>
     {% endfor %}
 
-    <div>
+
         <h1>Bienvenue sur Sortir.com !</h1>
 
-        <h2> Rejoignez le réseau de l'ENI !</h2>
-
-        <h3> Qu'avez-vous manqué aujourd'hui ? </h3><br>
-    </div>
-
-    <div class="container">
-
-        <div class="row">
-            {#
-                        {% for article in articles %}
-                            <div class="col-lg-3" id="box-shadow">
-                                <ul style="list-style-image: url({{ asset('img/hang.png') }})">
-                                    {% if app.user %}
-                                    <a href="{{ path('detail', {'id':article.id}) }}">
-                                        {% endif %}
-                                        <img id="article-image" src="{{ asset('uploads/images') }}/{{ article.image }}  "
-                                             alt="article"></a>
-                                    <li> Nom : {{ article.nom }}</li>
-                                    <li> Description : {{ article.description }}</li>
-                                    <li> Echangé par : {{ article.user.getUsername() }}</li>
-                                </ul>
-                            </div>
-                        {% else %}
-                            Il n'y a pas d'articles à échanger.
-                        {% endfor %}#}
-        </div>
-    </div>
-
-    <section id="section-filtre">
+  <section id="section-filtre">
 
 
         {% include 'includes/homeFilter.html.twig' with {form: form} only %}

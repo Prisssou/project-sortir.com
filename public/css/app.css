@@ -1,41 +1,45 @@
-
-
 h1 {
-    font-family: 'Playfair Display', serif;
+    font-family: 'welcome', serif;
     font-style: italic;
     color: #142340;
     text-align: center;
     padding-top: 1em;
-    padding-bottom: 1em;
+    padding-bottom: 1.5em;
 
 }
 
 h2, h3 {
     color: #142340;
-    text-align: center;
     padding-bottom: 1em;
 }
 
 /* Middle Out */
-.navbar-brand {
-    display: inline-block;
-    position: relative;
+.nav-link {
+    font-size: 20px;
+    color: #FFC952;
+
 
 }
 
-.navbar-brand:after {
+.nav-link:after {
     content: '';
     display: block;
     margin: auto;
     height: 2px;
     width: 0px;
+    color: #FFC952;
     background: transparent;
     transition: width .5s ease, background-color .5s ease;
 }
 
-.navbar-brand:hover:after {
+.nav-link:hover:after {
     width: 100%;
     background: #FFC952;
+    color: #FFC952;
+}
+
+.nav-link:hover {
+    color: #FFC952;
 }
 
 .btn-primary {
@@ -50,6 +54,20 @@ h2, h3 {
 
 .col-lg-3 {
     margin-top: 10px;
+    margin-bottom: 20px;
+}
+
+.col label {
+    color: #142340;
+    font-weight: bold;
+
+}
+
+.recap {
+    /*background-image: linear-gradient(to left bottom, #ffffff, #faeccd, #f5da9f, #fcd47c, #ffc952);*/
+    background-image: linear-gradient(to left bottom, #ffffff, #ffc952);
+    border-radius: 10px;
+    padding: 20px;
     margin-bottom: 20px;
 }
 
@@ -83,8 +101,18 @@ div#dropdownMenuButton {
 }
 
 #avatar {
-    width: 50px;
-    height: 50px;
+    width: 150px;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 1px 1px rgba(199, 188, 188, 0.1);
+
+}
+
+/* PREVIEW IMAGE */
+.thumb-image {
+    width: 150px;
+    height: 150px;
     object-fit: cover;
     border-radius: 50%;
     box-shadow: 1px 1px rgba(199, 188, 188, 0.1);
@@ -134,13 +162,32 @@ div#dropdownMenuButton {
 
 }
 
+.btn blue-gradient btn-block btn-rounded z-depth-1a {
+    background-color: #142340;
+    color: #FFC952;
+}
+
 i.fas.fa-plus {
     color: #FF0000;
 }
 
+
 #alertCancel {
     color: #FF0000;
     font-size: smaller;
+}
+
+.placeChoice {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
+
+.contenantForm {
+    background-color: rgba(20, 35, 64, 0.1);
+    padding-top: 20px;
 }
 
 
@@ -173,9 +220,5 @@ i.fas.fa-plus {
 /*::-webkit-scrollbar-track-piece{*/
 /*    !*background: linear-gradient(90deg,#201c29,#201c29 1px,#100e17 0,#100e17);*!*/
 /*}*/
-
-
-
-
 
 

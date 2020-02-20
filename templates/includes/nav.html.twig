@@ -78,7 +78,8 @@
 
 
     {# LOGO #}
-    <a class="navbar-brand" href="{{ path('home') }}"><img id="logo" src="{{ asset('img/favicon/command.png') }}" alt="logo"></a>
+    <a class="nav-link" href="{{ path('home') }}"><img id="logo" src="{{ asset('img/favicon/command.png') }}"
+                                                           alt="logo"></a>
 
     {# MENU BURGER #}
     <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
@@ -99,22 +100,20 @@
 
             {# NAVBAR FOR USER ROLE #}
             {% if app.user %}
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('city') }}">Villes</a></li>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{{ path('add_outing') }}">Créer une sortie</a>
-                </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('city') }}">Villes</a></li>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('add_outing') }}">Créer une sortie</a>
+            </li>
 
 
-                {#<div class="avatar d-none d-md-block">
+            {#<div class="avatar d-none d-md-block">
 #}{#                    <a href="{{ path('user_profile', {'id' : app.user.id}) }}">#}{#
 #}{#                        <img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="avatar">#}{#
 #}{#                    </a>#}{#
-                    <p>Hello {{ app.user.username }} !</p>
-                </div>#}
-
-
+                <p>Hello {{ app.user.username }} !</p>
+            </div>#}
 
 
         </ul>
