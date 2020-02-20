@@ -109,6 +109,18 @@ div#dropdownMenuButton {
 
 }
 
+#avatarNav {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 1px 1px rgba(199, 188, 188, 0.1);
+}
+
+#dropdownMenuButton {
+    background-color: rgba(20, 35, 64, 0);
+}
+
 /* PREVIEW IMAGE */
 .thumb-image {
     width: 150px;
@@ -150,6 +162,8 @@ div#dropdownMenuButton {
     box-shadow: 5px 5px 15px 2px #cfcfcf;
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
 }
+
+
 
 @media (min-width: 768px) {
     .login-form {

@@ -78,8 +78,13 @@
 
 
     {# LOGO #}
-    <a class="nav-link" href="{{ path('home') }}"><img id="logo" src="{{ asset('img/favicon/command.png') }}"
-                                                           alt="logo"></a>
+    <div>
+        <a class="nav-link" href="{{ path('home') }}"><img id="logo" src="{{ asset('img/favicon/command.png') }}"
+                                                           alt="logo">Sortir.com</a>
+
+
+    </div>
+
 
     {# MENU BURGER #}
     <button class="navbar-toggler custom-toggler" type="button" data-toggle="collapse"
@@ -89,7 +94,7 @@
     </button>
 
     <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-        <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+        <ul class="navbar-nav ml-auto mt-2 mt-lg-0">
 
             {# NAVBAR FOR ADMIN ROLE #}
             {% if is_granted("ROLE_ADMIN") %}
@@ -108,28 +113,28 @@
             </li>
 
 
-            {#<div class="avatar d-none d-md-block">
-#}{#                    <a href="{{ path('user_profile', {'id' : app.user.id}) }}">#}{#
-#}{#                        <img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image) }}" alt="avatar">#}{#
-#}{#                    </a>#}{#
-                <p>Hello {{ app.user.username }} !</p>
-            </div>#}
-
-
         </ul>
+        {# DROPDOWN USER #}
+        <div class="dropdown navbar-nav ">
+            <div class="btn  dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
+                 aria-haspopup="true" aria-expanded="false" >
+                {% if app.user.image.url is defined %}
+                    <img id="avatarNav" src="{{ asset('uploads/images/' ~ app.user.image.url) }}" alt="avatar">
 
-        <div class="dropdown navbar-nav ml-auto">
-            <div class="btn btn-secondary dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown"
-                 aria-haspopup="true" aria-expanded="false">
-                Hello {{ app.user.username }} !
+
+                {% else %}
+                    <img id="avatarNav" src="{{ asset('img/ninja.png') }}" alt="avatar">
+                {% endif %}
             </div>
-            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton" >
                 <a class="dropdown-item" href="{{ path('user_profile', {'id' : app.user.id}) }}">Mon profil</a>
                 <a class="dropdown-item" href="{{ path('logout') }}">Déconnexion</a>
             </div>
         </div>
 
         {% else %}
+            <a class="nav-link" href="{{ path('home') }}"><img id="logo" src="{{ asset('img/favicon/command.png') }}"
+                                                               alt="logo"></a>
             <li class="nav-item">
                 <a class="nav-link" href="{{ path('user_login') }}">Connexion</a>
             </li>

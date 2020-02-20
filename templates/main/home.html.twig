@@ -14,7 +14,7 @@
     {% endfor %}
 
 
-    <h1>Bienvenue sur Sortir.com !</h1>
+    <h1>Bienvenue {{app.user.username}} !</h1>
 
     <section id="section-filtre">
 
@@ -71,11 +71,11 @@
 
                 {% for sortie in sorties %}
                 <!-- CLOTURE DE LA SORTIE -->
-                {#                    {% set closingDate = sortie.closingDate|date('m/d/Y') %}#}
-                {#                    {% set today = "now"|date('m/d/Y') %}#}
-                {#                    {% set difference = date(today).diff(date(closingDate)) %}#}
-                {#                    {% set archivedDays = difference.days %}#}
-                {#                    {% if archivedDays < 30 %}#}
+                {% set closingDate = sortie.closingDate|date('m/d/Y') %}
+                {% set today = "now"|date('m/d/Y') %}
+                {% set difference = date(today).diff(date(closingDate)) %}
+                {% set archivedDays = difference.days %}
+                {% if archivedDays < 30 %}
 
                 {% if site.name == sortie.site %}
                 <tbody>
@@ -192,7 +192,7 @@
 
                 </tr>
                 {% endif %}
-                {#                    {% endif %}#}
+                {% endif %}
 
                 {% endfor %}
                 </tbody>

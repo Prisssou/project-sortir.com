@@ -29,10 +29,12 @@
 
             </span>
             </button>
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="nav-link" href="{{ path('home') }}"><img id="logo" src="{{ asset('img/favicon/command.png') }}"
+                                                               alt="logo"></a>
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
                     <li class="nav-item">
                         <a class="nav-link" href="#">Connexion</a>
                     </li>
@@ -51,7 +53,7 @@
                     <form action="{{ path('user_login') }}" method="post">
 
                         <!--Form without header-->
-                        <div id="loginForm" class="card" style="background-color: rgba(20, 35, 64, 0.1);">
+                        <div id="loginForm" class="card" style="background-color: rgba(20, 35, 64, 0.1); border-radius: 10px;">
 
                             <div class="card-body mx-4">
 
