@@ -27,6 +27,7 @@ class OutingType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Nom de la sortie',
+                    'attr'=> ['placeholder'=> 'Nom de la sortie'],
                 ]
             )
             ->add(
@@ -38,6 +39,7 @@ class OutingType extends AbstractType
                     'widget' => 'single_text',
                     'format' =>'dd/MM/yyyy H:mm',
                     'html5' => false,
+                    'attr'=> ['placeholder'=> 'Date et heure de la sortie'],
                 ]
             )
             ->add(
@@ -49,13 +51,15 @@ class OutingType extends AbstractType
                     'widget' => 'single_text',
                     'format' =>'dd/MM/yyyy H:mm',
                     'html5' => false,
+                    'attr'=> ['placeholder'=> 'Date limite d\'inscription'],
                 ]
             )
             ->add(
                 'numberMaxSub',
-                TextType::class,
+                IntegerType::class,
                 [
                     'label' => 'Nombre de places',
+                    'attr'=> ['placeholder'=> 'Nombre de places'],
                 ]
             )
             ->add(
@@ -63,6 +67,7 @@ class OutingType extends AbstractType
                 IntegerType::class,
                 [
                     'label' => 'Durée (en minutes)',
+                    'attr'=> ['placeholder'=> 'Durée (en minutes)'],
                 ]
             )
             ->add(
@@ -70,6 +75,8 @@ class OutingType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Description et infos',
+                    'attr'=> ['placeholder'=> 'Description et infos'],
+
                 ]
             )
             ->add(
@@ -81,9 +88,10 @@ class OutingType extends AbstractType
                         return $ville->getNom().' '.$ville->getCodesPostaux();
                     },
                     'mapped' => false,
-                    'placeholder' => '',
+                    'placeholder' => 'Choisir la ville',
                     'attr' => [
                         'class' => 'select2',
+
                     ],
                 ]
             )
@@ -96,6 +104,7 @@ class OutingType extends AbstractType
                     'choice_label' => function ($place) {
                         return $place->getName();
                     },
+                    'placeholder'=> 'Choisir le lieu',
 
                 ]
             );

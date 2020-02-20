@@ -19,6 +19,7 @@ class PlaceType extends AbstractType
                 [
                     'label' => 'Adresse du lieu',
                     'mapped' => false,
+                    'attr'=> ['placeholder'=> 'Rechercher une adresse'],
                 ]
 
             )
@@ -27,6 +28,7 @@ class PlaceType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Nom',
+                    'attr'=> ['placeholder'=> 'Nom du lieu'],
                 ]
             )
             ->add(
@@ -34,13 +36,16 @@ class PlaceType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Rue',
+                    'attr'=> ['placeholder'=> 'Rue'],
+
                 ]
             )
             ->add(
                 'zipcode',
                 TextType::class,
                 [
-                    'label' => 'Code Postal'
+                    'label' => 'Code Postal',
+                    'attr'=> ['placeholder'=> 'Code Postal'],
                 ]
             )
             ->add(
@@ -48,6 +53,7 @@ class PlaceType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Latitude',
+                    'attr'=> ['placeholder'=> 'Latitude'],
                 ]
             )
             ->add(
@@ -55,6 +61,7 @@ class PlaceType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Longitude',
+                    'attr'=> ['placeholder'=> 'Longitude'],
                 ]
             )
             ->add(
@@ -62,7 +69,8 @@ class PlaceType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Ville',
-                    'mapped' => false
+                    'mapped' => false,
+                    'attr'=> ['placeholder'=> 'Ville'],
                 ]
             );
     }
