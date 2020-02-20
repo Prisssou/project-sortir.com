@@ -10,7 +10,7 @@
         {# RECAP DE LA SORTIE #}
         <h3>Récapitulatif de la sortie</h3>
         <div class="row mt-3 recap">
-            <div class="col-md-6 col-sm-12 ">
+            <div class="col-sm-12 col-md-6">
                 <div class="col">
                     <label>Nom de la sortie : </label>
                     <span>{{ outing.name }}</span>
@@ -36,7 +36,7 @@
                     <span>{{ outing.description }}</span>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
+            <div class="col-sm-12 col-md-6 ">
                 <div class="col">
                     <label>Ville organisatrice :</label>
                     <span>{{ outing.site.name }}</span>
@@ -68,7 +68,7 @@
         <div class="row mt-5">
 
             <h3>Liste des participants inscrits </h3>
-                <table  class="table col-md-6">
+                <table class="myTable" class="table col-md-6">
                     <thead>
                     <tr>
                         <th>Pseudo</th>
@@ -103,15 +103,16 @@
         </div>
     </div>
 
-    <script>
-        $(document).ready( function () {
-            $('#myTable').DataTable();
-        } );
-    </script>
+
 
 {% endblock %}
-
-
+{% block script %}
+<script>
+    $(document).ready( function () {
+        $('.myTable').DataTable();
+    } );
+</script>
+{% endblock %}
 
 
 
