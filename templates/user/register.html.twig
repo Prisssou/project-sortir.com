@@ -4,18 +4,12 @@
 
 {% block body %}
 
-    <h2> Créer un compte </h2>
+    <h1> Créer un compte </h1>
 
     <div class="container">
-        <div class="row">
-            <div class="col-lg-4">
+        <div class="row d-flex justify-content-between">
 
-                {# Todo : ajouter upload image #}
-                {# Todo : A annuler #}
-
-            </div>
-
-            <div class="col-lg-4">
+            <div class="col-lg-5 mb-4 mr-1">
                 {{ form_start(MemberFormView) }}
 
                 {{ form_label(MemberFormView.username) }}
@@ -29,6 +23,16 @@
                 {{ form_label(MemberFormView.firstname) }}
                 {{ form_widget(MemberFormView.firstname) }}
                 {{ form_errors(MemberFormView.firstname) }} <br>
+
+                {{ form_label(MemberFormView.site) }}
+                {{ form_widget(MemberFormView.site) }}
+                {{ form_errors(MemberFormView.site) }} <br>
+
+
+            </div>
+
+            <div class="col-lg-5 mb-4">
+
 
                 {{ form_label(MemberFormView.phone) }}
                 {{ form_widget(MemberFormView.phone) }}
@@ -44,24 +48,13 @@
 
             </div>
 
-            <div class="col-lg-4">
-
-                {{ form_label(MemberFormView.site) }}
-                {{ form_widget(MemberFormView.site) }}
-                {{ form_errors(MemberFormView.site) }} <br> <br>
-
-                <br>
-
-            </div>
 
             <div class="col-sm-12 text-center">
 
-                <input class="btn btn-primary" type="submit" name="submitAction" value="Enregistrer">
-                <input class="btn btn-primary" type="submit" value="Annuler">
-
+                <input class="btn w-50 mb-5" type="submit" name="submitAction" value="Enregistrer" style="background-color: #142340; color: #FFC952;">
                 {{ form_end(MemberFormView) }}
-
-            </div>
+                <a href="{{ path('home') }}"><input class="btn w-50 mb-4" type="button" value="Annuler" style="background-color: #142340; color: #FFC952;"></a>
+          </div>
 
         </div>
 

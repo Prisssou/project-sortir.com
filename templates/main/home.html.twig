@@ -14,7 +14,9 @@
     {% endfor %}
 
 
-        <h1>Bienvenue sur Sortir.com !</h1>
+
+    <h1>Bienvenue {{app.user.username}} !</h1>
+
 
         <div class="container">
                 <div class="col-lg-12" id="section-filtre">
@@ -180,6 +182,25 @@
                             {% endif %}
                         {% endfor %}
 
+
+{#                         Annuler Version Workflow#}
+                        {% for member in sortie.member %}
+                        {% if (app.user == member
+                            or app.user.roles == ['ROLE_ADMIN']) %}
+                            {% if workflow_can(sortie, 'is_anulee') %}
+                                <a class="btn btn-primary" href="{{ path('outing_workflow', {
+                                    'id' : sortie.id,
+                                    'status' : 'is_anulee',
+                                    'redirect' : app.request.get('_route')
+                                }) }}">
+                                    {{ 'Annuler Workflow' | trans }}
+                                </a>
+                            {% endif %}
+                        {% endif %}
+                        {% endfor %}
+
+
+
                         {# Modifier la sortie ? #}
                         {% for member in sortie.member %}
                         {% if (app.user == member
@@ -188,8 +209,10 @@
                             and sortie.state.label != "Clôturée" %}
                         <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>
                     </td>
+
                     {% endif %}
                     {% endfor %}
+
 
 
                 </tr>
