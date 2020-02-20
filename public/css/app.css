@@ -4,7 +4,7 @@ h1 {
     color: #142340;
     text-align: center;
     padding-top: 1em;
-    padding-bottom: 2em;
+    padding-bottom: 1.5em;
 
 }
 
@@ -171,14 +171,23 @@ i.fas.fa-plus {
     color: #FF0000;
 }
 
+
 #alertCancel {
     color: #FF0000;
     font-size: smaller;
 }
 
-#placeChoice col-lg-8 {
-    display: inline-flex;
+.placeChoice {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 50px;
+}
 
+.contenantForm {
+    background-color: rgba(20, 35, 64, 0.1);
+    padding-top: 20px;
 }
 
 
@@ -211,9 +220,5 @@ i.fas.fa-plus {
 /*::-webkit-scrollbar-track-piece{*/
 /*    !*background: linear-gradient(90deg,#201c29,#201c29 1px,#100e17 0,#100e17);*!*/
 /*}*/
-
-
-
-
 
 
