@@ -168,8 +168,23 @@ div#dropdownMenuButton {
 }
 
 /* EVENTS TABLE */
-.dataTables_wrapper {
-
+.tab {
+    background-color: snow;
+}
+.table {
+    margin: auto;
+    width: 75% !important;
+    border-radius: 10px !important;
+}
+th {
+    background-color: #142340 !important;
+    color: #FFC952 !important;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 15px;
+}
+td {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 14px;
 }
 
 

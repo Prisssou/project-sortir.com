@@ -77,7 +77,26 @@
     #logo {
         height: 50px;
         width: 50px;
+        border-radius: 50%;
+
     }
+
+
+/* HOME : site name */
+#site-name {
+    /*font-family: 'Roboto Mono', monospace;*/
+    font-family: 'Montserrat', sans-serif;
+    text-align: center;
+    margin-top: 30px;
+
+}
+
+.tab {
+    display: flex;
+    justify-content: center;
+    font-family: 'Montserrat', sans-serif;
+    color: #142340;
+}
 
     /* Menu burger */
     /* Set the border color */ 
