@@ -212,7 +212,7 @@ i.fas.fa-plus {
 .contenantForm {
     background-color: rgba(20, 35, 64, 0.1);
     padding: 1.5em;
-    margin-bottom: 20px;
+    margin-bottom: 50px !important;
     border-radius: 10px;
     color : #142340;
     -moz-box-shadow: 5px 5px 15px 2px #cfcfcf;
