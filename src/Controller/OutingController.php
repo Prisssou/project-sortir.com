@@ -46,9 +46,11 @@ class OutingController extends Controller
 
             if ($request->get('submitAction') == 'Enregistrer') {
                 $outing->setState($state = $stateRepository->find('1'));
+                $outing->setStatus('Creee');
             } else {
                 if ($request->get('submitAction') == 'Publier') {
                     $outing->setState($state = $stateRepository->find('2'));
+                    $outing->setStatus('Ouverte');
                 }
             }
 
