@@ -51,23 +51,21 @@
             {% else %}
                 <div id="{{ site.name }}" class="tabcontent">
             {% endif %}
-            <h3>{{ site.name }}</h3>
+            <h3 id="site-name">{{ site.name }}</h3>
 
             {# Tableau des sorties #}
-            <table id="myTable" data-toggle="table" data-click-to-select="false" data-sort-name="nom"
-                   data-pagination="false" data-sort-order="asc" data-maintain-selected="false"
-                   class="table table-bordered table-orderable table-striped">
+            <table id="myTable"  class="table table-striped table-hover table-responsive">
                 <!--<table id="myTable" data-toggle="table" class="table table-bordered table-orderable table-striped" style="width:75%">-->
                 <thead class="thead-light">
-                <tr class="active">
-                    <th scope="col" data-field="nom" data-sortable="true">Nom de la sortie</th>
-                    <th scope="col" data-field="date" data-sortable="true">Date de la sortie</th>
-                    <th scope="col" data-field="cloture" data-sortable="true">Clôture</th>
-                    <th scope="col" data-field="inscrits" data-sortable="true">Inscrits/Places</th>
-                    <th scope="col" data-field="etat" data-sortable="true">Etat</th>
-                    <th scope="col" data-field="inscrit" data-sortable="true">Déjà inscrit?</th>
-                    <th scope="col" data-field="orga" data-sortable="true">Organisateur</th>
-                    <th scope="col" data-field="actions" data-sortable="true">Actions</th>
+                <tr>
+                    <th scope="col">Nom de la sortie</th>
+                    <th scope="col">Date de la sortie</th>
+                    <th scope="col">Clôture</th>
+                    <th scope="col">Inscrits/Places</th>
+                    <th scope="col">Etat</th>
+                    <th scope="col">Déjà inscrit ?</th>
+                    <th scope="col">Organisateur</th>
+                    <th scope="col">Actions</th>
                 </tr>
                 </thead>
 
@@ -311,25 +309,26 @@
 
 {% block script %}
 
-    <script type="text/javascript" charset="utf8"
-            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
-    <script>
-        $(document).ready(function () {
+    {# DATATABLES#}
+{#    <script type="text/javascript" charset="utf8"#}
+{#            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>#}
+{#    <script>#}
+{#        $(document).ready(function () {#}
 
-            /**
-             * Activation du tri sur toutes les colonnes du tableau
-             */
-            $('#myTable').DataTable({
-                columnDefs: [{
-                    orderable: true,
-                    targets: "_all",
-                }],
-                "searching": true
-            });
-            $('.dataTables_length').addClass('bs-select');
-        });
+{#            /**#}
+{#             * Activation du tri sur toutes les colonnes du tableau#}
+{#             */#}
+{#            $('#myTable').DataTable({#}
+{#                columnDefs: [{#}
+{#                    orderable: true,#}
+{#                    targets: "_all",#}
+{#                }],#}
+{#                "searching": true#}
+{#            });#}
+{#            $('.dataTables_length').addClass('bs-select');#}
+{#        });#}
 
-    </script>
+{#    </script>#}
 
     <script>
         var url;

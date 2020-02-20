@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2df7623c14d169a1fb1634428e14e0ee",
+    "content-hash": "179780f7263cdf6dab2ad93af046daac",
     "packages": [
         {
             "name": "doctrine/annotations",
@@ -4853,21 +4853,21 @@
         },
         {
             "name": "symfony/workflow",
-            "version": "v3.4.0",
+            "version": "v3.4.37",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/workflow.git",
-                "reference": "9be01bc49cce8ed314708fb8233a393d2427cb52"
+                "reference": "70fb0df25a99dff2579c83330ab49b0e8c1a970e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/workflow/zipball/9be01bc49cce8ed314708fb8233a393d2427cb52",
-                "reference": "9be01bc49cce8ed314708fb8233a393d2427cb52",
+                "url": "https://api.github.com/repos/symfony/workflow/zipball/70fb0df25a99dff2579c83330ab49b0e8c1a970e",
+                "reference": "70fb0df25a99dff2579c83330ab49b0e8c1a970e",
                 "shasum": ""
             },
             "require": {
                 "php": "^5.5.9|>=7.0.8",
-                "symfony/property-access": "~2.3|~3.0|~4.0"
+                "symfony/property-access": "^3.4|^4.3"
             },
             "require-dev": {
                 "psr/log": "~1.0",
@@ -4894,20 +4894,20 @@
             ],
             "authors": [
                 {
-                    "name": "Symfony Community",
-                    "homepage": "http://symfony.com/contributors"
-                },
-                {
                     "name": "Fabien Potencier",
                     "email": "fabien@symfony.com"
                 },
                 {
                     "name": "Grégoire Pineau",
                     "email": "lyrixx@lyrixx.info"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "https://symfony.com/contributors"
                 }
             ],
             "description": "Symfony Workflow Component",
-            "homepage": "http://symfony.com",
+            "homepage": "https://symfony.com",
             "keywords": [
                 "petrinet",
                 "place",
@@ -4916,7 +4916,7 @@
                 "transition",
                 "workflow"
             ],
-            "time": "2017-10-06T15:47:04+00:00"
+            "time": "2020-01-01T11:03:25+00:00"
         },
         {
             "name": "symfony/yaml",
