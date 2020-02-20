@@ -6,10 +6,11 @@
 
     <div class="container">
         <h1>Afficher une sortie</h1>
+
+        {# RECAP DE LA SORTIE #}
         <h3>Récapitulatif de la sortie</h3>
         <div class="row mt-3 recap">
-
-            <div class="col-md-6 col-sm-12 ">
+            <div class="col-sm-12 col-md-6">
                 <div class="col">
                     <label>Nom de la sortie : </label>
                     <span>{{ outing.name }}</span>
@@ -19,7 +20,7 @@
                     <span>{{ outing.startDate|date('d-m-Y h:i', "Europe/Paris") }}</span>
                 </div>
                 <div class="col">
-                    <label>Date limite d'inscrption : </label>
+                    <label>Date limite d'inscription : </label>
                     <span>{{ outing.limitDateSub|date('d-m-Y h:i', "Europe/Paris") }}</span>
                 </div>
                 <div class="col">
@@ -35,7 +36,7 @@
                     <span>{{ outing.description }}</span>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12">
+            <div class="col-sm-12 col-md-6 ">
                 <div class="col">
                     <label>Ville organisatrice :</label>
                     <span>{{ outing.site.name }}</span>
@@ -63,12 +64,11 @@
             </div>
         </div>
 
-        <div class="row mt-3">
-            {# Affiche la liste des participants à la sortie #}
+        {# AFFICHE LA LISTE DES PARTICIPANTS A LA SORTIE + S'INSCRIRE / ANNULER #}
+        <div class="row mt-5">
 
-            <div class="scrollbar scrollbar-juicy-peach bordered-warning"> {# Todo CSS à faire#}
-                <table class="table col-md-6">
-                    <h3>Liste des participants inscrits </h3>
+            <h3>Liste des participants inscrits </h3>
+                <table class="myTable" class="table col-md-6">
                     <thead>
                     <tr>
                         <th>Pseudo</th>
@@ -86,11 +86,13 @@
 
                     </tbody>
                 </table>
-            </div>
+
 
             <div class="col-md-6 text-center">
                 <div>
-                    <input class="btn w-50 mb-4" type="submit" name="submitAction" value="S'inscrire" style="background-color: #142340; color: #FFC952;">
+{#                    <input class="btn w-50 mb-4" type="submit" name="submitAction" value="S'inscrire" style="background-color: #142340; color: #FFC952;">#}
+                    <a href="{{ path('subscribe', {id: outing.id}) }}"><input class="btn w-50 mb-4" type="button" value="S'inscrire" style="background-color: #142340; color: #FFC952;"></a>
+
                 </div>
                 <div>
                     <a href="{{ path('home') }}"><input class="btn w-50 mb-4" type="button" value="Annuler" style="background-color: #142340; color: #FFC952;"></a>
@@ -102,9 +104,15 @@
     </div>
 
 
+
 {% endblock %}
-
-
+{% block script %}
+<script>
+    $(document).ready( function () {
+        $('.myTable').DataTable();
+    } );
+</script>
+{% endblock %}
 
 
 

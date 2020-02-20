@@ -68,13 +68,13 @@ div.modal-header{
     font-weight: bold;
 
 }
-
+/* AFFICHER UNE SORTIE RECAP */
 .recap {
     /*background-image: linear-gradient(to left bottom, #ffffff, #faeccd, #f5da9f, #fcd47c, #ffc952);*/
     background-image: linear-gradient(to left bottom, #ffffff, #ffc952);
     border-radius: 10px;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 100px;
 }
 
 
