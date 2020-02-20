@@ -19,7 +19,7 @@ div.modal-header{
     text-align: center;
 }
 
-/* Middle Out */
+/* NAVBAR Middle Out */
 .nav-link {
     font-size: 20px;
     color: #FFC952;
@@ -167,6 +167,11 @@ div#dropdownMenuButton {
     -o-box-shadow: 5px 5px 15px 2px #cfcfcf;
     box-shadow: 5px 5px 15px 2px #cfcfcf;
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
+}
+
+/* EVENTS TABLE */
+.dataTables_wrapper {
+
 }
 
 

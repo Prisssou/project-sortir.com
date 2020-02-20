@@ -104,8 +104,6 @@ class OutingController extends Controller
      */
     public function addSubscription($id, EntityManagerInterface $entityManager, Request $request)
     {
-        // Attributs
-
 
         // Récupération de la sortie
         $outingRepository = $entityManager->getRepository(Outing::class);
