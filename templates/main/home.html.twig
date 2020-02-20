@@ -155,7 +155,7 @@
                         {% for member in sortie.member %}
                             {% if app.user == member %}
                                 {% if workflow_can(sortie, 'to_Ouverte') %}
-                                    <a class="btn btn-primary" href="{{ path('outing_workflow', {
+                                    <a href="{{ path('outing_workflow', {
                                         'id' : sortie.id,
                                         'status' : 'to_Ouverte',
                                         'redirect' : app.request.get('_route'),
@@ -175,13 +175,15 @@
                                 {% endif %}
                             {% endfor %}
                         {% endfor %}
-                        {% if subscribed == false
-                            and sortie.subscriptions|length != sortie.numberMaxSub
-                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))
-                            and date(sortie.limitDateSub|date('m/d/Y')) > date("now"|date('m/d/Y'))
-                            and sortie.state.label != "Annulée"
-                            and sortie.state.label != "Passée" %}
+                        {% if subscribed == false %}
+{#                            and sortie.subscriptions|length != sortie.numberMaxSub#}
+{#                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))#}
+{#                            and date(sortie.limitDateSub|date('m/d/Y')) > date("now"|date('m/d/Y'))#}
+{#                            and sortie.state.label != "Annulée"#}
+{#                            and sortie.state.label != "Passée" %}#}
+                        {% if workflow_can(sortie, 'to_Cloturee') %}
                             <a href="{{ path('subscribe', {id: sortie.id}) }}" class="subscribeLink">S'inscrire</a>
+                            {% endif %}
                         {% endif %}
 
                         {# Se Désister #}

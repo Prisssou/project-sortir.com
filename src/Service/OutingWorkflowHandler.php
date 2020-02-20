@@ -25,7 +25,7 @@ class OutingWorkflowHandler
         # Récupération du Workflow
         $workflow = $this->workflows->get($outing);
 
-        dump($workflow);
+//        dump($workflow);
         # Récupération de Doctrine
         $em = $this->manager;
 
@@ -36,7 +36,7 @@ class OutingWorkflowHandler
         $em->flush();
 
         $transitions = $workflow->getEnabledTransitions($outing);
-        dump($transitions);
+//        dump($transitions);
 
 
         # Publication de l'article si possible

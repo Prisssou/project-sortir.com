@@ -128,6 +128,12 @@ class OutingController extends Controller
             $subscription->setOuting($outing);
             $subscription->setSubDate(new \DateTime('now'));
 
+
+            if(sizeof($numSubs)+1 == $maxSubs){
+                $outing->setStatus('Cloturee');
+                $entityManager->persist($outing);
+            }
+
             $entityManager->persist($subscription);
             $entityManager->flush();
 
