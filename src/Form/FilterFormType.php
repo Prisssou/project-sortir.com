@@ -32,14 +32,14 @@ class FilterFormType extends AbstractType
                 'startDate',
                 DateTimeType::class,
                 [
-                    'label' => 'Entre',
+                    'label' => 'Entre ',
                 ]
             )
             ->add(
                 'endDate',
                 DateTimeType::class,
                 [
-                    'label' => 'Et',
+                    'label' => 'Et  ',
                 ]
             )
             ->add(

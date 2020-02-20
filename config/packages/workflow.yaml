@@ -1,0 +1,36 @@
+framework:
+    workflows:
+        outing_state:
+            type: 'workflow' # or 'state_machine'
+            audit_trail:
+                enabled: true
+            marking_store:
+                type: 'single_state' # or 'multiple_state'
+                arguments:
+                    - 'status'
+            supports:
+                - App\Entity\Outing
+            initial_place: Creee
+            places:
+                - Creee
+                - Ouverte
+                - Cloturee
+                - ActiviteEnCours
+                - Passee
+                - Annulee
+            transitions:
+                to_Ouverte:
+                    from: Creee
+                    to:   Ouverte
+                to_Cloturee:
+                    from: Ouverte
+                    to: Cloturee
+                to_ActiviteEnCours:
+                    from: Cloturee
+                    to: ActiviteEnCours
+                is_anulee:
+                    from: [Creee, Ouverte, Cloturee]
+                    to: Annulee
+                to_Passee:
+                    from: ActiviteEnCours
+                    to:   Passee

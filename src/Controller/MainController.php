@@ -10,15 +10,57 @@ use App\Entity\State;
 use App\Entity\Subscription;
 use App\Form\FilterFormType;
 use App\Form\SearchFormType;
+use App\Service\OutingWorkflowHandler;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Workflow\Exception\LogicException;
 
 class MainController extends Controller
 {
+
+    /**
+     * Permet de changer le status d'une sortie
+     * @Route("workflow/{status}/{id}", name="outing_workflow")
+     * @param $status
+     * @param Outing $outing
+     * @param OutingWorkflowHandler $owh
+     * @param Request $request
+     * @return RedirectResponse
+     */
+    public function workflow($status,Outing $outing, OutingWorkflowHandler $owh, Request $request)
+    {
+
+        #Traitement du Workflow
+        try {
+
+            $owh->handle($outing,$status);
+
+            #Notification
+            $this->addFlash('notice','Le changement de statut a bien été effectué.');
+
+        } catch (LogicException $e){
+            #Notification
+            $this->addFlash('error','Changement de statut impossible.');
+
+        }
+
+        #Vérification par dump
+        dump($owh);
+
+        #Récupération du redirect
+        $redirect = $request->get('redirect') ?? 'home';
+
+        # On redirige l'utilisateur sur la bonne page
+        return $this->redirectToRoute($redirect);
+
+    }
+
+
     /**
      * @Route("/", name="home")
      * @param EntityManagerInterface $entityManager
@@ -53,6 +95,10 @@ class MainController extends Controller
 
         $sortiesFiltered = $sortieRepository->findSearch($data,$userId);
         $sorties = $sortiesFiltered;
+
+//        dump($workflow);
+
+
 //    dump($sorties);
 
 //        $filterForm = $this->createForm(FilterFormType::class);

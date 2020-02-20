@@ -111,6 +111,7 @@ class OutingController extends Controller
 
         // Attributs pour conditions
         $numSubs = $outing->getSubscriptions();
+
         $maxSubs = $outing->getNumberMaxSub();
         $dateMaxSub = $outing->getLimitDateSub();
         $today = date('now');

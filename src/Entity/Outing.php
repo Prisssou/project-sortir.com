@@ -88,6 +88,11 @@ class Outing implements \JsonSerializable
     private $state;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $status;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Place", inversedBy="outing")
      * @ORM\JoinColumn(nullable=false)
      */
@@ -128,6 +133,18 @@ class Outing implements \JsonSerializable
     public function setName(string $name): self
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    public function getStatus(): ?string
+    {
+        return $this->status;
+    }
+
+    public function setStatus(string $status): self
+    {
+        $this->status = $status;
 
         return $this;
     }
