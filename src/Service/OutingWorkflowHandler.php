@@ -9,7 +9,7 @@ use Doctrine\Common\Persistence\ObjectManager;
 use Symfony\Component\Workflow\Exception\LogicException;
 use Symfony\Component\Workflow\Registry;
 
-class OutingRequestHandler
+class OutingWorkflowHandler
 {
 
     private $workflows, $manager;

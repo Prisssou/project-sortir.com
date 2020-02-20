@@ -10,6 +10,7 @@ use App\Entity\State;
 use App\Entity\Subscription;
 use App\Form\FilterFormType;
 use App\Form\SearchFormType;
+use App\Service\OutingWorkflowHandler;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
@@ -25,7 +26,6 @@ class MainController extends Controller
     /**
      * Permet de changer le status d'une sortie
      * @Route("workflow/{status}/{id}", name="outing_workflow")
-     * @Security("has_role('ROLE_USER')")
      * @param $status
      * @param Outing $outing
      * @param OutingWorkflowHandler $owh
