@@ -15,14 +15,14 @@
 
 
 
-    <h1>Bienvenue {{app.user.username}} !</h1>
+    <h1>Bienvenue {{ app.user.username }} !</h1>
 
 
-        <div class="container">
-                <div class="col-lg-12" id="section-filtre">
-                    {% include 'includes/homeFilter.html.twig' with {form: form} only %}
-                </div>
+    <div class="container">
+        <div class="col-lg-12" id="section-filtre">
+            {% include 'includes/homeFilter.html.twig' with {form: form} only %}
         </div>
+    </div>
 
     <section id="section-tableau-sorties">
 
@@ -54,8 +54,10 @@
             <h3>{{ site.name }}</h3>
 
             {# Tableau des sorties #}
-            <table id="myTable" data-toggle="table" data-click-to-select="false" data-sort-name="nom" data-pagination="false" data-sort-order="asc" data-maintain-selected="false" class="table table-bordered table-orderable table-striped">
-            <!--<table id="myTable" data-toggle="table" class="table table-bordered table-orderable table-striped" style="width:75%">-->
+            <table id="myTable" data-toggle="table" data-click-to-select="false" data-sort-name="nom"
+                   data-pagination="false" data-sort-order="asc" data-maintain-selected="false"
+                   class="table table-bordered table-orderable table-striped">
+                <!--<table id="myTable" data-toggle="table" class="table table-bordered table-orderable table-striped" style="width:75%">-->
                 <thead class="thead-light">
                 <tr class="active">
                     <th scope="col" data-field="nom" data-sortable="true">Nom de la sortie</th>
@@ -106,7 +108,21 @@
                     {% endif %}
 
                     {# Etat de la sortie #}
-                    <td class="stateLabel">{{ sortie.state.label }}</td>
+
+                    {% if sortie.status == 'Creee' %}
+
+                        <td class="stateLabel">Créée</td>
+                    {% elseif sortie.status ==  'Ouverte' %}
+                        <td class="stateLabel">{{ sortie.status }}</td>
+                    {% elseif sortie.status == 'Cloturee' %}
+                        <td class="stateLabel">Clôturée</td>
+                    {% elseif sortie.status == 'ActiviteEnCours' %}
+                        <td class="stateLabel">Activité en cours</td>
+                    {% elseif sortie.status == 'Passee' %}
+                        <td class="stateLabel">Passée</td>
+                    {% elseif sortie.status == 'Annulee' %}
+                        <td class="stateLabel">Annulée</td>
+                    {% endif %}
 
                     {# Déjà Inscrit ? #}
                     {% set subscribed = false %}
@@ -135,6 +151,20 @@
                         {# Afficher la sortie #}
                         <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
 
+                        {# Publier Version Workflow #}
+                        {% for member in sortie.member %}
+                            {% if app.user == member %}
+                                {% if workflow_can(sortie, 'to_Ouverte') %}
+                                    <a class="btn btn-primary" href="{{ path('outing_workflow', {
+                                        'id' : sortie.id,
+                                        'status' : 'to_Ouverte',
+                                        'redirect' : app.request.get('_route'),
+                                    }) }}">
+                                        {{ 'Publier' | trans }}
+                                    </a>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
 
                         {# S'INSCRIRE #}
                         {% set subscribed = false %}
@@ -184,26 +214,11 @@
                         {% endfor %}
 
 
-{#                         Annuler Version Workflow#}
-                        {% for member in sortie.member %}
-                        {% if (app.user == member
-                            or app.user.roles == ['ROLE_ADMIN']) %}
-                            {% if workflow_can(sortie, 'is_annulee')%}
-                                <p>{{ dump(workflow_can(sortie, 'is_anulee')) }}</p>
-                                <a class="btn btn-primary" href="{{ path('outing_workflow', {
-                                    'id' : sortie.id,
-                                    'status' : 'is_annulee',
-                                    'redirect' : app.request.get('_route')
-                                }) }}">
-                                    {{ 'Annuler Workflow' | trans }}
-                                </a>
-                            {% endif %}
-                        {% endif %}
-                        {% endfor %}
 
-{#                        {% if 'Creee' in workflow_marked_places(sortie) %}#}
-{#                            <span class="label">ETAT PASSEE</span>#}
-{#                        {% endif %}#}
+
+                        {#                        {% if 'Creee' in workflow_marked_places(sortie) %}#}
+                        {#                            <span class="label">ETAT PASSEE</span>#}
+                        {#                        {% endif %}#}
 
 
 
@@ -218,7 +233,6 @@
 
                     {% endif %}
                     {% endfor %}
-
 
 
                 </tr>
@@ -277,17 +291,17 @@
 
 
     </section>
-            <footer class="navbar-default"  style="text-align: center">
+    <footer class="navbar-default" style="text-align: center">
 
-               - Made with <i class="fas fa-heart"></i> by Push Push Team -
+        - Made with <i class="fas fa-heart"></i> by Push Push Team -
 
-            </footer>
+    </footer>
 
 
     <script src="{{ asset('js/table-animation.js') }}"></script>
 
-{#    <script type="text/javascript" charset="utf8"#}
-{#            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>#}
+    {#    <script type="text/javascript" charset="utf8"#}
+    {#            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>#}
 
 {% endblock %}
 
@@ -296,7 +310,7 @@
     <script type="text/javascript" charset="utf8"
             src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
     <script>
-        $(document).ready(function() {
+        $(document).ready(function () {
 
             /**
              * Activation du tri sur toutes les colonnes du tableau
@@ -308,7 +322,7 @@
                 }],
                 "searching": true
             });
-             $('.dataTables_length').addClass('bs-select');
+            $('.dataTables_length').addClass('bs-select');
         });
 
     </script>
