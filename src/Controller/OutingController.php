@@ -46,9 +46,11 @@ class OutingController extends Controller
 
             if ($request->get('submitAction') == 'Enregistrer') {
                 $outing->setState($state = $stateRepository->find('1'));
+                $outing->setStatus('Creee');
             } else {
                 if ($request->get('submitAction') == 'Publier') {
                     $outing->setState($state = $stateRepository->find('2'));
+                    $outing->setStatus('Ouverte');
                 }
             }
 
@@ -125,6 +127,12 @@ class OutingController extends Controller
             $subscription->setMember($user);
             $subscription->setOuting($outing);
             $subscription->setSubDate(new \DateTime('now'));
+
+
+            if(sizeof($numSubs)+1 == $maxSubs){
+                $outing->setStatus('Cloturee');
+                $entityManager->persist($outing);
+            }
 
             $entityManager->persist($subscription);
             $entityManager->flush();

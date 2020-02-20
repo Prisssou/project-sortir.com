@@ -27,13 +27,16 @@ class MainController extends Controller
      * Permet de changer le status d'une sortie
      * @Route("/workflow/{status}/{id}", name="outing_workflow")
      * @param $status
-     * @param Outing $outing
+     * @param $id
+     * @param EntityManagerInterface $entityManager
      * @param OutingWorkflowHandler $owh
      * @param Request $request
      * @return RedirectResponse
      */
-    public function workflow($status,Outing $outing, OutingWorkflowHandler $owh, Request $request)
+    public function workflow($status, $id, EntityManagerInterface $entityManager, OutingWorkflowHandler $owh, Request $request)
     {
+        $outingRepository = $entityManager->getRepository(Outing::class);
+        $outing = $outingRepository->find($id);
 
         #Traitement du Workflow
         try {
@@ -50,7 +53,7 @@ class MainController extends Controller
         }
 
         #Vérification par dump
-        dump($owh);
+//        dump($owh);
 
 
         #Récupération du redirect
