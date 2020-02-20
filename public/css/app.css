@@ -22,8 +22,6 @@ div.modal-header {
 .nav-link {
     font-size: 20px;
     color: #FFC952;
-
-
 }
 
 .nav-link:after {
@@ -225,6 +223,28 @@ i.fas.fa-plus {
 div.modal-body {
     margin: 10px;
 }
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+}
+
+input {
+    margin-bottom: 1.5em;
+}
+
+
 
 
 
