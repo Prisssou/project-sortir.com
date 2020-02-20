@@ -102,7 +102,7 @@
                             <span style="color: green; font-weight: bold">{{ sortie.subscriptions|length }}</span>/{{ sortie.numberMaxSub }}
                         </td>
 
-                        {% endif %}
+                    {% endif %}
 
                     {# Etat de la sortie #}
                     <td class="stateLabel">{{ sortie.state.label }}</td>
@@ -185,13 +185,19 @@
 
 
                         {# Modifier la sortie ? #}
-                        {# <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>#}
+                        {% for member in sortie.member %}
+                        {% if (app.user == member
+                            or app.user.roles == ['ROLE_ADMIN'])
+                            and sortie.state.label != "Annulée" %}
+                        <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>
                     </td>
+                        {% endif %}
+                        {% endfor %}
 
 
                 </tr>
                 {% endif %}
-               {% endif %}
+                {% endif %}
 
                 {% endfor %}
                 </tbody>

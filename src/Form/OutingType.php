@@ -81,6 +81,7 @@ class OutingType extends AbstractType
                         return $ville->getNom().' '.$ville->getCodesPostaux();
                     },
                     'mapped' => false,
+                    'placeholder' => '',
                     'attr' => [
                         'class' => 'select2',
                     ],
