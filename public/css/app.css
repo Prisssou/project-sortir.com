@@ -5,7 +5,6 @@ h1 {
     text-align: center;
     padding-top: 1em;
     padding-bottom: 1.5em;
-
 }
 
 h2, h3 {
@@ -13,13 +12,13 @@ h2, h3 {
     padding-bottom: 1em;
 }
 
-div.modal-header{
+div.modal-header {
     color: #142340;
     padding-bottom: 1em;
     text-align: center;
 }
 
-/* Middle Out */
+/* NAVBAR Middle Out */
 .nav-link {
     font-size: 20px;
     color: #FFC952;
@@ -54,9 +53,7 @@ div.modal-header{
 
 .btn {
     margin-right: 100px;
-
 }
-
 
 .col-lg-3 {
     margin-top: 10px;
@@ -68,14 +65,15 @@ div.modal-header{
     font-weight: bold;
 
 }
+
 /* AFFICHER UNE SORTIE RECAP */
 .recap {
-    /*background-image: linear-gradient(to left bottom, #ffffff, #faeccd, #f5da9f, #fcd47c, #ffc952);*/
-    background-image: linear-gradient(to left bottom, #ffffff, #ffc952);
+    background-image: linear-gradient(to left bottom, #ffffff, #faeccd, #f5da9f, #fcd47c, #ffc952);
     border-radius: 10px;
     padding: 20px;
     margin-bottom: 100px;
 }
+
 
 
 .nav {
@@ -169,6 +167,11 @@ div#dropdownMenuButton {
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
 }
 
+/* EVENTS TABLE */
+.dataTables_wrapper {
+
+}
+
 
 
 @media (min-width: 768px) {
@@ -188,13 +191,14 @@ div#dropdownMenuButton {
 }
 
 i.fas.fa-plus {
-    color: #FF0000;
+    color: red;
+    font-weight: bold;
 }
 
 
 #alertCancel {
-    color: #FF0000;
-    font-size: smaller;
+    color: red;
+    font-weight: bold;
 }
 
 .placeChoice {
@@ -204,24 +208,25 @@ i.fas.fa-plus {
     align-items: center;
     margin-bottom: 50px;
 }
-
-
 .contenantForm {
     background-color: rgba(20, 35, 64, 0.1);
-    padding-top: 0.5em;
-    padding-bottom : 0.5em;
-    border-radius: 10px!important;
-
+    padding: 1.5em;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    color : #142340;
 
 }
-
-.contenantForm form{
-    padding : 2em 2em 0em 2em;
+.contenantForm form {
+    padding: 2em 2em 0em 2em;
+    color : #142340;
+    border-radius: 10px;
 }
 
 div.modal-body {
-    margin : 10px;
+    margin: 10px;
 }
+
+
 
 
 /*!* Custom ScrollBar *!*/

@@ -104,8 +104,6 @@ class OutingController extends Controller
      */
     public function addSubscription($id, EntityManagerInterface $entityManager, Request $request)
     {
-        // Attributs
-
 
         // Récupération de la sortie
         $outingRepository = $entityManager->getRepository(Outing::class);
@@ -113,6 +111,7 @@ class OutingController extends Controller
 
         // Attributs pour conditions
         $numSubs = $outing->getSubscriptions();
+
         $maxSubs = $outing->getNumberMaxSub();
         $dateMaxSub = $outing->getLimitDateSub();
         $today = date('now');

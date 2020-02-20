@@ -209,7 +209,7 @@
                         console.log(response.status);
                         if (response.status == "nok") {
                             console.log('error');
-                            var linkCity = $("<p style=\"color:#FF0000;;\"> La ville n\'existe pas, ajoutez là ! <a href=\"{{ path('city') }}\" > <i class=\"fas fa-plus\" ></i></a></p>")
+                            var linkCity = $("<p style=\"color:red;font-size:bold;\"> La ville n\'existe pas, ajoutez là ! <a href=\"{{ path('city') }}\" > <i class=\"fas fa-plus\" ></i></a></p>")
                             $('#startForm').prepend(linkCity);
                         } else {
                             var option = $("<option>").attr("value", response.place.id);

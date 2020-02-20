@@ -17,13 +17,12 @@
 
     <h1>Bienvenue {{app.user.username}} !</h1>
 
-    <section id="section-filtre">
 
-
-        {% include 'includes/homeFilter.html.twig' with {form: form} only %}
-
-
-    </section>
+        <div class="container">
+                <div class="col-lg-12" id="section-filtre">
+                    {% include 'includes/homeFilter.html.twig' with {form: form} only %}
+                </div>
+        </div>
 
     <section id="section-tableau-sorties">
 
@@ -55,17 +54,18 @@
             <h3>{{ site.name }}</h3>
 
             {# Tableau des sorties #}
-            <table class="myTable" style="width:100%">
-                <thead>
-                <tr>
-                    <th>Nom de la sortie</th>
-                    <th>Date de la sortie</th>
-                    <th>Clôture</th>
-                    <th>Inscrits/Places</th>
-                    <th>Etat</th>
-                    <th>Déjà inscrit?</th>
-                    <th>Organisateur</th>
-                    <th>Actions</th>
+            <table id="myTable" data-toggle="table" data-click-to-select="false" data-sort-name="nom" data-pagination="false" data-sort-order="asc" data-maintain-selected="false" class="table table-bordered table-orderable table-striped">
+            <!--<table id="myTable" data-toggle="table" class="table table-bordered table-orderable table-striped" style="width:75%">-->
+                <thead class="thead-light">
+                <tr class="active">
+                    <th scope="col" data-field="nom" data-sortable="true">Nom de la sortie</th>
+                    <th scope="col" data-field="date" data-sortable="true">Date de la sortie</th>
+                    <th scope="col" data-field="cloture" data-sortable="true">Clôture</th>
+                    <th scope="col" data-field="inscrits" data-sortable="true">Inscrits/Places</th>
+                    <th scope="col" data-field="etat" data-sortable="true">Etat</th>
+                    <th scope="col" data-field="inscrit" data-sortable="true">Déjà inscrit?</th>
+                    <th scope="col" data-field="orga" data-sortable="true">Organisateur</th>
+                    <th scope="col" data-field="actions" data-sortable="true">Actions</th>
                 </tr>
                 </thead>
 
@@ -183,6 +183,7 @@
                             {% endif %}
                         {% endfor %}
 
+
 {#                         Annuler Version Workflow#}
                         {% for member in sortie.member %}
                         {% if (app.user == member
@@ -205,16 +206,19 @@
 {#                        {% endif %}#}
 
 
+
                         {# Modifier la sortie ? #}
                         {% for member in sortie.member %}
                         {% if (app.user == member
                             or app.user.roles == ['ROLE_ADMIN'])
-                            and sortie.state.label != "Annulée" %}
+                            and sortie.state.label != "Annulée"
+                            and sortie.state.label != "Clôturée" %}
                         <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>
                     </td>
 
-                        {% endif %}
-                        {% endfor %}
+                    {% endif %}
+                    {% endfor %}
+
 
 
                 </tr>
@@ -273,25 +277,41 @@
 
 
     </section>
-    {#    #}{#    <footer>#}
-    {#    #}{#        <div></div>#}
-    {#    #}{#        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>#}
+            <footer class="navbar-default"  style="text-align: center">
 
+               - Made with <i class="fas fa-heart"></i> by Push Push Team -
 
-    {#    #}{#    </footer>#}
+            </footer>
 
 
     <script src="{{ asset('js/table-animation.js') }}"></script>
 
+{#    <script type="text/javascript" charset="utf8"#}
+{#            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>#}
+
 {% endblock %}
 
 {% block script %}
-    <script>
-        $(document).ready(function () {
-            $('.myTable').DataTable();
-        });
-    </script>
 
+    <script type="text/javascript" charset="utf8"
+            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>
+    <script>
+        $(document).ready(function() {
+
+            /**
+             * Activation du tri sur toutes les colonnes du tableau
+             */
+            $('#myTable').DataTable({
+                columnDefs: [{
+                    orderable: true,
+                    targets: "_all",
+                }],
+                "searching": true
+            });
+             $('.dataTables_length').addClass('bs-select');
+        });
+
+    </script>
 
     <script>
         var url;
