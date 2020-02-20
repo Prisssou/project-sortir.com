@@ -14,25 +14,32 @@ h2, h3 {
 }
 
 /* Middle Out */
-.navbar-brand {
-    display: inline-block;
-    position: relative;
+.nav-link {
+    font-size: 20px;
+    color: #FFC952;
+
 
 }
 
-.navbar-brand:after {
+.nav-link:after {
     content: '';
     display: block;
     margin: auto;
     height: 2px;
     width: 0px;
+    color: #FFC952;
     background: transparent;
     transition: width .5s ease, background-color .5s ease;
 }
 
-.navbar-brand:hover:after {
+.nav-link:hover:after {
     width: 100%;
     background: #FFC952;
+    color: #FFC952;
+}
+
+.nav-link:hover {
+    color: #FFC952;
 }
 
 .btn-primary {
@@ -169,12 +176,10 @@ i.fas.fa-plus {
     font-size: smaller;
 }
 
-#placeChoice col-lg-8{
-    display : inline-flex;
+#placeChoice col-lg-8 {
+    display: inline-flex;
 
 }
-
-
 
 
 /*!* Custom ScrollBar *!*/
