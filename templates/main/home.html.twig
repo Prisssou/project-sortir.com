@@ -72,7 +72,7 @@
                     {% set today = "now"|date('m/d/Y') %}
                     {% set difference = date(today).diff(date(closingDate)) %}
                     {% set archivedDays = difference.days %}
-                    {% if archivedDays < 30 %}
+                    {#{% if archivedDays < 30 %}#}
 
                         {% if site.name == sortie.site %}
 
@@ -187,7 +187,7 @@
 
                             </tr>
                         {% endif %}
-                    {% endif %}
+                    {#{% endif %}#}
 
                 {% endfor %}
 

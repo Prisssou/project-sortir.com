@@ -34,6 +34,10 @@ class OutingType extends AbstractType
                 DateTimeType::class,
                 [
                     'label' => 'Date et heure de la sortie',
+                    'choice_translation_domain' => true,
+                    'widget' => 'single_text',
+                    'format' =>'dd/MM/yyyy H:mm',
+                    'html5' => false,
                 ]
             )
             ->add(
@@ -41,6 +45,10 @@ class OutingType extends AbstractType
                 DateType::class,
                 [
                     'label' => 'Date limite d\'inscription',
+                    'choice_translation_domain' => true,
+                    'widget' => 'single_text',
+                    'format' =>'dd/MM/yyyy H:mm',
+                    'html5' => false,
                 ]
             )
             ->add(
