@@ -153,6 +153,7 @@ div#dropdownMenuButton {
     text-align: center;
 }
 
+/* FORM */
 #box-shadow {
     padding-top: 20px;
     margin: 40px;
@@ -163,6 +164,10 @@ div#dropdownMenuButton {
     -o-box-shadow: 5px 5px 15px 2px #cfcfcf;
     box-shadow: 5px 5px 15px 2px #cfcfcf;
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
+}
+
+input #member_image_imagePath {
+    text-align: center;
 }
 
 /* EVENTS TABLE */
@@ -177,26 +182,9 @@ div#dropdownMenuButton {
 th {
     background-color: #142340 !important;
     color: #FFC952 !important;
-    font-family: 'Montserrat', sans-serif;
-    font-size: 15px;
-}
-td {
-    font-family: 'Montserrat', sans-serif;
-    font-size: 14px;
-}
-
-
-
-@media (min-width: 768px) {
-    .login-form {
-        margin-right: 18em;
-        margin-left: 18em;
-    }
-}
-
-@media only screen and (max-width: 600px) {
 
 }
+
 
 .btn blue-gradient btn-block btn-rounded z-depth-1a {
     background-color: #142340;
@@ -227,6 +215,11 @@ i.fas.fa-plus {
     margin-bottom: 20px;
     border-radius: 10px;
     color : #142340;
+    -moz-box-shadow: 5px 5px 15px 2px #cfcfcf;
+    -webkit-box-shadow: 5px 5px 15px 2px #cfcfcf;
+    -o-box-shadow: 5px 5px 15px 2px #cfcfcf;
+    box-shadow: 5px 5px 15px 2px #cfcfcf;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
 
 }
 .contenantForm form {
@@ -259,7 +252,16 @@ input {
     margin-bottom: 1.5em;
 }
 
+@media (min-width: 768px) {
+    .login-form {
+        margin-right: 18em;
+        margin-left: 18em;
+    }
+}
 
+@media only screen and (max-width: 600px) {
+
+}
 
 
 
