@@ -14,9 +14,9 @@
     {% endfor %}
 
 
-        <h1>Bienvenue sur Sortir.com !</h1>
+    <h1>Bienvenue sur Sortir.com !</h1>
 
-  <section id="section-filtre">
+    <section id="section-filtre">
 
 
         {% include 'includes/homeFilter.html.twig' with {form: form} only %}
@@ -163,7 +163,8 @@
                                         and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')
                                         and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
                                         and sortie.state.label != "Annulée" %}
-                                        <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se désister</a>
+                                        <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se
+                                            désister</a>
                                     {% endif %}
 
 
@@ -284,9 +285,9 @@
                 });
         });
 
-        $(document).ready( function () {
+        $(document).ready(function () {
             $('#table_id').DataTable();
-        } );
+        });
 
         // $(function () {
         //     $('#datetimepicker2a').datetimepicker();
