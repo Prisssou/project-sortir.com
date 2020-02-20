@@ -72,11 +72,11 @@
                 {% for sortie in sorties %}
 
                 <!-- CLOTURE DE LA SORTIE -->
-                {#                    {% set closingDate = sortie.closingDate|date('m/d/Y') %}#}
-                {#                    {% set today = "now"|date('m/d/Y') %}#}
-                {#                    {% set difference = date(today).diff(date(closingDate)) %}#}
-                {#                    {% set archivedDays = difference.days %}#}
-                {#                    {% if archivedDays < 30 %}#}
+                {% set closingDate = sortie.closingDate|date('m/d/Y') %}
+                {% set today = "now"|date('m/d/Y') %}
+                {% set difference = date(today).diff(date(closingDate)) %}
+                {% set archivedDays = difference.days %}
+                {% if archivedDays < 30 %}
 
                 {% if site.name == sortie.site %}
                 <tbody>
@@ -102,7 +102,7 @@
                             <span style="color: green; font-weight: bold">{{ sortie.subscriptions|length }}</span>/{{ sortie.numberMaxSub }}
                         </td>
 
-                    {% endif %}
+                        {% endif %}
 
                     {# Etat de la sortie #}
                     <td class="stateLabel">{{ sortie.state.label }}</td>
@@ -121,9 +121,6 @@
                     {% else %}
                         <td>Pas encore !</td>
                     {% endif %}
-
-
-
 
                     {# Organisateur #}
                     {% for member in sortie.member %}
@@ -186,87 +183,15 @@
                         {% endfor %}
 
 
-<<<<<<< HEAD
-                                {# Organisateur #}
-                                {% for member in sortie.member %}
-                                    <td>
-                                        <a href="{{ path('user_other_profile', {id: member.id}) }}">{{ member.username }}</a>
-                                    </td>
-                                {% endfor %}
-
-                                {# Actions possibles #}
-                                <td class="actions">
-                                    {# Afficher la sortie #}
-                                    <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
-
-                                    {# S'INSCRIRE #}
-                                    {% set subscribed = false %}
-                                    {% for subscription in app.user.subscriptions %}
-                                        {% for subscriptions in sortie.subscriptions %}
-                                            {% if subscription == subscriptions %}
-                                                {% set subscribed = true %}
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endfor %}
-                                    {% if subscribed == false
-                                        and sortie.subscriptions|length != sortie.numberMaxSub
-                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
-                                        and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y')
-                                        and sortie.state.label != "Annulée"
-                                        and sortie.state.label != "Passée" %}
-                                        <a href="{{ path('subscribe', {id: sortie.id}) }}" class="subscribeLink">S'inscrire</a>
-                                    {% endif %}
-
-                                    {# Se Désister #}
-                                    {% set subscribed = false %}
-                                    {% for subscription in app.user.subscriptions %}
-                                        {% for subscriptions in sortie.subscriptions %}
-                                            {% if subscription == subscriptions %}
-                                                {% set subscribed = true %}
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endfor %}
-
-                                    {% if  subscribed
-                                        and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')
-                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
-                                        and sortie.state.label != "Annulée" %}
-                                        <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se désister</a>
-                                    {% endif %}
-
-
-                                    {# Annuler la sortie en tant qu'organisateur ou qu'admin #}
-                                    {% for member in sortie.member %}
-                                        {% if (app.user == member
-                                            or app.user.roles == ['ROLE_ADMIN'])
-                                            and sortie.state.label != "Annulée" %}
-                                            <a href="{{ path('cancel', {id: sortie.id}) }}" data-toggle="modal"
-                                               data-target="#cancelModal" class="cancelLink">
-                                                Annuler </a>
-                                        {% endif %}
-                                    {% endfor %}
-
-
-
-                                    {# Modifier la sortie ? #}
-                                    {#                        <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>#}
-                                </td>
-
-
-                            </tr>
-                        {% endif %}
-                    {#{% endif %}#}
-=======
->>>>>>> ea2c45ce0a337aff9c5f039d6d686253b2d063db
 
                         {# Modifier la sortie ? #}
-                        {#                        <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>#}
+                        {# <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>#}
                     </td>
 
 
                 </tr>
                 {% endif %}
-                {#                    {% endif %}#}
+               {% endif %}
 
                 {% endfor %}
                 </tbody>
