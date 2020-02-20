@@ -54,7 +54,7 @@
             <h3>{{ site.name }}</h3>
 
             {# Tableau des sorties #}
-            <table style="width:100%">
+            <table id="myTable" style="width:100%">
                 <tr>
                     <th>Nom de la sortie</th>
                     <th>Date de la sortie</th>
@@ -68,11 +68,11 @@
 
                 {% for sortie in sorties %}
                     <!-- CLOTURE DE LA SORTIE -->
-                    {% set closingDate = sortie.closingDate|date('m/d/Y') %}
-                    {% set today = "now"|date('m/d/Y') %}
-                    {% set difference = date(today).diff(date(closingDate)) %}
-                    {% set archivedDays = difference.days %}
-                    {% if archivedDays < 30 %}
+{#                    {% set closingDate = sortie.closingDate|date('m/d/Y') %}#}
+{#                    {% set today = "now"|date('m/d/Y') %}#}
+{#                    {% set difference = date(today).diff(date(closingDate)) %}#}
+{#                    {% set archivedDays = difference.days %}#}
+{#                    {% if archivedDays < 30 %}#}
 
                         {% if site.name == sortie.site %}
 
@@ -142,8 +142,8 @@
                                     {% endfor %}
                                     {% if subscribed == false
                                         and sortie.subscriptions|length != sortie.numberMaxSub
-                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
-                                        and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y')
+                                        and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))
+                                        and date(sortie.limitDateSub|date('m/d/Y')) > date("now"|date('m/d/Y'))
                                         and sortie.state.label != "Annulée"
                                         and sortie.state.label != "Passée" %}
                                         <a href="{{ path('subscribe', {id: sortie.id}) }}" class="subscribeLink">S'inscrire</a>
@@ -161,7 +161,7 @@
 
                                     {% if  subscribed
                                         and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')
-                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
+                                        and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))
                                         and sortie.state.label != "Annulée" %}
                                         <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se désister</a>
                                     {% endif %}
@@ -187,7 +187,7 @@
 
                             </tr>
                         {% endif %}
-                    {% endif %}
+{#                    {% endif %}#}
 
                 {% endfor %}
 
@@ -247,12 +247,19 @@
 
 
     {#    #}{#    </footer>#}
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
 
     <script src="{{ asset('js/table-animation.js') }}"></script>
 
 {% endblock %}
 
 {% block script %}
+
+
 
     <script>
         var url;

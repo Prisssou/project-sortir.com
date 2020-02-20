@@ -68,7 +68,7 @@
         <div class="row mt-5">
 
             <h3>Liste des participants inscrits </h3>
-                <table class="table col-md-6">
+                <table  class="table col-md-6">
                     <thead>
                     <tr>
                         <th>Pseudo</th>
@@ -103,6 +103,11 @@
         </div>
     </div>
 
+    <script>
+        $(document).ready( function () {
+            $('#myTable').DataTable();
+        } );
+    </script>
 
 {% endblock %}
 
