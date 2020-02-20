@@ -54,7 +54,7 @@ class OutingType extends AbstractType
                 'duration',
                 IntegerType::class,
                 [
-                    'label' => 'Durée',
+                    'label' => 'Durée (en minutes)',
                 ]
             )
             ->add(
@@ -83,6 +83,7 @@ class OutingType extends AbstractType
                 EntityType::class,
                 [
                     'class' => Place::class,
+                    'label' => 'Lieu',
                     'choice_label' => function ($place) {
                         return $place->getName();
                     },
