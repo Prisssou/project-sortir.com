@@ -25,7 +25,7 @@ class MainController extends Controller
 
     /**
      * Permet de changer le status d'une sortie
-     * @Route("workflow/{status}/{id}", name="outing_workflow")
+     * @Route("/workflow/{status}/{id}", name="outing_workflow")
      * @param $status
      * @param Outing $outing
      * @param OutingWorkflowHandler $owh
@@ -51,6 +51,7 @@ class MainController extends Controller
 
         #Vérification par dump
         dump($owh);
+
 
         #Récupération du redirect
         $redirect = $request->get('redirect') ?? 'home';
@@ -95,6 +96,8 @@ class MainController extends Controller
 
         $sortiesFiltered = $sortieRepository->findSearch($data,$userId);
         $sorties = $sortiesFiltered;
+
+
 
 //        dump($workflow);
 

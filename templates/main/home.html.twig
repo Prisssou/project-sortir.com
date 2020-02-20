@@ -187,10 +187,11 @@
                         {% for member in sortie.member %}
                         {% if (app.user == member
                             or app.user.roles == ['ROLE_ADMIN']) %}
-                            {% if workflow_can(sortie, 'is_anulee') %}
+                            {% if workflow_can(sortie, 'is_annulee')%}
+                                <p>{{ dump(workflow_can(sortie, 'is_anulee')) }}</p>
                                 <a class="btn btn-primary" href="{{ path('outing_workflow', {
                                     'id' : sortie.id,
-                                    'status' : 'is_anulee',
+                                    'status' : 'is_annulee',
                                     'redirect' : app.request.get('_route')
                                 }) }}">
                                     {{ 'Annuler Workflow' | trans }}
@@ -198,6 +199,10 @@
                             {% endif %}
                         {% endif %}
                         {% endfor %}
+
+{#                        {% if 'Creee' in workflow_marked_places(sortie) %}#}
+{#                            <span class="label">ETAT PASSEE</span>#}
+{#                        {% endif %}#}
 
 
                         {# Modifier la sortie ? #}

@@ -25,12 +25,12 @@ framework:
                 to_Cloturee:
                     from: Ouverte
                     to: Cloturee
+                is_annulee:
+                    from: Creee
+                    to: Annulee
                 to_ActiviteEnCours:
                     from: Cloturee
                     to: ActiviteEnCours
-                is_anulee:
-                    from: [Creee, Ouverte, Cloturee]
-                    to: Annulee
                 to_Passee:
                     from: ActiviteEnCours
-                    to:   Passee
+                    to: Passee
