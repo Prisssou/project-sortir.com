@@ -14,7 +14,11 @@
     {% endfor %}
 
 
+<<<<<<< HEAD
     <h1>Bienvenue sur Sortir.com !</h1>
+=======
+    <h1>Bienvenue {{app.user.username}} !</h1>
+>>>>>>> 5a71cc9b064b7975cee024d23e170f045603b65a
 
     <section id="section-filtre">
 
@@ -54,7 +58,8 @@
             <h3>{{ site.name }}</h3>
 
             {# Tableau des sorties #}
-            <table style="width:100%">
+            <table class="myTable" style="width:100%">
+                <thead>
                 <tr>
                     <th>Nom de la sortie</th>
                     <th>Date de la sortie</th>
@@ -65,133 +70,141 @@
                     <th>Organisateur</th>
                     <th>Actions</th>
                 </tr>
+                </thead>
+
 
                 {% for sortie in sorties %}
-                    <!-- CLOTURE DE LA SORTIE -->
-                    {% set closingDate = sortie.closingDate|date('m/d/Y') %}
-                    {% set today = "now"|date('m/d/Y') %}
-                    {% set difference = date(today).diff(date(closingDate)) %}
-                    {% set archivedDays = difference.days %}
-                    {% if archivedDays < 30 %}
 
-                        {% if site.name == sortie.site %}
+                <!-- CLOTURE DE LA SORTIE -->
+                {% set closingDate = sortie.closingDate|date('m/d/Y') %}
+                {% set today = "now"|date('m/d/Y') %}
+                {% set difference = date(today).diff(date(closingDate)) %}
+                {% set archivedDays = difference.days %}
+                {% if archivedDays < 30 %}
 
-                            <tr>
-                                {# Titre de la sortie #}
-                                <td>{{ sortie.name }}</td>
-
-                                {# Date de la sortie #}
-                                <td>{{ sortie.startDate|date('d/m/Y à H:i') }}</td>
-
-                                {# Date de cloture de l'inscription #}
-                                <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
-
-                                {# Nb inscrits / Nb places #}
-                                {% if sortie.subscriptions|length == sortie.numberMaxSub %}
-                                    <td>
-                                        <span style="color: red; font-weight: bold">{{ sortie.subscriptions|length }}</span>/{{ sortie.numberMaxSub }}
-                                    </td>
-                                {% else %}
-                                    <td>
-                                        <span style="color: green; font-weight: bold">{{ sortie.subscriptions|length }}</span>/{{ sortie.numberMaxSub }}
-                                    </td>
-
-                                {% endif %}
-
-                                {# Etat de la sortie #}
-                                <td class="stateLabel">{{ sortie.state.label }}</td>
-
-                                {# Déjà Inscrit ? #}
-                                {% set subscribed = false %}
-                                {% for subscription in app.user.subscriptions %}
-                                    {% for subscriptions in sortie.subscriptions %}
-                                        {% if subscription == subscriptions %}
-                                            {% set subscribed = true %}
-                                        {% endif %}
-                                    {% endfor %}
-                                {% endfor %}
-                                {% if subscribed %}
-                                    <td> Oui</td>
-                                {% else %}
-                                    <td>Pas encore !</td>
-                                {% endif %}
+                {% if site.name == sortie.site %}
+                <tbody>
 
 
+                <tr>
+                    {# Titre de la sortie #}
+                    <td>{{ sortie.name }}</td>
 
+                    {# Date de la sortie #}
+                    <td>{{ sortie.startDate|date('d/m/Y à H:i') }}</td>
 
-                                {# Organisateur #}
-                                {% for member in sortie.member %}
-                                    <td>
-                                        <a href="{{ path('user_other_profile', {id: member.id}) }}">{{ member.username }}</a>
-                                    </td>
-                                {% endfor %}
+                    {# Date de cloture de l'inscription #}
+                    <td>{{ sortie.closingDate|date('d/m/Y') }}</td>
 
-                                {# Actions possibles #}
-                                <td class="actions">
-                                    {# Afficher la sortie #}
-                                    <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
+                    {# Nb inscrits / Nb places #}
+                    {% if sortie.subscriptions|length == sortie.numberMaxSub %}
+                        <td>
+                            <span style="color: red; font-weight: bold">{{ sortie.subscriptions|length }}</span>/{{ sortie.numberMaxSub }}
+                        </td>
+                    {% else %}
+                        <td>
+                            <span style="color: green; font-weight: bold">{{ sortie.subscriptions|length }}</span>/{{ sortie.numberMaxSub }}
+                        </td>
 
-                                    {# S'INSCRIRE #}
-                                    {% set subscribed = false %}
-                                    {% for subscription in app.user.subscriptions %}
-                                        {% for subscriptions in sortie.subscriptions %}
-                                            {% if subscription == subscriptions %}
-                                                {% set subscribed = true %}
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endfor %}
-                                    {% if subscribed == false
-                                        and sortie.subscriptions|length != sortie.numberMaxSub
-                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
-                                        and sortie.limitDateSub|date('d/m/Y') > "now"|date('d/m/Y')
-                                        and sortie.state.label != "Annulée"
-                                        and sortie.state.label != "Passée" %}
-                                        <a href="{{ path('subscribe', {id: sortie.id}) }}" class="subscribeLink">S'inscrire</a>
-                                    {% endif %}
-
-                                    {# Se Désister #}
-                                    {% set subscribed = false %}
-                                    {% for subscription in app.user.subscriptions %}
-                                        {% for subscriptions in sortie.subscriptions %}
-                                            {% if subscription == subscriptions %}
-                                                {% set subscribed = true %}
-                                            {% endif %}
-                                        {% endfor %}
-                                    {% endfor %}
-
-                                    {% if  subscribed
-                                        and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')
-                                        and sortie.closingDate|date('d/m/Y') > "now"|date('d/m/Y')
-                                        and sortie.state.label != "Annulée" %}
-                                        <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se
-                                            désister</a>
-                                    {% endif %}
-
-
-                                    {# Annuler la sortie en tant qu'organisateur ou qu'admin #}
-                                    {% for member in sortie.member %}
-                                        {% if (app.user == member
-                                            or app.user.roles == ['ROLE_ADMIN'])
-                                            and sortie.state.label != "Annulée" %}
-                                            <a href="{{ path('cancel', {id: sortie.id}) }}" data-toggle="modal"
-                                               data-target="#cancelModal" class="cancelLink">
-                                                Annuler </a>
-                                        {% endif %}
-                                    {% endfor %}
-
-
-
-                                    {# Modifier la sortie ? #}
-                                    {#                        <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>#}
-                                </td>
-
-
-                            </tr>
-                        {% endif %}
                     {% endif %}
 
-                {% endfor %}
+                    {# Etat de la sortie #}
+                    <td class="stateLabel">{{ sortie.state.label }}</td>
 
+                    {# Déjà Inscrit ? #}
+                    {% set subscribed = false %}
+                    {% for subscription in app.user.subscriptions %}
+                        {% for subscriptions in sortie.subscriptions %}
+                            {% if subscription == subscriptions %}
+                                {% set subscribed = true %}
+                            {% endif %}
+                        {% endfor %}
+                    {% endfor %}
+                    {% if subscribed %}
+                        <td> Oui</td>
+                    {% else %}
+                        <td>Pas encore !</td>
+                    {% endif %}
+
+                    {# Organisateur #}
+                    {% for member in sortie.member %}
+                        <td>
+                            <a href="{{ path('user_other_profile', {id: member.id}) }}">{{ member.username }}</a>
+                        </td>
+                    {% endfor %}
+
+                    {# Actions possibles #}
+                    <td class="actions">
+                        {# Afficher la sortie #}
+                        <a href="{{ path('detail', {id: sortie.id}) }}">Afficher</a>
+
+
+                        {# S'INSCRIRE #}
+                        {% set subscribed = false %}
+                        {% for subscription in app.user.subscriptions %}
+                            {% for subscriptions in sortie.subscriptions %}
+                                {% if subscription == subscriptions %}
+                                    {% set subscribed = true %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+                        {% if subscribed == false
+                            and sortie.subscriptions|length != sortie.numberMaxSub
+                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))
+                            and date(sortie.limitDateSub|date('m/d/Y')) > date("now"|date('m/d/Y'))
+                            and sortie.state.label != "Annulée"
+                            and sortie.state.label != "Passée" %}
+                            <a href="{{ path('subscribe', {id: sortie.id}) }}" class="subscribeLink">S'inscrire</a>
+                        {% endif %}
+
+                        {# Se Désister #}
+                        {% set subscribed = false %}
+                        {% for subscription in app.user.subscriptions %}
+                            {% for subscriptions in sortie.subscriptions %}
+                                {% if subscription == subscriptions %}
+                                    {% set subscribed = true %}
+                                {% endif %}
+                            {% endfor %}
+                        {% endfor %}
+
+                        {% if  subscribed
+                            and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')
+                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))
+                            and sortie.state.label != "Annulée" %}
+                            <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se désister</a>
+                        {% endif %}
+
+
+                        {# Annuler la sortie en tant qu'organisateur ou qu'admin #}
+                        {% for member in sortie.member %}
+                            {% if (app.user == member
+                                or app.user.roles == ['ROLE_ADMIN'])
+                                and sortie.state.label != "Annulée" %}
+                                <a href="{{ path('cancel', {id: sortie.id}) }}" data-toggle="modal"
+                                   data-target="#cancelModal" class="cancelLink">
+                                    Annuler </a>
+                            {% endif %}
+                        {% endfor %}
+                        
+
+                        {# Modifier la sortie ? #}
+                        {% for member in sortie.member %}
+                        {% if (app.user == member
+                            or app.user.roles == ['ROLE_ADMIN'])
+                            and sortie.state.label != "Annulée" %}
+                        <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>
+                    </td>
+
+                        {% endif %}
+                        {% endfor %}
+
+
+                </tr>
+                {% endif %}
+                {% endif %}
+
+                {% endfor %}
+                </tbody>
             </table>
             </div>
             </div>
@@ -249,11 +262,18 @@
 
     {#    #}{#    </footer>#}
 
+
     <script src="{{ asset('js/table-animation.js') }}"></script>
 
 {% endblock %}
 
 {% block script %}
+    <script>
+        $(document).ready(function () {
+            $('.myTable').DataTable();
+        });
+    </script>
+
 
     <script>
         var url;

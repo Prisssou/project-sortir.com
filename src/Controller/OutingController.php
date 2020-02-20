@@ -84,7 +84,6 @@ class OutingController extends Controller
         // Récupération de la sortie
         $outingRepository = $entityManager->getRepository(Outing::class);
         $outing = $outingRepository->find($id);
-        dump($outing);
 
         // Récupération de la liste des participants
         $subscriptionRepository = $entityManager->getRepository(Subscription::class);
@@ -114,7 +113,6 @@ class OutingController extends Controller
 
         // Attributs pour conditions
         $numSubs = $outing->getSubscriptions();
-        dump($numSubs);
         $maxSubs = $outing->getNumberMaxSub();
         $dateMaxSub = $outing->getLimitDateSub();
         $today = date('now');
@@ -216,6 +214,49 @@ class OutingController extends Controller
             'outing' => $outing,
         ]);
 
+    }
+
+    /**
+     * @Route("edit/{id}", name="edit")
+     *
+     */
+    public function editOuting($id, EntityManagerInterface $em, Request $request)
+    {
+        // Récupération de la sortie
+        $outingRepository = $em->getRepository(Outing::class);
+        $outing = $outingRepository->find($id);
+
+        // Formulaire de modification de profil
+        $outingForm = $this->createForm(OutingType::class, $outing);
+        $outingForm->handleRequest($request);
+
+        // Formulaire de modification de la place
+        $place = $outing->getPlace();
+        $placeForm = $this->createForm(PlaceType::class, $place);
+        $placeForm->handleRequest($request);
+
+        if($outingForm->isSubmitted()) {
+
+            $outing->setClosingDate($outing->getLimitDateSub());
+
+            $this->addFlash(
+                'success',
+                'Sortie modifiée avec succès'
+            );
+
+            $em->persist($outing);
+            $em->flush();
+
+            return $this->redirectToRoute("home");
+        }
+
+        return $this->render(
+            'outing/edit.html.twig',
+            [
+                'outingFormView' => $outingForm->createView(),
+                'placeFormView' => $placeForm->createView(),
+            ]
+        );
     }
 
 }

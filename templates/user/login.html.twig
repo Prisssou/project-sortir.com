@@ -29,10 +29,12 @@
 
             </span>
             </button>
-            <a class="navbar-brand" href="#">Logo</a>
+            <a class="nav-link" href="{{ path('home') }}"><img id="logo" src="{{ asset('img/favicon/command.png') }}"
+                                                               alt="logo"></a>
 
             <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+
                     <li class="nav-item">
                         <a class="nav-link" href="#">Connexion</a>
                     </li>
@@ -43,7 +45,7 @@
 
         {#                 FORM #}
         <div>
-            <div  class="row justify-content-center">
+            <div class="row justify-content-center">
 
                 <!-- Grid column -->
                 <div class="col-md-10 col-lg-8 col-xl-5 mb-4">
@@ -51,7 +53,7 @@
                     <form action="{{ path('user_login') }}" method="post">
 
                         <!--Form without header-->
-                        <div id="loginForm" class="card" style="background-color: rgba(20, 35, 64, 0.1);">
+                        <div id="loginForm" class="card" style="background-color: rgba(20, 35, 64, 0.1); border-radius: 10px;">
 
                             <div class="card-body mx-4">
 
@@ -71,7 +73,8 @@
 
                                 <div class="md-form pb-3 mt-5">
                                     <label for="password">Mot de passe</label>
-                                    <input class="input-form form-control" type="password" id="password" name="_password" required/>
+                                    <input class="input-form form-control" type="password" id="password"
+                                           name="_password" required/>
                                 </div>
 
 
@@ -126,74 +129,16 @@
     </div>
 
 
-
-
-    {#    <div id="spacing-div"></div>#}
-    {#    <h1 class="lobster-align">Viens donc te connecter ici!👇</h1>#}
-    {#    <div id="spacing-div"></div>#}
-    {#    <div id="spacing-div"></div>#}
-    {#    <div class="d-flex justify-content-center mb-3">#}
-
-{#    <div class="container">#}
-{#        <div class="d-flex justify-content-center mb-3">#}
-
-
-{#            <form action="{{ path('user_login') }}" method="post">#}
-{#                <div class="row">#}
-{#                    <div class="col">#}
-{#                        <label for="username">Identifiant:</label>#}
-{#                        <div class="col no-padding">#}
-{#                            <input class="input-form" type="text" id="username" name="_username"#}
-{#                                   value="{{ last_username }}" required/>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-
-
-{#                <div class="row">#}
-{#                    <div class="col">#}
-{#                        <label for="password">Mot de passe:</label>#}
-{#                        <div class="col no-padding">#}
-{#                            <input class="input-form" type="password" id="password" name="_password" required/>#}
-{#                        </div>#}
-{#                    </div>#}
-{#                </div>#}
-{#                Remember me#}
-{#                <div class="row">#}
-{#                    <div class="col">#}
-{#                        <input type="checkbox" id="remember_me" name="_remember_me" checked/>#}
-{#                        <label for="remember_me">Se souvenir de moi</label>#}
-
-{#                    </div>#}
-
-{#                </div>#}
-
-
-{#                If you want to control the URL the user#}
-{#                is redirected to on success (more details below)#}
-{#                <input type="hidden" name="_target_path" value="/account"/>#}
-
-
-{#                <div id="spacing-div"></div>#}
-
-{#                <div class="row">#}
-{#                    <div class="col">#}
-{#                        <input type="hidden" name="_target_path" value="{{ url('home') }}"/>#}
-{#                        <button type="submit" class="btn btn-primary">Se connecter</button>#}
-{#                    </div>#}
-{#                </div>#}
-
-
-                {% if error %}
-                    <div class="row">
-                        <div class="col">
-                            <div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-                        </div>
-                    </div>
-                    <div id="spacing-div"></div>
-                {% endif %}
-            </form>
+    {% if error %}
+        <div class="row">
+            <div class="col">
+                <div class="alert-error">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+            </div>
         </div>
+        <div id="spacing-div"></div>
+    {% endif %}
+    </form>
+    </div>
     </div>
     </div>
 

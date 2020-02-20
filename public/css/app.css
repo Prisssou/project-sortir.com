@@ -13,6 +13,12 @@ h2, h3 {
     padding-bottom: 1em;
 }
 
+div.modal-header{
+    color: #142340;
+    padding-bottom: 1em;
+    text-align: center;
+}
+
 /* Middle Out */
 .nav-link {
     font-size: 20px;
@@ -62,13 +68,13 @@ h2, h3 {
     font-weight: bold;
 
 }
-
+/* AFFICHER UNE SORTIE RECAP */
 .recap {
     /*background-image: linear-gradient(to left bottom, #ffffff, #faeccd, #f5da9f, #fcd47c, #ffc952);*/
     background-image: linear-gradient(to left bottom, #ffffff, #ffc952);
     border-radius: 10px;
     padding: 20px;
-    margin-bottom: 20px;
+    margin-bottom: 100px;
 }
 
 
@@ -107,6 +113,18 @@ div#dropdownMenuButton {
     border-radius: 50%;
     box-shadow: 1px 1px rgba(199, 188, 188, 0.1);
 
+}
+
+#avatarNav {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 50%;
+    box-shadow: 1px 1px rgba(199, 188, 188, 0.1);
+}
+
+#dropdownMenuButton {
+    background-color: rgba(20, 35, 64, 0);
 }
 
 /* PREVIEW IMAGE */
@@ -151,6 +169,8 @@ div#dropdownMenuButton {
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
 }
 
+
+
 @media (min-width: 768px) {
     .login-form {
         margin-right: 18em;
@@ -185,9 +205,22 @@ i.fas.fa-plus {
     margin-bottom: 50px;
 }
 
+
 .contenantForm {
     background-color: rgba(20, 35, 64, 0.1);
-    padding-top: 20px;
+    padding-top: 0.5em;
+    padding-bottom : 0.5em;
+    border-radius: 10px!important;
+
+
+}
+
+.contenantForm form{
+    padding : 2em 2em 0em 2em;
+}
+
+div.modal-body {
+    margin : 10px;
 }
 
 

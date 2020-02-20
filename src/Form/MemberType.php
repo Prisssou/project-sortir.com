@@ -95,11 +95,6 @@ class MemberType extends AbstractType
                     'label' => ' ',
                     'mapped' => false,
                     'constraints' => [
-                        new NotBlank(
-                            [
-                                'message' => 'Merci d\'entrer un mot de passe',
-                            ]
-                        ),
                         new Length(
                             [
                                 'min' => 8,
