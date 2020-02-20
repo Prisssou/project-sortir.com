@@ -10,18 +10,20 @@
 
 <div class="container">
     <div class="row">
-        <div class="col-lg-4">
+        <div class="col-lg-2">
 
             {# Todo : ajouter upload image #}
 
         </div>
 
-        <div class="col-lg-4">
+        <div class="col-lg-8">
             {{ form_start(outingFormView) }}
 
             {{ form_label(outingFormView.name) }}
             {{ form_widget(outingFormView.name) }}
             {{ form_errors(outingFormView.name) }} <br>
+
+
 
             {{ form_label(outingFormView.startDate) }}
             {{ form_widget(outingFormView.startDate) }}
@@ -40,31 +42,38 @@
             {{ form_errors(outingFormView.duration) }} minutes <br>
 
             {{ form_label(outingFormView.description) }}
-            {{ form_widget(outingFormView.description) }}
+            {{ form_widget(outingFormView.description)}}
             {{ form_errors(outingFormView.description) }} <br>
 
             {{ form_label(outingFormView.ville) }}
             {{ form_widget(outingFormView.ville) }}
             {{ form_errors(outingFormView.ville) }} <br>
 
+            <div class="placeChoice col-lg-8">
+
             {{ form_label(outingFormView.place) }}
             {{ form_widget(outingFormView.place) }}
-            {{ form_errors(outingFormView.place) }} <br>
+            {{ form_errors(outingFormView.place) }}
 
-            <div class="col-sm-12 text-center">
 
-                <input class="btn btn-primary" type="submit" name="submitAction" value="Enregistrer">
-                <input class="btn btn-primary" type="submit" name="submitAction" value="Publier">
-                <input class="btn btn-primary" type="submit" value="Annuler">
-
-                {{ form_end(outingFormView) }}
+            <button type="button"  class="btn blue-gradient btn-block btn-rounded z-depth-1a" data-toggle="modal" data-target="#placeForm">
+                <i class="fas fa-plus-circle"></i>
+            </button><br>
 
             </div>
 
-            <!-- Button trigger modal -->
-            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#placeForm">
-                <i class="fas fa-plus-circle"></i>
-            </button>
+            <div class="col-sm-12 text-center">
+
+                <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" type="submit" name="submitAction" value="Enregistrer"><br>
+                <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" type="submit" name="submitAction" value="Publier"><br>
+
+                {{ form_end(outingFormView) }}
+
+                <a href="{{ path('home') }}" ><input class="btn blue-gradient btn-block btn-rounded z-depth-1a" type="submit" value="Annuler"></a><br>
+
+            </div>
+
+
 
             <!-- Modal -->
             <div class="modal fade bd-example-modal-xl" id="placeForm" tabindex="-1" role="dialog"
@@ -115,9 +124,9 @@
                                     {{ form_errors(placeFormView.longitude) }} <br>
 
                                     <div class="modal-footer">
-                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Fermer
+                                        <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a">Enregistrer</button>
+                                        <button type="button" class="btn blue-gradient btn-block btn-rounded z-depth-1a" data-dismiss="modal">Fermer
                                         </button>
-                                        <button type="submit" class="btn btn-primary">Enregistrer</button>
                                     </div>
 
                                     {{ form_end(placeFormView) }}
@@ -136,7 +145,7 @@
             </div>
 
 
-            <div class="col-lg-4">
+            <div class="col-lg-2">
 
 
             </div>
