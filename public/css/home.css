@@ -1,20 +1,20 @@
-    @font-face {
-        font-family: 'welcome';
-        src: url('welcome_2019-webfont.woff2') format('woff2'),
-        url('welcome_2019-webfont.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
+@font-face {
+    font-family: 'welcome';
+    src: url('welcome_2019-webfont.woff2') format('woff2'),
+    url('welcome_2019-webfont.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
-    }
+}
 
-    @font-face {
-        font-family: 'averta';
-        src: url('Averta.woff2') format('woff2'),
-        url('Averta.woff') format('woff');
-        font-weight: normal;
-        font-style: normal;
+@font-face {
+    font-family: 'averta';
+    src: url('Averta.woff2') format('woff2'),
+    url('Averta.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
 
-    }
+}
 
     html, body {
         height: 100%;
@@ -31,7 +31,7 @@
         color: #FFC952;
         background-color: #142340;
         text-align: center;
-        padding-top: 1em;
+        /*padding-top: 1em;*/
     }
 
     .full-height h1 {
@@ -41,13 +41,16 @@
         background-color: #142340;
         font-size: 10em;
         /*text-align: center;*/
+        padding-top: 100px;
+        padding-bottom: 50px;
 
     }
 
     .full-height p {
-        font-size: 4em;
+        font-size: 2em;
         font-family: 'Playfair Display', serif;
         font-style: italic;
+        padding-bottom: 50px;
     }
 
     .typing {
