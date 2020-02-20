@@ -14,15 +14,13 @@
     {% endfor %}
 
 
-    <h1>Bienvenue sur Sortir.com !</h1>
+        <h1>Bienvenue sur Sortir.com !</h1>
 
-    <section id="section-filtre">
-
-
-        {% include 'includes/homeFilter.html.twig' with {form: form} only %}
-
-
-    </section>
+        <div class="container">
+                <div class="col-lg-12" id="section-filtre">
+                    {% include 'includes/homeFilter.html.twig' with {form: form} only %}
+                </div>
+        </div>
 
     <section id="section-tableau-sorties">
 
@@ -182,17 +180,16 @@
                             {% endif %}
                         {% endfor %}
 
-
-
                         {# Modifier la sortie ? #}
                         {% for member in sortie.member %}
                         {% if (app.user == member
                             or app.user.roles == ['ROLE_ADMIN'])
-                            and sortie.state.label != "Annulée" %}
+                            and sortie.state.label != "Annulée"
+                            and sortie.state.label != "Clôturée" %}
                         <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>
                     </td>
-                        {% endif %}
-                        {% endfor %}
+                    {% endif %}
+                    {% endfor %}
 
 
                 </tr>
@@ -251,12 +248,11 @@
 
 
     </section>
-    {#    #}{#    <footer>#}
-    {#    #}{#        <div></div>#}
-    {#    #}{#        Icons made by <a href="https://www.flaticon.com/authors/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.com/" title="Flaticon"> www.flaticon.com</a>#}
+            <footer class="navbar-default"  style="text-align: center">
 
+               - Made with <i class="fas fa-heart"></i> by Push Push Team -
 
-    {#    #}{#    </footer>#}
+            </footer>
 
 
     <script src="{{ asset('js/table-animation.js') }}"></script>
