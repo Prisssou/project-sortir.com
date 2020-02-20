@@ -5,21 +5,29 @@
 
     <div class="container">
         <div class="row">
-            <div class="col-lg-4">
-{#                <img id="image-create" src="{{ asset('img/articleimage.png') }}" alt="">#}
-                <img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image.url) }}" alt="avatar">
+            <div class="col-lg-4 text-center">
 
+                <!-- AFFICHAGE DE L'AVATAR -->
+                {% if app.user.image.url is defined %}
+                    <img id="avatar" src="{{ asset('uploads/images/' ~ app.user.image.url) }}" alt="avatar">
+
+
+                {% else %}
+                    <img id="avatar" src="{{ asset('img/ninja.png') }}" alt="avatar">
+                {% endif %}
+                <!-- FORM -->
                 {{ form_start(memberFormView) }}
-                {# Image + Upload #}
 
+                <!-- UPLOAD AVATAR -->
                 {{ form_label(memberFormView.image) }}
+                <!-- PREVIEW IMAGE W/ JS -->
                 {{ form_widget(memberFormView.image) }}
                 <div id="image-holder"></div>
                 {{ form_errors(memberFormView.image) }} <br>
 
             </div>
 
-                <div class="col-lg-8">
+            <div class="col-lg-8">
 
 
                 {{ form_label(memberFormView.username) }}
@@ -55,13 +63,15 @@
                 {{ form_errors(memberFormView.site) }} <br>
 
 
-
             </div>
 
         </div>
-        <div class="col-sm-12 text-center">
-            <input class="btn btn-primary" type="submit" value="Enregistrer">
-            <a href="{{ path('home') }}"><input class="btn btn-primary" type="button" value="Annuler"></a>
+        <div>
+
+        </div>
+        <div class="col-sm-12 col-md-8 offset-md-4 text-center">
+            <input class="btn w-50 mt-4 mb-4" type="submit" value="Enregistrer" style="background-color: #142340; color: #FFC952;">
+            <a href="{{ path('home') }}"><input class="btn w-50 mb-4" type="button" value="Annuler" style="background-color: #142340; color: #FFC952;"></a>
         </div>
 
 
@@ -69,9 +79,10 @@
 
     </div>
 
+    <!-- SCRIPT PREVIEW IMAGE -->
     <script>
-        $(document).ready(function() {
-            $("#member_image_imagePath").on('change', function() {
+        $(document).ready(function () {
+            $("#member_image_imagePath").on('change', function () {
                 //Get count of selected files
                 var countFiles = $(this)[0].files.length;
                 var imgPath = $(this)[0].value;
@@ -79,12 +90,11 @@
                 var image_holder = $("#image-holder");
                 image_holder.empty();
                 if (extn == "gif" || extn == "png" || extn == "jpg" || extn == "jpeg") {
-                    if (typeof(FileReader) != "undefined") {
+                    if (typeof (FileReader) != "undefined") {
                         //loop for each file selected for uploaded.
-                        for (var i = 0; i < countFiles; i++)
-                        {
+                        for (var i = 0; i < countFiles; i++) {
                             var reader = new FileReader();
-                            reader.onload = function(e) {
+                            reader.onload = function (e) {
                                 $("<img />", {
                                     "src": e.target.result,
                                     "class": "thumb-image"

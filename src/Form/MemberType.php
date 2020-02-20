@@ -130,7 +130,7 @@ class MemberType extends AbstractType
                 'image',
                 ImageType::class,
                 [
-                    'label' => 'Avatar :  ',
+                    'label' => 'Vous souhaitez changer d\'avatar ?  ',
 //
 //                    // unmapped means that this field is not associated to any entity property
                     'mapped' => false,
