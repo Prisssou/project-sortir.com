@@ -181,6 +181,14 @@ class OutingController extends Controller
             ['outing' => 'ASC']
         );
 
+        $numSubs = $outing->getSubscriptions();
+        $maxSubs = $outing->getNumberMaxSub();
+        $currentState = $outing->getStatus();
+        if(sizeof($numSubs)-1 < $maxSubs && $currentState == 'Cloturee'){
+            $outing->setStatus('Ouverte');
+            $em->persist($outing);
+        }
+
         $em->remove($subscription[0]);
         $em->flush();
 

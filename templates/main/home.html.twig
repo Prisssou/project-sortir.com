@@ -194,11 +194,13 @@
                             {% endfor %}
                         {% endfor %}
 
-                        {% if  subscribed
-                            and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')
-                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))
-                            and sortie.state.label != "Annulée" %}
+                        {% if  subscribed %}
+{#                            and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')#}
+{#                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))#}
+{#                            and sortie.state.label != "Annulée" %}#}
+                        {% if workflow_can(sortie, 're_Ouverte') or sortie.status == 'Ouverte' %}
                             <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se désister</a>
+                        {% endif %}
                         {% endif %}
 
 

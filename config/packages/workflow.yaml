@@ -25,6 +25,9 @@ framework:
                 to_Cloturee:
                     from: Ouverte
                     to: Cloturee
+                re_Ouverte:
+                    from: Cloturee
+                    to: Ouverte
                 is_annulee:
                     from: [Creee, Ouverte, Cloturee]
                     to: Annulee
