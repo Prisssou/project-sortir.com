@@ -1,20 +1,20 @@
 <?php
 
 namespace App\Controller;
-
-use App\Entity\City;
-use App\Entity\Event;
-use App\Entity\Inscription;
-use App\Entity\Place;
-use App\Entity\Site;
-use App\Entity\User;
-use App\Form\EventType;
-use App\Form\PlaceType;
-use Doctrine\ORM\EntityManagerInterface;
-use Geocoder\Provider\GoogleMaps\GoogleMaps;
-use Geocoder\Query\GeocodeQuery;
-use GuzzleHttp\Client as GuzzleClient;
-use Http\Adapter\Guzzle6\Client;
+//
+//use App\Entity\City;
+//use App\Entity\Event;
+//use App\Entity\Inscription;
+//use App\Entity\Place;
+//use App\Entity\Site;
+//use App\Entity\User;
+//use App\Form\EventType;
+//use App\Form\PlaceType;
+//use Doctrine\ORM\EntityManagerInterface;
+//use Geocoder\Provider\GoogleMaps\GoogleMaps;
+//use Geocoder\Query\GeocodeQuery;
+//use GuzzleHttp\Client as GuzzleClient;
+//use Http\Adapter\Guzzle6\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
