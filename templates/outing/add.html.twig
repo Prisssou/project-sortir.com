@@ -8,68 +8,49 @@
 <h1> Créer une sortie <i class="fas fa-pizza-slice"></i>
 </h1>
 
-<div class="container justify-content-center">
-        <div class="col-lg-2"></div>
-        <div class="contenantForm col-lg-8 align-self-center" style="border-radius: 10px;">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-2">
+
+        </div>
+
+        <div class="contenantForm col-lg-8"  >
             {{ form_start(outingFormView) }}
-            <div class="row justify-content-start">
-            <div class="col-lg-5">
-                {{ form_widget(outingFormView.name) }}
-                {{ form_errors(outingFormView.name) }} <br>
-            </div>
-            </div>
+
+            {{ form_label(outingFormView.name) }}
+            {{ form_widget(outingFormView.name) }}
+            {{ form_errors(outingFormView.name) }} <br>
 
 
-            <div class="row justify-content-start">
-            <div class="col-lg-6 form-group">
-                <div class="input-group date picker" id="datetimepicker2c" data-target-input="nearest">
-                    {{ form_widget(outingFormView.startDate) }}
-                    {{ form_errors(outingFormView.startDate) }}
+            {{ form_label(outingFormView.startDate) }}
+            {{ form_widget(outingFormView.startDate) }}
+            {{ form_errors(outingFormView.startDate) }} <br>
 
-                    <div class="input-group-append" data-target="#datetimepicker2c"
-                         data-toggle="datetimepicker" style="height: 38px">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
-            </div>
+            {{ form_label(outingFormView.limitDateSub) }}
+            {{ form_widget(outingFormView.limitDateSub) }}
+            {{ form_errors(outingFormView.limitDateSub) }} <br>
 
-
-            <div class="col-lg-5 form-group">
-                <div class="input-group date picker" id="datetimepicker2d" data-target-input="nearest">
-                    {{ form_widget(outingFormView.limitDateSub) }}
-                    {{ form_errors(outingFormView.limitDateSub) }}
-
-                    <div class="input-group-append" data-target="#datetimepicker2d"
-                         data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-
-
-                </div>
-            </div>
-            </div>
-            <div class="row justify-content-start">
-            <div class="col-lg-4">
+            {{ form_label(outingFormView.numberMaxSub) }}
             {{ form_widget(outingFormView.numberMaxSub) }}
             {{ form_errors(outingFormView.numberMaxSub) }} <br>
-            </div>
-            <div class="col-lg-4">
+
+            {{ form_label(outingFormView.duration) }}
             {{ form_widget(outingFormView.duration) }}
-            {{ form_errors(outingFormView.duration) }} <br>
-            </div>
-            </div>
-            <div class="row justify-content-start">
-            <div class="col-lg-7">
+            {{ form_errors(outingFormView.duration) }}  <br>
+
+            {{ form_label(outingFormView.description) }}
             {{ form_widget(outingFormView.description) }}
             {{ form_errors(outingFormView.description) }} <br>
-            </div>
-            </div>
-            <div class="col-lg-4">
+
+            {{ form_label(outingFormView.ville) }}
             {{ form_widget(outingFormView.ville) }}
             {{ form_errors(outingFormView.ville) }}<br><br>
-            </div>
 
-            <div class="col-lg-4 placeChoice">
+            {{ form_label(outingFormView.place) }}
+
+            <div class="placeChoice">
+
+
                 {{ form_widget(outingFormView.place) }}
                 {{ form_errors(outingFormView.place) }}
 
@@ -82,22 +63,21 @@
             </div>
 
             <div class="col-sm-12 text-center">
+
                 <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
     color: #FFC952;" type="submit" name="submitAction" value="Enregistrer"><br>
                 <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
     color: #FFC952;" type="submit" name="submitAction"
                        value="Publier"><br>
+
                 {{ form_end(outingFormView) }}
 
-            </div>
-
-            <div class="col-sm-12 text-center" style="padding-left:3em; padding-right: 3em">
-                <a href="{{ path('home') }}"><input
-                            class="btn blue-gradient btn-block btn-rounded z-depth-1a"
-                            style="background-color: #142340;
+                <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a"
+                                                    style="background-color: #142340;
     color: #FFC952;" type="submit" value="Annuler"></a><br>
 
             </div>
+
 
             <!-- Modal -->
             <div class="modal fade bd-example-modal-xl" id="placeForm" tabindex="-1" role="dialog"
@@ -111,32 +91,39 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="row align-items-center">
-                                <div class="contenantForm col-lg-6">
+                            <div class="row">
+                                <div class="contenantForm col-lg-6" >
 
 
                                     {# partie formulaire#}
 
                                     {{ form_start(placeFormView, {'attr': {'id': 'startForm'}}) }}
 
+                                    {{ form_label(placeFormView.adresse) }}
                                     {{ form_widget(placeFormView.adresse) }}
                                     {{ form_errors(placeFormView.adresse) }} <br>
 
+                                    {{ form_label(placeFormView.name) }}
                                     {{ form_widget(placeFormView.name) }}
                                     {{ form_errors(placeFormView.name) }} <br>
 
+                                    {{ form_label(placeFormView.street) }}
                                     {{ form_widget(placeFormView.street) }}
                                     {{ form_errors(placeFormView.street) }} <br>
 
+                                    {{ form_label(placeFormView.zipcode) }}
                                     {{ form_widget(placeFormView.zipcode) }}
                                     {{ form_errors(placeFormView.zipcode) }} <br>
 
+                                    {{ form_label(placeFormView.city) }}
                                     {{ form_widget(placeFormView.city) }}
                                     {{ form_errors(placeFormView.city) }} <br>
 
+                                    {{ form_label(placeFormView.latitude) }}
                                     {{ form_widget(placeFormView.latitude) }}
                                     {{ form_errors(placeFormView.latitude) }} <br>
 
+                                    {{ form_label(placeFormView.longitude) }}
                                     {{ form_widget(placeFormView.longitude) }}
                                     {{ form_errors(placeFormView.longitude) }} <br>
 
@@ -160,6 +147,8 @@
                                 </div>
 
                             </div>
+
+
                         </div>
                     </div>
                 </div>
@@ -173,7 +162,6 @@
 
 
         </div>
-    <div class="col-lg-2"></div>
 
     </div>
 
@@ -200,7 +188,7 @@
                         console.log(response.status);
                         if (response.status == "nok") {
                             console.log('error');
-                            var linkCity = $("<p style=\"color:red;font-size:bold;\"> La ville n\'existe pas, ajoutez là ! <a href=\"{{ path('city') }}\" > <i class=\"fas fa-plus\" ></i></a></p>")
+                            var linkCity = $("<p style=\"color:#FCC258;;\"> La ville n\'existe pas, ajoutez là ! <a href=\"{{ path('city') }}\" > <i class=\"fas fa-plus\" ></i></a></p>")
                             $('#startForm').prepend(linkCity);
                         } else {
                             var option = $("<option>").attr("value", response.place.id);
@@ -211,6 +199,14 @@
                         }
                     });
             });
+
         </script>
 
     {% endblock %}
+
+
+
+
+
+
+

@@ -222,11 +222,7 @@ i.fas.fa-plus {
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
 
 }
-.contenantForm form {
-    padding: 2em 2em 0em 2em;
-    color : #142340;
-    border-radius: 10px;
-}
+
 
 div.modal-body {
     margin: 10px;
@@ -248,9 +244,6 @@ div.modal-body {
     text-align: center;
 }
 
-input {
-    margin-bottom: 1.5em;
-}
 
 @media (min-width: 768px) {
     .login-form {
