@@ -4,14 +4,16 @@
     <h1>Ajouter une ville <i class="fas fa-map-marked-alt"></i>
     </h1>
 
-<div class="container">
+    <div class="container contenantForm ">
+        <div class="row">
 
-        <div class="contenantForm col-lg-8 align-self-center">
 
-            {{ form_start(villeFormView) }}
+            <div class="col-sm-12 col-md-6 mt-3 mb-3 ">
 
-               {{ form_widget(villeFormView.nom) }}
-               {{ form_errors(villeFormView.nom) }}
+                {{ form_start(villeFormView) }}
+
+                {{ form_widget(villeFormView.nom) }}
+                {{ form_errors(villeFormView.nom) }}
 
                 {{ form_widget(villeFormView.codesPostaux) }}
                 {{ form_errors(villeFormView.codesPostaux) }}
@@ -19,26 +21,30 @@
                 {{ form_widget(villeFormView.departement) }}
                 {{ form_errors(villeFormView.departement) }}
 
-            <div class="col-sm-12 text-center">
+                <div class="col-sm-12 text-center">
 
-                <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
+                    <input class="btn blue-gradient btn-block btn-rounded z-depth-1a mt-5" style="background-color: #142340;
                 color: #FFC952;" type="submit" name="submitAction" value="Enregistrer"><br>
 
-                {{ form_end(villeFormView) }}
+                    {{ form_end(villeFormView) }}
 
-                <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
+                    <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a"
+                                                        style="background-color: #142340;
                 color: #FFC952;" type="button" value="Annuler"></a>
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 mt-3 mb-3 d-flex justify-content-center">
+                <img id="add-city" src="img/adcity.png" alt="">
             </div>
         </div>
-
     </div>
-        <div class="col-lg-2"></div>
 
 
-            {% endblock %}
+
+{% endblock %}
 
 
 
         {% block title %}
-        Ajout de ville
-{% endblock %}
+            Ajout de ville
+        {% endblock %}
