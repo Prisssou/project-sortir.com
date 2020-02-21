@@ -120,6 +120,8 @@
                         <td class="stateLabel">Passée</td>
                     {% elseif sortie.status == 'Annulee' %}
                         <td class="stateLabel">Annulée</td>
+                    {% elseif sortie.status == 'Archivee' %}
+                        <td class="stateLabel">Archivée</td>
                     {% endif %}
 
                     {# Déjà Inscrit ? #}
