@@ -18,6 +18,7 @@ framework:
                 - ActiviteEnCours
                 - Passee
                 - Annulee
+                - Archivee
             transitions:
                 to_Ouverte:
                     from: Creee

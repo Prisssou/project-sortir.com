@@ -120,6 +120,8 @@
                         <td class="stateLabel">Passée</td>
                     {% elseif sortie.status == 'Annulee' %}
                         <td class="stateLabel">Annulée</td>
+                    {% elseif sortie.status == 'Archivee' %}
+                        <td class="stateLabel">Archivée</td>
                     {% endif %}
 
                     {# Déjà Inscrit ? #}
@@ -208,7 +210,9 @@
                         {% for member in sortie.member %}
                             {% if (app.user == member
                                 or app.user.roles == ['ROLE_ADMIN'])
-                                and sortie.state.label != "Annulée" %}
+                                and sortie.status != "ActiviteEnCours"
+                                and sortie.status != "Passee"
+                                and sortie.status != "Annulee" %}
                                 <a href="{{ path('cancel', {id: sortie.id}) }}" data-toggle="modal"
                                    data-target="#cancelModal" class="cancelLink">
                                     Annuler </a>
@@ -228,8 +232,10 @@
                         {% for member in sortie.member %}
                         {% if (app.user == member
                             or app.user.roles == ['ROLE_ADMIN'])
-                            and sortie.state.label != "Annulée"
-                            and sortie.state.label != "Clôturée" %}
+                            and sortie.status != "ActiviteEnCours"
+                            and sortie.status != "Passee"
+                            and sortie.status != "Annulee"
+                            and sortie.status != "Cloturee" %}
                         <a href="{{ path('edit', {id: sortie.id}) }}">Modifier</a>
                     </td>
 
@@ -282,7 +288,9 @@
     <section class="container">
         <div class="row">
 
+
             <div class="col-md-4 offset-md-4 justify-content-center mt-5 mb-5 pb-4">
+
                 <button class="btn w-100 " style="background-color: #142340; color: #FFC952;"><a
                             href="{{ path('add_outing') }}"
                             style="color: #FFC952; text-decoration: none">Créer une nouvelle
