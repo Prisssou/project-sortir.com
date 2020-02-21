@@ -54,7 +54,7 @@
             <h3 id="site-name">{{ site.name }}</h3>
 
             {# Tableau des sorties #}
-            <table id="myTable"  class="table table-striped table-hover table-responsive">
+            <table id="myTable" class="table table-striped table-hover table-responsive">
                 <!--<table id="myTable" data-toggle="table" class="table table-bordered table-orderable table-striped" style="width:75%">-->
                 <thead class="thead-light">
                 <tr>
@@ -174,13 +174,13 @@
                             {% endfor %}
                         {% endfor %}
                         {% if subscribed == false %}
-{#                            and sortie.subscriptions|length != sortie.numberMaxSub#}
-{#                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))#}
-{#                            and date(sortie.limitDateSub|date('m/d/Y')) > date("now"|date('m/d/Y'))#}
-{#                            and sortie.state.label != "Annulée"#}
-{#                            and sortie.state.label != "Passée" %}#}
-                        {% if workflow_can(sortie, 'to_Cloturee') %}
-                            <a href="{{ path('subscribe', {id: sortie.id}) }}" class="subscribeLink">S'inscrire</a>
+                            {#                            and sortie.subscriptions|length != sortie.numberMaxSub#}
+                            {#                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))#}
+                            {#                            and date(sortie.limitDateSub|date('m/d/Y')) > date("now"|date('m/d/Y'))#}
+                            {#                            and sortie.state.label != "Annulée"#}
+                            {#                            and sortie.state.label != "Passée" %}#}
+                            {% if workflow_can(sortie, 'to_Cloturee') %}
+                                <a href="{{ path('subscribe', {id: sortie.id}) }}" class="subscribeLink">S'inscrire</a>
                             {% endif %}
                         {% endif %}
 
@@ -195,12 +195,12 @@
                         {% endfor %}
 
                         {% if  subscribed %}
-{#                            and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')#}
-{#                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))#}
-{#                            and sortie.state.label != "Annulée" %}#}
-                        {% if workflow_can(sortie, 're_Ouverte') or sortie.status == 'Ouverte' %}
-                            <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se désister</a>
-                        {% endif %}
+                            {#                            and sortie.startDate|date('d/m/Y à H:i') > "now"|date('d/m/Y à H:i')#}
+                            {#                            and date(sortie.closingDate|date('m/d/Y')) > date("now"|date('m/d/Y'))#}
+                            {#                            and sortie.state.label != "Annulée" %}#}
+                            {% if workflow_can(sortie, 're_Ouverte') or sortie.status == 'Ouverte' %}
+                                <a href="{{ path('unsubscribe', {id: sortie.id}) }}" class="desistLink">Se désister</a>
+                            {% endif %}
                         {% endif %}
 
 
@@ -281,10 +281,11 @@
 
     <section class="container">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 justify-content-center mt-5 mb-5 pb-4">
-                <button class="btn w-100 " style="background-color: #142340; color: #FFC952;"><a href="{{ path('add_outing') }}"
-                                                   style="color: #FFC952; text-decoration: none">Créer une nouvelle
+
+            <div class="col-md-4 offset-md-4 justify-content-center mt-5 mb-5 pb-4">
+                <button class="btn w-100 " style="background-color: #142340; color: #FFC952;"><a
+                            href="{{ path('add_outing') }}"
+                            style="color: #FFC952; text-decoration: none">Créer une nouvelle
                         sortie</a></button>
 
             </div>
@@ -310,25 +311,25 @@
 {% block script %}
 
     {# DATATABLES#}
-{#    <script type="text/javascript" charset="utf8"#}
-{#            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>#}
-{#    <script>#}
-{#        $(document).ready(function () {#}
+    {#    <script type="text/javascript" charset="utf8"#}
+    {#            src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.js"></script>#}
+    {#    <script>#}
+    {#        $(document).ready(function () {#}
 
-{#            /**#}
-{#             * Activation du tri sur toutes les colonnes du tableau#}
-{#             */#}
-{#            $('#myTable').DataTable({#}
-{#                columnDefs: [{#}
-{#                    orderable: true,#}
-{#                    targets: "_all",#}
-{#                }],#}
-{#                "searching": true#}
-{#            });#}
-{#            $('.dataTables_length').addClass('bs-select');#}
-{#        });#}
+    {#            /**#}
+    {#             * Activation du tri sur toutes les colonnes du tableau#}
+    {#             */#}
+    {#            $('#myTable').DataTable({#}
+    {#                columnDefs: [{#}
+    {#                    orderable: true,#}
+    {#                    targets: "_all",#}
+    {#                }],#}
+    {#                "searching": true#}
+    {#            });#}
+    {#            $('.dataTables_length').addClass('bs-select');#}
+    {#        });#}
 
-{#    </script>#}
+    {#    </script>#}
 
     <script>
         var url;
@@ -360,9 +361,9 @@
                 });
         });
 
-        $(document).ready(function () {
-            $('#table_id').DataTable();
-        });
+        // $(document).ready(function () {
+        //     $('#table_id').DataTable();
+        // });
 
         // $(function () {
         //     $('#datetimepicker2a').datetimepicker();
