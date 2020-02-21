@@ -14,39 +14,60 @@
 
         </div>
 
-        <div class="contenantForm col-lg-8"  >
+        <div class="contenantForm col-lg-8">
             {{ form_start(outingFormView) }}
 
-            {{ form_label(outingFormView.name) }}
+            <div class="col-lg-8">
             {{ form_widget(outingFormView.name) }}
             {{ form_errors(outingFormView.name) }} <br>
+            </div>
 
+            <div class="form-group">
+                <div class="col-sm-5 justify-content-start">
+                    <div class="input-group date picker" id="datetimepicker2c" data-target-input="nearest">
+                        {{ form_widget(outingFormView.startDate) }}
+                        {{ form_errors(outingFormView.startDate) }} <br>
+                        <div class="input-group-append" data-target="#datetimepicker2c"
+                             data-toggle="datetimepicker" style="height: 38px">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            {{ form_label(outingFormView.startDate) }}
-            {{ form_widget(outingFormView.startDate) }}
-            {{ form_errors(outingFormView.startDate) }} <br>
+            <div class="form-group">
+                <div class="col-sm-5 justify-content-start">
+                    <div class="input-group date picker" id="datetimepicker2d" data-target-input="nearest">
+                        {{ form_widget(outingFormView.limitDateSub) }}
+                        {{ form_errors(outingFormView.limitDateSub) }} <br>
+                        <div class="input-group-append" data-target="#datetimepicker2d"
+                             data-toggle="datetimepicker" style="height: 38px">
+                            <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            {{ form_label(outingFormView.limitDateSub) }}
-            {{ form_widget(outingFormView.limitDateSub) }}
-            {{ form_errors(outingFormView.limitDateSub) }} <br>
-
-            {{ form_label(outingFormView.numberMaxSub) }}
+            <div class="col-sm-5 justify-content-start">
             {{ form_widget(outingFormView.numberMaxSub) }}
             {{ form_errors(outingFormView.numberMaxSub) }} <br>
+            </div>
 
-            {{ form_label(outingFormView.duration) }}
+            <div class="col-sm-5 justify-content-start">
             {{ form_widget(outingFormView.duration) }}
-            {{ form_errors(outingFormView.duration) }}  <br>
+            {{ form_errors(outingFormView.duration) }} <br>
+            </div>
 
-            {{ form_label(outingFormView.description) }}
+
+            <div class="col-sm-11 justify-content-start">
             {{ form_widget(outingFormView.description) }}
             {{ form_errors(outingFormView.description) }} <br>
+            </div>
 
-            {{ form_label(outingFormView.ville) }}
+            <div class="col-sm-11 justify-content-start">
             {{ form_widget(outingFormView.ville) }}
             {{ form_errors(outingFormView.ville) }}<br><br>
-
-            {{ form_label(outingFormView.place) }}
+            </div>
 
             <div class="placeChoice">
 
@@ -92,38 +113,37 @@
                         </div>
                         <div class="modal-body">
                             <div class="row">
-                                <div class="contenantForm col-lg-6" >
+                                <div class="contenantForm col-lg-6">
 
 
                                     {# partie formulaire#}
 
                                     {{ form_start(placeFormView, {'attr': {'id': 'startForm'}}) }}
 
-                                    {{ form_label(placeFormView.adresse) }}
+
                                     {{ form_widget(placeFormView.adresse) }}
                                     {{ form_errors(placeFormView.adresse) }} <br>
 
-                                    {{ form_label(placeFormView.name) }}
                                     {{ form_widget(placeFormView.name) }}
                                     {{ form_errors(placeFormView.name) }} <br>
 
-                                    {{ form_label(placeFormView.street) }}
+
                                     {{ form_widget(placeFormView.street) }}
                                     {{ form_errors(placeFormView.street) }} <br>
 
-                                    {{ form_label(placeFormView.zipcode) }}
+
                                     {{ form_widget(placeFormView.zipcode) }}
                                     {{ form_errors(placeFormView.zipcode) }} <br>
 
-                                    {{ form_label(placeFormView.city) }}
+
                                     {{ form_widget(placeFormView.city) }}
                                     {{ form_errors(placeFormView.city) }} <br>
 
-                                    {{ form_label(placeFormView.latitude) }}
+
                                     {{ form_widget(placeFormView.latitude) }}
                                     {{ form_errors(placeFormView.latitude) }} <br>
 
-                                    {{ form_label(placeFormView.longitude) }}
+
                                     {{ form_widget(placeFormView.longitude) }}
                                     {{ form_errors(placeFormView.longitude) }} <br>
 
@@ -188,7 +208,7 @@
                         console.log(response.status);
                         if (response.status == "nok") {
                             console.log('error');
-                            var linkCity = $("<p style=\"color:#FCC258;;\"> La ville n\'existe pas, ajoutez là ! <a href=\"{{ path('city') }}\" > <i class=\"fas fa-plus\" ></i></a></p>")
+                            var linkCity = $("<p style=\"color:red;\"> La ville n\'existe pas, ajoutez là ! <a href=\"{{ path('city') }}\" > <i class=\"fas fa-plus\" ></i></a></p>")
                             $('#startForm').prepend(linkCity);
                         } else {
                             var option = $("<option>").attr("value", response.place.id);
