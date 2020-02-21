@@ -110,10 +110,10 @@ class MainController extends Controller
         $lastMonth = date('Y-m-d h:i:s', strtotime("last month"));
         $sortiesArchived = $sortieRepository->findToArchive($lastMonth);
 
-        dump($sortiesArchived);
+       /* dump($sortiesArchived);*/
 
         if ($sortiesArchived) {
-            dump($sortiesArchived);
+           /* dump($sortiesArchived);*/
             foreach ($sortiesArchived as $archive) {
                 $sortieState = $archive->getState();
 //                dump($sortieState);
@@ -129,7 +129,7 @@ class MainController extends Controller
         #Clôture automatique des sorties dont la date limite d'inscription est passée
 
         $limiteNow = new \DateTime('now');
-        dump($limiteNow);
+       /* dump($limiteNow);*/
 //        $sortiesArchived = $sortieRepository->findToArchive($limiteNow);
 //
 //        dump($sortiesArchived);
@@ -148,7 +148,7 @@ class MainController extends Controller
 //            }
 //        }
 
-        dump($sorties);
+       /* dump($sorties);*/
 
         return $this->render(
             'main/home.html.twig',
