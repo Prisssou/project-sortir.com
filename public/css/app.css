@@ -234,6 +234,11 @@ i.fas.fa-plus {
 
 }
 
+/* OTHER PROFILES*/
+.card {
+    margin: 0 auto; /* Added */
+    text-align: center;
+}
 
 div.modal-body {
     margin: 10px;

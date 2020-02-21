@@ -182,8 +182,6 @@ class UserController extends Controller
         $memberRepository = $entityManager->getRepository(Member::class);
         $member = $memberRepository->find($id);
 
-
-
         return $this->render(
             'user/otherProfile.html.twig',
             compact('member')

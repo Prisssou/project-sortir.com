@@ -1,40 +1,25 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <h1> Profil </h1>
+
+    <h1> Profil <i class="fas fa-user-astronaut"></i> </h1>
+
     <div class="container">
-        <div class="contenantForm row">
-            <div class="col-lg-4">
-                <img id="image-create" src="{{ asset('img/articleimage.png') }}" alt="image">
-                <label> {{ member.username }} </label>
-                {#            <span>{{ member.image }}</span>#}
+       <div class="card align items-center mb-3 w-50 contenantForm" style="background-color: rgba(20, 35, 64, 0.1); border-radius: 10px;">
+            <div class="card-body">
+            <img id="image-create" class="card-img-top text-center d-inline-block mb-3" src="{{ asset('uploads/images/' ~ app.user.image.url) }}"
+                 alt="Card image cap">
 
+                <h5 class="card-title">{{ member.username }}</h5>
+                <ul class="list-group list-group-flush w-100 align-items-stretch">
+                    <li class="list-group-item text-center d-inline-block">{{ member.firstname }}</li>
+                    <li class="list-group-item text-center d-inline-block">{{ member.email }}</li>
+                    <li class="list-group-item text-center d-inline-block">{{ member.site }}</li>
+                </ul>
+                <div class="col-sm-12 col-md-8 offset-md-4 text-center mt-5">
+                    <a href="{{ path('home') }}"><input class="btn w-50 mb-4" type="button" value="Retour" style="background-color: #142340; color: #FFC952;"></a>
+                </div>
             </div>
-
-            <div class="col-lg-8">
-
-                <div class="col">
-                    <label> </label>
-                    <span>{{ member.username }}</span>
-                </div>
-                <div class="col">
-                    <label> </label>
-                    <span>{{ member.firstname }}</span>
-                </div>
-                <div class="col">
-                    <label> </label>
-                    <span>{{ member.email }}</span>
-                </div>
-                <div class="col">
-                    <label> </label>
-                    <span>{{ member.site }}</span>
-                </div>
-
-
-            </div>
-
         </div>
-
-
     </div>
 {% endblock %}
