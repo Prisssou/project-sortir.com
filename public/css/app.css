@@ -187,7 +187,7 @@ th {
 
 /* ADD CITY */
 
-#ville_nom, #ville_codesPostaux, #ville_departement {
+#ville_nom, #ville_codesPostaux, #ville_departement, #site_name {
     margin-bottom: 50px;
 }
 

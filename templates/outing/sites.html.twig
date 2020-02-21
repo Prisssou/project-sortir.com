@@ -2,27 +2,39 @@
 
 {% block body %}
 
+    <h1>Ajouter un site <i class="fas fa-map-marked-alt"></i></h1>
 
-        {{ form_start(siteFormView) }}
+    <div class="container contenantForm ">
 
-        {{ form_widget(siteFormView.name) }}
-        {{ form_errors(siteFormView.name) }}
+        <div class="row">
+            <div class="col-sm-12 col-md-6 mt-3 mb-3 ">
+                {{ form_start(siteFormView) }}
 
+                {{ form_widget(siteFormView.name) }}
+                {{ form_errors(siteFormView.name) }}
 
+                <div class="col-sm-12 text-center">
 
-            <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
+                    <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
                 color: #FFC952;" type="submit" name="submitAction" value="Enregistrer"><br>
 
-            {{ form_end(siteFormView) }}
+                    {{ form_end(siteFormView) }}
 
-            <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
+                    <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a"
+                                                        style="background-color: #142340;
                 color: #FFC952;" type="button" value="Annuler"></a>
 
-
+                </div>
+            </div>
+            <div class="col-sm-12 col-md-6 mt-3 mb-3 d-flex justify-content-center">
+                <img id="add-city" src="img/adcity.png" alt="city">
+            </div>
+        </div>
+    </div>
 
 
 {% endblock %}
 
-{% block title %}
+    {% block title %}
 
-{% endblock %}
+    {% endblock %}
