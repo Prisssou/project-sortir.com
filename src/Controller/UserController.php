@@ -121,7 +121,6 @@ class UserController extends Controller
 
         if ($memberForm->isSubmitted() && $memberForm->isValid()) {
 
-
             $entityManager = $this->getDoctrine()->getManager();
             $formData = $request->request->all();
 
