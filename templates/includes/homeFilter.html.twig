@@ -1,21 +1,21 @@
 {{ form_start(form) }}
 
-<div class="small-margin contenantForm">
-    <div class="row justify-content-center">
-        <div class="col-lg-8">
+<div class="container contenantForm">
+    <div class="row">
+        <div class="col-sm-8 align-self-center">
             <div class="no-padding input-group">
                 <div class="input-group-append">
                     <div class="input-group-text"><i class="fa fa-search"></i></div>
                 </div>
                 {{ form_widget(form.motCle) }}
                 {{ form_errors(form.motCle) }}
-
             </div>
         </div>
-        <p>
-            <a  class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
-    color: #FFC952;width:auto; margin-left: 50px" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fas fa-plus-circle"></i></a>
-        </p>
+        <div class="col-sm-4 col align-self-center">
+            <a class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
+    color: #FFC952;width:auto; margin-left: 50px" data-toggle="collapse" href="#multiCollapseExample1" role="button"
+               aria-expanded="false" aria-controls="multiCollapseExample1"><i class="fas fa-plus-circle"></i></a>
+        </div>
     </div>
 
 
@@ -24,19 +24,20 @@
             <div class="collapse multi-collapse" id="multiCollapseExample1">
                 <div class="card card-body">
                     <div class="row justify-content-center">
-                        <div class="col-lg-3">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <div class="input-group date" id="datetimepicker2a" data-target-input="nearest">
                                     {{ form_widget(form.beginDate) }}
                                     {{ form_errors(form.beginDate) }}
-                                    <div class="input-group-append" data-target="#datetimepicker2a" data-toggle="datetimepicker">
+                                    <div class="input-group-append" data-target="#datetimepicker2a"
+                                         data-toggle="datetimepicker">
                                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                                     </div>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="col-lg-3">
+                        <div class="col-sm-3">
                             <div class="input-group date" id="datetimepicker2b" data-target-input="nearest">
                                 {{ form_widget(form.endDate) }}
                                 {{ form_errors(form.endDate) }}
@@ -50,18 +51,18 @@
 
 
                     <div class="row justify-content-around">
-                        <div class="col-lg-4">
+                        <div class="col-sm-4">
                             {{ form_widget(form.dureeMin) }}
                             {{ form_errors(form.dureeMin) }}
                         </div>
-                        <div class="col-lg-4">
+                        <div class="col-sm-4">
                             {{ form_widget(form.dureeMax) }}
                             {{ form_errors(form.dureeMax) }}<br>
                         </div>
                     </div>
 
                     <div class="row justify-content-around">
-                        <div class="col-lg-6">
+                        <div class="col-sm-6">
                             {{ form_label(form.orga) }}
                             {{ form_widget(form.orga) }}
                             {{ form_errors(form.orga) }}<br>
@@ -71,7 +72,7 @@
                             {{ form_widget(form.inscrit) }}
                             {{ form_errors(form.inscrit) }}<br>
                         </div>
-                        <div class="col-lg-6">
+                        <div class="col-sm-6">
                             {{ form_label(form.notInscrit) }}
                             {{ form_widget(form.notInscrit) }}
                             {{ form_errors(form.notInscrit) }}<br>
@@ -84,14 +85,23 @@
                     </div>
                 </div>
 
-                </div>
             </div>
         </div>
-    <div class="col-lg-3 .offset-lg-3 justify-content-center">
-        <button type="submit" class="btn w-100 " style="background-color: #142340; color: #FFC952;">Rechercher</button>
-        {{ form_end(form) }}
     </div>
+
+    <div class="row">
+        <div class="col-sm-3 offset-sm-3 mt-4">
+            <button type="submit" class="btn blue-gradient btn-block btn-rounded z-depth-1a"
+                    style="background-color: #142340; color: #FFC952;">Rechercher
+            </button>
+        </div>
     </div>
+    {{ form_end(form) }}
+</div>
+
+
+
+
 
 
 
