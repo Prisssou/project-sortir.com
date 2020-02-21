@@ -206,12 +206,12 @@ DQL;
         $dql           = <<<DQL
 SELECT ab
 FROM APP\ENTITY\Outing ab
-WHERE ab.limitDateSub < :limiteNow
+WHERE ab.limitDateSub <= :limiteNow
 DQL;
         $query = $entityManager
             ->createQuery($dql)
             ->setParameter(':limiteNow', $limiteNow);
-//       dump($lastMonth);
+//       dump($limiteNow);
 
         return $query->getResult();
     }

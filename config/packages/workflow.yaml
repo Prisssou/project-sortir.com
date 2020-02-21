@@ -30,7 +30,7 @@ framework:
                     from: Cloturee
                     to: Ouverte
                 is_annulee:
-                    from: [Creee, Ouverte, Cloturee]
+                    from: Cloturee
                     to: Annulee
                 to_ActiviteEnCours:
                     from: Cloturee
