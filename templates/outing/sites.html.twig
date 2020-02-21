@@ -1,29 +1,32 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-{#    <h1>Ajouter un site</h1>
+    <h1>Ajouter un site</h1>
 
-<div class="container">
+    <div class="container contenantForm ">
+        <div class="row">
+            <div class="col-sm-12 col-md-6 mt-3 mb-3 ">
 
-    <div class="contenantForm col-lg-8 align-self-center">
 
-        {{ form_start(siteFormView) }}
+                {{ form_start(siteFormView) }}
 
-        {{ form_widget(siteFormView.nom) }}
-        {{ form_errors(siteFormView.nom) }}
+                {{ form_widget(siteFormView.nom) }}
+                {{ form_errors(siteFormView.nom) }}
 
-        <div class="col-sm-12 text-center">
+                <div class="col-sm-12 text-center">
 
-            <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
+                    <input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
                 color: #FFC952;" type="submit" name="submitAction" value="Enregistrer"><br>
 
-            {{ form_end(siteFormView) }}
+                    {{ form_end(siteFormView) }}
 
-            <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
+                    <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a"
+                                                        style="background-color: #142340;
                 color: #FFC952;" type="button" value="Annuler"></a>
+                </div>
+            </div>
         </div>
     </div>
-</div>#}
 
 {% endblock %}
 
