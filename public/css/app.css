@@ -22,8 +22,6 @@ div.modal-header {
 .nav-link {
     font-size: 20px;
     color: #FFC952;
-
-
 }
 
 .nav-link:after {
@@ -155,6 +153,7 @@ div#dropdownMenuButton {
     text-align: center;
 }
 
+/* FORM */
 #box-shadow {
     padding-top: 20px;
     margin: 40px;
@@ -167,23 +166,25 @@ div#dropdownMenuButton {
     filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
 }
 
+input #member_image_imagePath {
+    text-align: center;
+}
+
 /* EVENTS TABLE */
-.dataTables_wrapper {
+.tab {
+    background-color: snow;
+}
+.table {
+    margin: auto;
+    width: 75% !important;
+    border-radius: 10px !important;
+}
+th {
+    background-color: #142340 !important;
+    color: #FFC952 !important;
 
 }
 
-
-
-@media (min-width: 768px) {
-    .login-form {
-        margin-right: 18em;
-        margin-left: 18em;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-
-}
 
 .btn blue-gradient btn-block btn-rounded z-depth-1a {
     background-color: #142340;
@@ -211,9 +212,14 @@ i.fas.fa-plus {
 .contenantForm {
     background-color: rgba(20, 35, 64, 0.1);
     padding: 1.5em;
-    margin-bottom: 20px;
+    margin-bottom: 50px !important;
     border-radius: 10px;
     color : #142340;
+    -moz-box-shadow: 5px 5px 15px 2px #cfcfcf;
+    -webkit-box-shadow: 5px 5px 15px 2px #cfcfcf;
+    -o-box-shadow: 5px 5px 15px 2px #cfcfcf;
+    box-shadow: 5px 5px 15px 2px #cfcfcf;
+    filter: progid:DXImageTransform.Microsoft.Shadow(color=#cfcfcf, Direction=134, Strength=15);
 
 }
 .contenantForm form {
@@ -224,6 +230,37 @@ i.fas.fa-plus {
 
 div.modal-body {
     margin: 10px;
+}
+
+::-webkit-input-placeholder {
+    text-align: center;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+    text-align: center;
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+    text-align: center;
+}
+
+:-ms-input-placeholder {
+    text-align: center;
+}
+
+input {
+    margin-bottom: 1.5em;
+}
+
+@media (min-width: 768px) {
+    .login-form {
+        margin-right: 18em;
+        margin-left: 18em;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+
 }
 
 

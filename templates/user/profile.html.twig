@@ -1,9 +1,10 @@
 {% extends 'layout.html.twig' %}
 
 {% block body %}
-    <h1> Mon profil </h1>
+    <h1> Mon profil  <i class="fas fa-user-alt"></i> </h1>
 
-    <div class="contenantForm container">
+    <div id="box-shadow" class=" container">
+        <!-- class=" contenantForm container" -->
         <div class="row">
             <div class="col-lg-4 text-center">
 
@@ -13,7 +14,7 @@
 
 
                 {% else %}
-                    <img id="avatar" src="{{ asset('img/ninja.png') }}" alt="avatar">
+                    <img id="avatar" src="{{ asset('img/yellowavatar.png') }}" alt="avatar">
                 {% endif %}
                 <!-- FORM -->
                 {{ form_start(memberFormView) }}

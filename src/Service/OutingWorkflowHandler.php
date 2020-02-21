@@ -25,7 +25,7 @@ class OutingWorkflowHandler
         # Récupération du Workflow
         $workflow = $this->workflows->get($outing);
 
-        dump($workflow);
+//        dump($workflow);
         # Récupération de Doctrine
         $em = $this->manager;
 
@@ -35,11 +35,20 @@ class OutingWorkflowHandler
         # Insertion en BDD
         $em->flush();
 
+        $transitions = $workflow->getEnabledTransitions($outing);
+//        dump($transitions);
+
+
         # Publication de l'article si possible
 //        if ($workflow->can($outing, 'to_be_published')) {
 //            $workflow->apply($outing, 'to_be_published');
 //            $em->flush();
 //        }
+        # Annulation de la sortie si possible
+        if ($workflow->can($outing, 'is_annulee')) {
+            $workflow->apply($outing, 'is_annulee');
+            $em->flush();
+        }
     }
 
 }

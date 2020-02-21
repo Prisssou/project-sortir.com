@@ -17,18 +17,21 @@ class VilleType extends AbstractType
                 TextType::class,
                 [
                     'label' => 'Nom de la ville',
+                    'attr'=> ['placeholder'=> 'Nom de la ville'],
                 ])
 
             ->add('codesPostaux',
                 TextType::class,
                 [
-                    'label' => 'Code postal de la ville'
+                    'label' => 'Code postal de la ville',
+                    'attr'=> ['placeholder'=> 'Code postal'],
                 ])
 
             ->add('departement',
                 TextType::class,
                 [
-                    'label' => 'Numéro de département'
+                    'label' => 'Numéro de département',
+                    'attr'=> ['placeholder'=> 'Numéro de département'],
                 ])
         ;
     }

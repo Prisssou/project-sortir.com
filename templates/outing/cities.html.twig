@@ -5,24 +5,19 @@
     </h1>
 
 <div class="container">
-    <div class="row">
-        <div class="col-lg-2"></div>
 
-        <div class="contenantForm col-lg-8">
+        <div class="contenantForm col-lg-8 align-self-center">
 
             {{ form_start(villeFormView) }}
 
-            {{ form_label(villeFormView.nom) }}
-            {{ form_widget(villeFormView.nom) }}
-            {{ form_errors(villeFormView.nom) }}
+               {{ form_widget(villeFormView.nom) }}
+               {{ form_errors(villeFormView.nom) }}
 
-            {{ form_label(villeFormView.codesPostaux) }}
-            {{ form_widget(villeFormView.codesPostaux) }}
-            {{ form_errors(villeFormView.codesPostaux) }}
+                {{ form_widget(villeFormView.codesPostaux) }}
+                {{ form_errors(villeFormView.codesPostaux) }}
 
-            {{ form_label(villeFormView.departement) }}
-            {{ form_widget(villeFormView.departement) }}
-            {{ form_errors(villeFormView.departement) }}<br>
+                {{ form_widget(villeFormView.departement) }}
+                {{ form_errors(villeFormView.departement) }}
 
             <div class="col-sm-12 text-center">
 
@@ -34,8 +29,9 @@
                 <a href="{{ path('home') }}"><input class="btn blue-gradient btn-block btn-rounded z-depth-1a" style="background-color: #142340;
                 color: #FFC952;" type="button" value="Annuler"></a>
             </div>
-
         </div>
+
+    </div>
         <div class="col-lg-2"></div>
 
 

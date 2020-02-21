@@ -34,19 +34,19 @@ class SearchFormType extends AbstractType
                 [
                     'label' => 'Le nom de la sortie contient:',
                     'required' => false,
-                    'attr' => ['placeholder' => 'Search'],
+                    'attr' => ['placeholder' => 'Envie de faire de l\'escalade?'],
                 ]
             )
             ->add(
                 'beginDate',
                 DateTimeType::class,
                 [
-                    'label' => 'Entre le ',
                     'required' => false,
                     'choice_translation_domain' => true,
                     'widget' => 'single_text',
                     'format' =>'dd/MM/yyyy H:mm',
                     'html5' => false,
+                    'attr' => ['placeholder' => 'Date de début'],
 
 
                 ]
@@ -55,12 +55,12 @@ class SearchFormType extends AbstractType
                 'endDate',
                 DateTimeType::class,
                 [
-                    'label' => 'Et le ',
                     'required' => false,
                     'choice_translation_domain' => true,
                     'widget' => 'single_text',
                     'format' =>'dd/MM/yyyy H:mm',
                     'html5' => false,
+                    'attr' => ['placeholder' => 'Date de fin'],
 
                 ]
             )
@@ -69,6 +69,7 @@ class SearchFormType extends AbstractType
                     'label'=>'Durée min:',
                     'required'=>false,
                     'scale'=>0,
+                    'attr' => ['placeholder' => 'Durée minimale'],
 
                 ])
             ->add('dureeMax', NumberType::class,
@@ -76,6 +77,7 @@ class SearchFormType extends AbstractType
                     'label'=>'Durée max:',
                     'required'=>false,
                     'scale'=>0,
+                    'attr' => ['placeholder' => 'Durée maximale'],
 
                 ])
             ->add('orga', CheckboxType::class,

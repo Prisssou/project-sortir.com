@@ -8,23 +8,21 @@
 <h1> Créer une sortie <i class="fas fa-pizza-slice"></i>
 </h1>
 
-<div class="container">
-    <div class="row">
-        <div class="col-lg-2">
-
-        </div>
-
-        <div class="contenantForm col-lg-9" style="border-radius: 10px;">
+<div class="container justify-content-center">
+        <div class="col-lg-2"></div>
+        <div class="contenantForm col-lg-8 align-self-center" style="border-radius: 10px;">
             {{ form_start(outingFormView) }}
+            <div class="row justify-content-start">
+            <div class="col-lg-5">
+                {{ form_widget(outingFormView.name) }}
+                {{ form_errors(outingFormView.name) }} <br>
+            </div>
+            </div>
 
-            {{ form_label(outingFormView.name) }}
-            {{ form_widget(outingFormView.name) }}
-            {{ form_errors(outingFormView.name) }} <br>
 
-            <div class="form-group">
+            <div class="row justify-content-start">
+            <div class="col-lg-6 form-group">
                 <div class="input-group date picker" id="datetimepicker2c" data-target-input="nearest">
-                    <div class="col-sm-5 no-padding"> {{ form_label(outingFormView.startDate) }}</div>
-
                     {{ form_widget(outingFormView.startDate) }}
                     {{ form_errors(outingFormView.startDate) }}
 
@@ -32,15 +30,12 @@
                          data-toggle="datetimepicker" style="height: 38px">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                    <div class="col-sm-7"></div>
-
                 </div>
             </div>
 
-            <div class="form-group">
-                <div class="input-group date picker" id="datetimepicker2d" data-target-input="nearest">
-                    <div class="col-sm-5 no-padding"> {{ form_label(outingFormView.limitDateSub) }}</div>
 
+            <div class="col-lg-5 form-group">
+                <div class="input-group date picker" id="datetimepicker2d" data-target-input="nearest">
                     {{ form_widget(outingFormView.limitDateSub) }}
                     {{ form_errors(outingFormView.limitDateSub) }}
 
@@ -48,31 +43,33 @@
                          data-toggle="datetimepicker">
                         <div class="input-group-text"><i class="fa fa-calendar"></i></div>
                     </div>
-                    <div class="col-sm-7"></div>
+
 
                 </div>
             </div>
-
-            {{ form_label(outingFormView.numberMaxSub) }}
+            </div>
+            <div class="row justify-content-start">
+            <div class="col-lg-4">
             {{ form_widget(outingFormView.numberMaxSub) }}
             {{ form_errors(outingFormView.numberMaxSub) }} <br>
-
-            {{ form_label(outingFormView.duration) }}
+            </div>
+            <div class="col-lg-4">
             {{ form_widget(outingFormView.duration) }}
             {{ form_errors(outingFormView.duration) }} <br>
-
-            {{ form_label(outingFormView.description) }}
+            </div>
+            </div>
+            <div class="row justify-content-start">
+            <div class="col-lg-7">
             {{ form_widget(outingFormView.description) }}
             {{ form_errors(outingFormView.description) }} <br>
-
-            {{ form_label(outingFormView.ville) }}
+            </div>
+            </div>
+            <div class="col-lg-4">
             {{ form_widget(outingFormView.ville) }}
             {{ form_errors(outingFormView.ville) }}<br><br>
+            </div>
 
-            {{ form_label(outingFormView.place) }}
-
-            <div class="placeChoice">
-
+            <div class="col-lg-4 placeChoice">
                 {{ form_widget(outingFormView.place) }}
                 {{ form_errors(outingFormView.place) }}
 
@@ -114,7 +111,7 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                            <div class="row">
+                            <div class="row align-items-center">
                                 <div class="contenantForm col-lg-6">
 
 
@@ -122,31 +119,24 @@
 
                                     {{ form_start(placeFormView, {'attr': {'id': 'startForm'}}) }}
 
-                                    {{ form_label(placeFormView.adresse) }}
                                     {{ form_widget(placeFormView.adresse) }}
                                     {{ form_errors(placeFormView.adresse) }} <br>
 
-                                    {{ form_label(placeFormView.name) }}
                                     {{ form_widget(placeFormView.name) }}
                                     {{ form_errors(placeFormView.name) }} <br>
 
-                                    {{ form_label(placeFormView.street) }}
                                     {{ form_widget(placeFormView.street) }}
                                     {{ form_errors(placeFormView.street) }} <br>
 
-                                    {{ form_label(placeFormView.zipcode) }}
                                     {{ form_widget(placeFormView.zipcode) }}
                                     {{ form_errors(placeFormView.zipcode) }} <br>
 
-                                    {{ form_label(placeFormView.city) }}
                                     {{ form_widget(placeFormView.city) }}
                                     {{ form_errors(placeFormView.city) }} <br>
 
-                                    {{ form_label(placeFormView.latitude) }}
                                     {{ form_widget(placeFormView.latitude) }}
                                     {{ form_errors(placeFormView.latitude) }} <br>
 
-                                    {{ form_label(placeFormView.longitude) }}
                                     {{ form_widget(placeFormView.longitude) }}
                                     {{ form_errors(placeFormView.longitude) }} <br>
 
@@ -183,6 +173,7 @@
 
 
         </div>
+    <div class="col-lg-2"></div>
 
     </div>
 

@@ -46,9 +46,11 @@ class OutingController extends Controller
 
             if ($request->get('submitAction') == 'Enregistrer') {
                 $outing->setState($state = $stateRepository->find('1'));
+                $outing->setStatus('Creee');
             } else {
                 if ($request->get('submitAction') == 'Publier') {
                     $outing->setState($state = $stateRepository->find('2'));
+                    $outing->setStatus('Ouverte');
                 }
             }
 
@@ -126,6 +128,12 @@ class OutingController extends Controller
             $subscription->setOuting($outing);
             $subscription->setSubDate(new \DateTime('now'));
 
+
+            if(sizeof($numSubs)+1 == $maxSubs){
+                $outing->setStatus('Cloturee');
+                $entityManager->persist($outing);
+            }
+
             $entityManager->persist($subscription);
             $entityManager->flush();
 
@@ -172,6 +180,14 @@ class OutingController extends Controller
             ['outing' => $outing->getId(), 'member' => $member->getId()],
             ['outing' => 'ASC']
         );
+
+        $numSubs = $outing->getSubscriptions();
+        $maxSubs = $outing->getNumberMaxSub();
+        $currentState = $outing->getStatus();
+        if(sizeof($numSubs)-1 < $maxSubs && $currentState == 'Cloturee'){
+            $outing->setStatus('Ouverte');
+            $em->persist($outing);
+        }
 
         $em->remove($subscription[0]);
         $em->flush();
