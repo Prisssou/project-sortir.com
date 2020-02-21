@@ -17,7 +17,9 @@ class SiteType extends AbstractType
                 TextType::class,
                 [
                     'label'=>'nom',
-                    'placeholder' => 'Nom du site'
+                    'attr'=>[
+                        'placeholder' => 'Nom du site'
+                        ],
                 ]);
     }
 

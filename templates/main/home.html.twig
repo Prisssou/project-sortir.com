@@ -19,7 +19,8 @@
 
 
     <div class="container">
-        <div class="col-sm-8 offset-2 justify-content-center" id="section-filtre">
+        <div class="col-md-9 offset-md-2 col-sm-8 offset-sm-0 justify-content-center" id="section-filtre">
+           {# col-sm-5 offset-sm-2 col-md-6 offset-md-0#}
             {% include 'includes/homeFilter.html.twig' with {form: form} only %}
         </div>
     </div>
@@ -287,8 +288,10 @@
 
     <section class="container">
         <div class="row">
-            <div class="col-md-4"></div>
-            <div class="col-md-4 justify-content-center mt-5 mb-5 pb-4">
+
+
+            <div class="col-md-4 offset-md-4 justify-content-center mt-5 mb-5 pb-4">
+
                 <button class="btn w-100 " style="background-color: #142340; color: #FFC952;"><a
                             href="{{ path('add_outing') }}"
                             style="color: #FFC952; text-decoration: none">Créer une nouvelle
@@ -367,9 +370,9 @@
                 });
         });
 
-        $(document).ready(function () {
-            $('#table_id').DataTable();
-        });
+        // $(document).ready(function () {
+        //     $('#table_id').DataTable();
+        // });
 
         // $(function () {
         //     $('#datetimepicker2a').datetimepicker();

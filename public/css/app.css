@@ -185,6 +185,17 @@ th {
 
 }
 
+/* ADD CITY */
+
+#ville_nom, #ville_codesPostaux, #ville_departement {
+    margin-bottom: 50px;
+}
+
+#add-city {
+    height: 300px;
+    width: 300px;
+}
+
 
 .btn blue-gradient btn-block btn-rounded z-depth-1a {
     background-color: #142340;
@@ -256,6 +267,15 @@ div.modal-body {
 
 }
 
+input#place_adresse
+{
+    margin-bottom: 15px;
+}
+
+.card.card-body {
+    margin-top : 50px;
+    border-radius: 10px;
+}
 
 
 

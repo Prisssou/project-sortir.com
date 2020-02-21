@@ -111,17 +111,17 @@ class MainController extends Controller
         $sorties = $sortiesFiltered;
 
         #workflow
-        $definitionBuilder = new DefinitionBuilder();
-        $definition = $definitionBuilder->addPlaces(['Creee','Ouverte', 'Cloturee','ActiviteEnCours','Passee','Annulee','Archivee'])
-            // Transitions are defined with a unique name, an origin place and a destination place
-            ->addTransition(new Transition('to_Ouverte', 'Creee', 'Ouverte'))
-            ->addTransition(new Transition('to_Cloturee', 'Ouverte', 'Cloturee'))
-            ->addTransition(new Transition('re_Ouverte', 'Cloturee', 'Ouverte'))
-            ->addTransition(new Transition('is_annulee', 'Cloturee', 'Annulee'))
-            ->addTransition(new Transition('to_ActiviteEnCours', 'Cloturee', 'ActiviteEnCours'))
-            ->addTransition(new Transition('to_Passee', 'ActiviteEnCours', 'Passee'))
-            ->build()
-        ;
+//        $definitionBuilder = new DefinitionBuilder();
+//        $definition = $definitionBuilder->addPlaces(['Creee','Ouverte', 'Cloturee','ActiviteEnCours','Passee','Annulee','Archivee'])
+//            // Transitions are defined with a unique name, an origin place and a destination place
+//            ->addTransition(new Transition('to_Ouverte', 'Creee', 'Ouverte'))
+//            ->addTransition(new Transition('to_Cloturee', 'Ouverte', 'Cloturee'))
+//            ->addTransition(new Transition('re_Ouverte', 'Cloturee', 'Ouverte'))
+//            ->addTransition(new Transition('is_annulee', 'Cloturee', 'Annulee'))
+//            ->addTransition(new Transition('to_ActiviteEnCours', 'Cloturee', 'ActiviteEnCours'))
+//            ->addTransition(new Transition('to_Passee', 'ActiviteEnCours', 'Passee'))
+//            ->build()
+//        ;
 
 
         #workflow
@@ -168,10 +168,12 @@ class MainController extends Controller
         $lastMonth = date('Y-m-d h:i:s', strtotime("last month"));
         $sortiesArchived = $sortieRepository->findToArchive($lastMonth);
 
+
 //        dump($sortiesArchived);
 
         if ($sortiesArchived) {
 //            dump($sortiesArchived);
+
             foreach ($sortiesArchived as $archive) {
 //                $sortieState = $archive->getState();
 //                dump($sortieState);
@@ -184,9 +186,7 @@ class MainController extends Controller
             }
         }
 
-
-
-//        dump($sorties);
+        
 
         return $this->render(
             'main/home.html.twig',
