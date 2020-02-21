@@ -195,5 +195,26 @@ DQL;
        return $query->getResult();
    }
 
+    /**
+     * Récupère les sorties devant être clôturées
+     * @param $limiteNow
+     * @return Outing[]
+     */
+    public function findToClosure($limiteNow): array
+    {
+        $entityManager = $this->getEntityManager();
+        $dql           = <<<DQL
+SELECT ab
+FROM APP\ENTITY\Outing ab
+WHERE ab.limitDateSub < :limiteNow
+DQL;
+        $query = $entityManager
+            ->createQuery($dql)
+            ->setParameter(':limiteNow', $limiteNow);
+//       dump($lastMonth);
+
+        return $query->getResult();
+    }
+
 
 }

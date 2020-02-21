@@ -126,6 +126,28 @@ class MainController extends Controller
             }
         }
 
+        #Clôture automatique des sorties dont la date limite d'inscription est passée
+
+        $limiteNow = new \DateTime('now');
+        dump($limiteNow);
+//        $sortiesArchived = $sortieRepository->findToArchive($limiteNow);
+//
+//        dump($sortiesArchived);
+//
+//        if ($sortiesArchived) {
+//            dump($sortiesArchived);
+//            foreach ($sortiesArchived as $archive) {
+//                $sortieState = $archive->getState();
+////                dump($sortieState);
+//
+//                $archive->setStatus('Archivee');
+////                dump($archive);
+//                $entityManager->persist($archive);
+//                $entityManager->flush();
+//
+//            }
+//        }
+
         dump($sorties);
 
         return $this->render(
