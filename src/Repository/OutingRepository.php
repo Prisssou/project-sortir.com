@@ -96,7 +96,7 @@ class OutingRepository extends ServiceEntityRepository
                         ->leftJoin('outing.subscriptions', 'unsub')
                         ->andWhere('outing NOT IN ('. $subQb->getDQL().')')
                         ->setParameter(':user', $user);
-                    dump($user);
+//                    dump($user);
 //                    dump($search->getNotInscrit());
 
 
@@ -174,32 +174,47 @@ class OutingRepository extends ServiceEntityRepository
     }
 
 
-    // /**
-    //  * @return Outing[] Returns an array of Outing objects
-    //  */
-    /*
-    public function findByExampleField($value)
-    {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('o.id', 'ASC')
-            ->setMaxResults(10)
-            ->getQuery()
-            ->getResult()
-        ;
-    }
-    */
+    /**
+     * Récupère les sorties devant être archivées
+     * @param $lastMonth
+     * @return Outing[]
+     */
+   public function findToArchive($lastMonth): array
+   {
+       $entityManager = $this->getEntityManager();
+       $dql           = <<<DQL
+SELECT o
+FROM APP\ENTITY\Outing o
+WHERE o.startDate < :lastMonth
+DQL;
+       $query = $entityManager
+           ->createQuery($dql)
+           ->setParameter(':lastMonth', $lastMonth);
+//       dump($lastMonth);
 
-    /*
-    public function findOneBySomeField($value): ?Outing
+       return $query->getResult();
+   }
+
+    /**
+     * Récupère les sorties devant être clôturées
+     * @param $limiteNow
+     * @return Outing[]
+     */
+    public function findToClosure($limiteNow): array
     {
-        return $this->createQueryBuilder('o')
-            ->andWhere('o.exampleField = :val')
-            ->setParameter('val', $value)
-            ->getQuery()
-            ->getOneOrNullResult()
-        ;
+        $entityManager = $this->getEntityManager();
+        $dql           = <<<DQL
+SELECT ab
+FROM APP\ENTITY\Outing ab
+WHERE ab.limitDateSub < :limiteNow
+DQL;
+        $query = $entityManager
+            ->createQuery($dql)
+            ->setParameter(':limiteNow', $limiteNow);
+//       dump($lastMonth);
+
+        return $query->getResult();
     }
-    */
+
+
 }

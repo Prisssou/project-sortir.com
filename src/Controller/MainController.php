@@ -33,22 +33,27 @@ class MainController extends Controller
      * @param Request $request
      * @return RedirectResponse
      */
-    public function workflow($status, $id, EntityManagerInterface $entityManager, OutingWorkflowHandler $owh, Request $request)
-    {
+    public function workflow(
+        $status,
+        $id,
+        EntityManagerInterface $entityManager,
+        OutingWorkflowHandler $owh,
+        Request $request
+    ) {
         $outingRepository = $entityManager->getRepository(Outing::class);
         $outing = $outingRepository->find($id);
 
         #Traitement du Workflow
         try {
 
-            $owh->handle($outing,$status);
+            $owh->handle($outing, $status);
 
             #Notification
-            $this->addFlash('notice','Le changement de statut a bien été effectué.');
+            $this->addFlash('notice', 'Le changement de statut a bien été effectué.');
 
-        } catch (LogicException $e){
+        } catch (LogicException $e) {
             #Notification
-            $this->addFlash('error','Changement de statut impossible.');
+            $this->addFlash('error', 'Changement de statut impossible.');
 
         }
 
@@ -91,40 +96,59 @@ class MainController extends Controller
         $form->handleRequest($request);
 
 
-        $userId= null;
+        $userId = null;
         if ($this->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY')) {
             $userId = $this->getUser()->getId();
         }
 
 
-        $sortiesFiltered = $sortieRepository->findSearch($data,$userId);
+        $sortiesFiltered = $sortieRepository->findSearch($data, $userId);
         $sorties = $sortiesFiltered;
 
 
+        #Archivage automatique des sorties au chargement
+        $lastMonth = date('Y-m-d h:i:s', strtotime("last month"));
+        $sortiesArchived = $sortieRepository->findToArchive($lastMonth);
 
-//        dump($workflow);
+        dump($sortiesArchived);
 
+        if ($sortiesArchived) {
+            dump($sortiesArchived);
+            foreach ($sortiesArchived as $archive) {
+                $sortieState = $archive->getState();
+//                dump($sortieState);
 
-//    dump($sorties);
+                $archive->setStatus('Archivee');
+//                dump($archive);
+                $entityManager->persist($archive);
+                $entityManager->flush();
 
-//        $filterForm = $this->createForm(FilterFormType::class);
-//        $filterForm->handleRequest($request);
+            }
+        }
+
+        #Clôture automatique des sorties dont la date limite d'inscription est passée
+
+        $limiteNow = new \DateTime('now');
+        dump($limiteNow);
+//        $sortiesArchived = $sortieRepository->findToArchive($limiteNow);
 //
-//        if ($filterForm->isSubmitted() && $filterForm->isValid()) {
+//        dump($sortiesArchived);
 //
+//        if ($sortiesArchived) {
+//            dump($sortiesArchived);
+//            foreach ($sortiesArchived as $archive) {
+//                $sortieState = $archive->getState();
+////                dump($sortieState);
 //
+//                $archive->setStatus('Archivee');
+////                dump($archive);
+//                $entityManager->persist($archive);
+//                $entityManager->flush();
 //
-//            return $this->redirectToRoute("user_login");
-//
+//            }
 //        }
-//
-//
-//        return $this->render(
-//            'main/home.html.twig',
-//            [
-//                'MemberFormView' => $filterForm->createView(),
-//            ]
-//        );
+
+        dump($sorties);
 
         return $this->render(
             'main/home.html.twig',
@@ -137,8 +161,6 @@ class MainController extends Controller
             ]
         );
     }
-
-
 
 
 }

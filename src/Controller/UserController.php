@@ -47,12 +47,11 @@ class UserController extends Controller
             );
             $member->setActive(1);
 
-
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($member);
             $entityManager->flush();
 
-            return $this->redirectToRoute("user_login");
+            return $this->redirectToRoute("home");
 
         }
 
@@ -152,7 +151,7 @@ class UserController extends Controller
             }
 
 //                $imageURL->setMember($member);
-            $entityManager->persist($imageURL);
+//            $entityManager->persist($imageURL);
             $entityManager->persist($member);
             $entityManager->flush();
 
