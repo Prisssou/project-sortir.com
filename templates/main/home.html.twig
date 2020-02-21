@@ -78,7 +78,7 @@
                 {% set today = "now"|date('m/d/Y') %}
                 {% set difference = date(today).diff(date(closingDate)) %}
                 {% set archivedDays = difference.days %}
-                {% if archivedDays < 30 %}
+                {% if sortie.status != 'Archivee'%}
 
                 {% if site.name == sortie.site %}
                 <tbody>

@@ -80,6 +80,7 @@ class MainController extends Controller
      * @param EntityManagerInterface $entityManager
      * @param Request $request
      * @return Response
+     * @throws \Exception
      */
     public function home(EntityManagerInterface $entityManager, Request $request)
     {
@@ -186,7 +187,7 @@ class MainController extends Controller
             }
         }
 
-        
+
 
         return $this->render(
             'main/home.html.twig',
